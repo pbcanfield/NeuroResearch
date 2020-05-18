@@ -1,2 +1,2 @@
 # NeuroResearch
-NeuroLab Research
+Computational Neuroscience Research

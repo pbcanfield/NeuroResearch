@@ -1,0 +1,4 @@
+node_type_id model_type pop_name
+100 virtual poisson_CA3
+101 virtual poisson_DG
+102 virtual input_EC
