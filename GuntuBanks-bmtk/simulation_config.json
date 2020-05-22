@@ -59,6 +59,14 @@
     "overwrite_output_dir": true
   },
   "reports": {
+      "syn_report": {
+      "cells": "hippocampus",
+      "variable_name": "W_nmda",
+      "module": "netcon_report",
+      "sections": "soma",
+      "syn_type": "pyr2pyr",
+      "file_name": "syns.h5"
+    }
   },
   "network": "./circuit_config.json"
 }

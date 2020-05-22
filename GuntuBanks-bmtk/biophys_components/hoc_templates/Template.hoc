@@ -250,8 +250,8 @@ begintemplate DGCell
 		soma[0] {insert ichan2  //ildikos ichan
 				enat = 55 ekf = -90  ek=-90  elca=130	esk=-90
 			el_ichan2 =-64
-			gnatbar_ichan2=0.12  
-			gkfbar_ichan2=0.013  
+			gnatbar_ichan2=0.25  
+			gkfbar_ichan2=0.02  
 			gl_ichan2 = 0.0002
 			cm=2.5
 		} 
@@ -260,8 +260,8 @@ begintemplate DGCell
 			insert ichan2
 				enat = 55 ekf = -90  ek=-90  elca=130	esk=-90
 			el_ichan2 =-64
-			gnatbar_ichan2=0.12  
-			gkfbar_ichan2=0.013
+			gnatbar_ichan2=0.25  
+			gkfbar_ichan2=0.02
 			gl_ichan2 = 0.0002
 			cm=2.5
 		}	
@@ -270,8 +270,8 @@ begintemplate DGCell
 			insert ichan2
 			enat = 55 ekf = -90  ek=-90  elca=130	esk=-90
 			el_ichan2 =-64
-			gnatbar_ichan2=0.0
-			gkfbar_ichan2=0.00
+			gnatbar_ichan2=0.25
+			gkfbar_ichan2=0.02
 			gl_ichan2 = 0.0002
 			cm=2.5
 		}
@@ -864,7 +864,7 @@ begintemplate IzhiCell_BC
 			vhalfn_k1BC = -15
 			
 			insert napBC
-			gbar_napBC = 0.0005
+			gbar_napBC = 0.0002 //0.0005
 		}
 		
 		dend[0] {
