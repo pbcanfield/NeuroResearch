@@ -195,6 +195,60 @@ def plot_lfp(output_dir, lfp_file='ecp.h5',channel=0):
     plt.show()
 
 
+def plot_firing_rates(seed, cellGroup, files_dir='legacy', num_bins=30):
+    '''
+    Author: Pete Canfield
+    Generate some statistics about the firing rates of each cell in the network.
+
+    Arguments:
+        1) The seed that you want to analyze.
+        2) What group of cells do you want to look at in the network
+        3) The directory with the spiking information
+        4) The file naming structure.
+        5) The number of bins to use for generating the histogram.
+    '''
+    cellGroups = ['EC','CA3e', 'CA3o', 'CA3b', 'DGg', 'DGh', 'DGb']
+    cell_nums = [30,63,8,8,384,32,32]
+    groupIndex = cellGroups.index(cellGroup)
+
+
+    #Get all the files from the directory.
+    file = open(os.path.join(files_dir,'bmtk_'+str(seed)+'_SpikeTime'+str(groupIndex)+'.txt'))
+
+
+    #First check to see if all the cells in that cell fire.
+
+    data = genfromtxt(file,delimiter=',', dtype=None)
+
+    dontFire = []
+    for cellId in range(cell_nums[groupIndex]):
+        allFire = False
+        for i in range(data.size):
+            if(data[i][0] == cellId):
+                allFire = True
+                break
+        if(not allFire):
+            dontFire.append(cellId)
+    
+    print("Cells in group " + cellGroup + " which do not fire: ")
+    print(dontFire)
+    fireTimes = [data[i][1] for i in range(data.size)]
+
+    fig, ax = plt.subplots()
+
+    
+
+    n, bins, patches = ax.hist(fireTimes,num_bins)
+    ax.plot()
+    ax.set_xlabel("Time")
+    ax.set_ylabel("Number of " + cellGroup + " cells active")
+    ax.set_title("Firing times of " + cellGroup + " cells.")
+    
+    fig.tight_layout()
+    plt.show()
+
+
+
 if __name__ == '__main__':
 
     #Example plot report https://github.com/AllenInstitute/bmtk/blob/develop/bmtk/analyzer/cell_vars.py
@@ -214,10 +268,16 @@ if __name__ == '__main__':
     #data, labels = original_connection_divergence_average('./Outputs/008sepsConnections.txt',convergence=True)
     #plot_connection_info(data, labels, 'Hummos Model Average Convergence')
 
+
     seed = sys.argv[1]
-    output_dir = seed + "_output"
-    plot_raster(seed)
-    plot_lfp(output_dir)
+    #output_dir = seed + "_output"
+    #plot_raster(seed)
+    
+
+    group = sys.argv[2]
+    bins = int(sys.argv[3])
+    plot_firing_rates(seed, group, num_bins=bins)
+    #plot_lfp(output_dir)
     #print_average_frequencies('./legacy/'+seed+'_output/spikes.csv')
 
 
