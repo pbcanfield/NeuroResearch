@@ -230,13 +230,12 @@ def plot_firing_rates(seed, cellGroup, files_dir='legacy', num_bins=30):
         if(not allFire):
             dontFire.append(cellId)
     
-    print("Cells in group " + cellGroup + " which do not fire: ")
+    print("Cells in group " + cellGroup + " that do not fire: ")
     print(dontFire)
     fireTimes = [data[i][1] for i in range(data.size)]
 
     fig, ax = plt.subplots()
 
-    
 
     n, bins, patches = ax.hist(fireTimes,num_bins)
     ax.plot()
