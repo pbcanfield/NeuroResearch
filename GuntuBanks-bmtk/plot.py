@@ -217,31 +217,54 @@ def plot_firing_rates(seed, cellGroup, files_dir='legacy', num_bins=30):
 
 
     #First check to see if all the cells in that cell fire.
-
     data = genfromtxt(file,delimiter=',', dtype=None)
-
-    dontFire = []
-    for cellId in range(cell_nums[groupIndex]):
-        allFire = False
-        for i in range(data.size):
-            if(data[i][0] == cellId):
-                allFire = True
-                break
-        if(not allFire):
-            dontFire.append(cellId)
-    
-    print("Cells in group " + cellGroup + " that do not fire: ")
-    print(dontFire)
+    fireIds = [data[i][0] for i in range(data.size)]
     fireTimes = [data[i][1] for i in range(data.size)]
 
-    fig, ax = plt.subplots()
+
+    dontFire = []
+    fireFreqs = []
+
+    fireIds.sort()
+
+    startInd = 0
+    ind = 0
+
+    for id in range(cell_nums[groupIndex]):
+         
+        while ind < len(fireIds) and fireIds[ind] == id:
+            ind += 1
+            
+        
+        count = ind - startInd
+        if count == 0:
+            dontFire.append(id)
+                                                
+        fireFreqs.append(count/10.0) #divided by 10 becuase the simulation runtime is 10 seconds.
+        startInd = ind
+
+    print("Cells in group " + cellGroup + " that do not fire: ")
+    print(dontFire)
 
 
-    n, bins, patches = ax.hist(fireTimes,num_bins)
-    ax.plot()
-    ax.set_xlabel("Time")
-    ax.set_ylabel("Number of " + cellGroup + " cells active")
-    ax.set_title("Firing times of " + cellGroup + " cells.")
+
+    fig, (ax1,ax2) = plt.subplots(1,2)
+
+    
+
+    print("The average spiking frequency of " + cellGroup + " cells is: " + str(sum(fireFreqs)/len(fireFreqs)))
+    
+    ax2.hist(fireFreqs,num_bins)
+    ax2.plot()
+    ax2.set_title(cellGroup + " frequency distribution")
+    ax2.set_xlabel("Frequency")
+    
+
+    ax1.hist(fireTimes,10000)
+    ax1.plot()
+    ax1.set_xlabel("Time")
+    ax1.set_ylabel("Number of " + cellGroup + " cells active")
+    ax1.set_title("Firing times of " + cellGroup + " cells.")
     
     fig.tight_layout()
     plt.show()
