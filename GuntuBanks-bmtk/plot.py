@@ -1,4 +1,5 @@
 import glob, os, re, sys
+import random
 
 import h5py
 import numpy as np
@@ -195,7 +196,7 @@ def plot_lfp(output_dir, lfp_file='ecp.h5',channel=0):
     plt.show()
 
 
-def plot_firing_rates(seed, cellGroup, files_dir='legacy', num_bins=30):
+def plot_firing_rates(seed, cellGroup, files_dir='legacy'):
     '''
     Author: Pete Canfield
     Generate some statistics about the firing rates of each cell in the network.
@@ -204,15 +205,13 @@ def plot_firing_rates(seed, cellGroup, files_dir='legacy', num_bins=30):
         1) The seed that you want to analyze.
         2) What group of cells do you want to look at in the network
         3) The directory with the spiking information
-        4) The file naming structure.
-        5) The number of bins to use for generating the histogram.
     '''
     cellGroups = ['EC','CA3e', 'CA3o', 'CA3b', 'DGg', 'DGh', 'DGb']
     cell_nums = [30,63,8,8,384,32,32]
     groupIndex = cellGroups.index(cellGroup)
 
 
-    #Get all the files from the directory.
+    #Get the files from the directory.
     file = open(os.path.join(files_dir,'bmtk_'+str(seed)+'_SpikeTime'+str(groupIndex)+'.txt'))
 
 
@@ -246,30 +245,89 @@ def plot_firing_rates(seed, cellGroup, files_dir='legacy', num_bins=30):
     print("Cells in group " + cellGroup + " that do not fire: ")
     print(dontFire)
 
-
-
     fig, (ax1,ax2) = plt.subplots(1,2)
-
-    
 
     print("The average spiking frequency of " + cellGroup + " cells is: " + str(sum(fireFreqs)/len(fireFreqs)))
     
-    ax2.hist(fireFreqs,num_bins)
+    ax2.hist(fireFreqs,int(1 + 3.322 * np.log(len(fireFreqs))))
     ax2.plot()
     ax2.set_title(cellGroup + " frequency distribution")
     ax2.set_xlabel("Frequency")
-    
+    ax2.set_ylabel("Number of " + cellGroup + " cells with reported average frequency")
 
-    ax1.hist(fireTimes,10000)
+    ax1.hist(fireTimes,1000)
     ax1.plot()
     ax1.set_xlabel("Time")
     ax1.set_ylabel("Number of " + cellGroup + " cells active")
-    ax1.set_title("Firing times of " + cellGroup + " cells.")
+    ax1.set_title("Firing times of " + cellGroup + " cells (10 ms bins)")
     
     fig.tight_layout()
     plt.show()
 
 
+def plot_instantaneous_frequencies(seed, cellGroup, cell_num = 2, files_dir='legacy'):
+    '''
+    Author: Pete Canfield
+    Generate a n x n matrix which graphs the instantaneous frequencies of n^2 randomly selected
+    cells in the specified cell group.
+
+    Arguments:
+        1) The seed that you want to analyze.
+        2) What group of cells do you want to look at in the network
+        3) The number of cells you want to sample (cell_num ^ 2)
+        4) The directory with the spiking information
+
+    '''
+
+    cellGroups = ['EC','CA3e', 'CA3o', 'CA3b', 'DGg', 'DGh', 'DGb']
+    cell_nums = [30,63,8,8,384,32,32]
+    groupIndex = cellGroups.index(cellGroup)
+
+    cellSquared = cell_num ** 2
+
+    if cellSquared > cell_nums[groupIndex]:
+        print("There arent enough cells in " + cellGroup + " to pick " + str(cellSquared) + " cells.")
+        print("Exiting")
+        return
+
+    toGenerate = random.sample(range(cell_nums[groupIndex]),cellSquared)
+
+    #Get the files from the directory.
+    file = open(os.path.join(files_dir,'bmtk_'+str(seed)+'_SpikeTime'+str(groupIndex)+'.txt'))
+
+
+    #First check to see if all the cells in that cell fire.
+    data = genfromtxt(file,delimiter=',', dtype=None)
+
+    #Create a dictionary where each key is the cell id we are intereted in 
+    #each value is a pair of the time information and the corresponding instantaneous
+    #frequency information.
+    freqs = {}
+    for i in toGenerate:
+        freqs[i] = ([0],[0])
+
+    for elem in data:
+        for id in toGenerate:
+            if elem[0] == id:
+                freqs[id][0].append(elem[1])
+                freqs[id][1].append(1/((elem[1] - freqs[id][1][-1])/1000.0))
+
+    fig, axs = plt.subplots(cell_num,cell_num, sharex=True,sharey=True)
+
+    item = 0
+    for i in range(cell_num):
+        for j in range(cell_num):
+            axs[i,j].plot(freqs[toGenerate[item]][0],freqs[toGenerate[item]][1])
+            #axs[i,j].set_title("Cell " + str(toGenerate[item]))
+            item += 1
+
+    fig.suptitle("Instantaneous freqeuncy of randomly selected " + cellGroup + " cells")
+    
+    fig.text(0.5, 0.03, 'Time (ms)', ha='center')
+    fig.text(0.03, 0.5, 'Frequncy (Hz)', va='center', rotation='vertical')
+    
+
+    plt.show()
 
 if __name__ == '__main__':
 
@@ -297,8 +355,11 @@ if __name__ == '__main__':
     
 
     group = sys.argv[2]
-    bins = int(sys.argv[3])
-    plot_firing_rates(seed, group, num_bins=bins)
+    plot_firing_rates(seed, group)
+
+    #nCells = int(sys.argv[3])
+
+    #plot_instantaneous_frequencies(seed,group,nCells)
     #plot_lfp(output_dir)
     #print_average_frequencies('./legacy/'+seed+'_output/spikes.csv')
 
