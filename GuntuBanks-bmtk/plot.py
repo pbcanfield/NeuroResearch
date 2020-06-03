@@ -303,7 +303,7 @@ def plot_instantaneous_frequencies(seed, cellGroup, cell_num = 2, files_dir='leg
     #each value is a pair of the time information and the corresponding instantaneous
     #frequency information.
     freqs = {}
-    for i in toGenerate:
+    for i in toGenerate: 
         freqs[i] = ([0],[0])
 
     for elem in data:
@@ -357,9 +357,9 @@ if __name__ == '__main__':
     group = sys.argv[2]
     plot_firing_rates(seed, group)
 
-    #nCells = int(sys.argv[3])
+    nCells = int(sys.argv[3])
 
-    #plot_instantaneous_frequencies(seed,group,nCells)
+    plot_instantaneous_frequencies(seed,group,nCells)
     #plot_lfp(output_dir)
     #print_average_frequencies('./legacy/'+seed+'_output/spikes.csv')
 
