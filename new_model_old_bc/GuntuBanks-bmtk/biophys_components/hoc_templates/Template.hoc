@@ -1,0 +1,1037 @@
+/////////////////////
+// Model Templates //
+/////////////////////
+
+begintemplate IzhiCell 
+	public NumSoma
+	NumSoma = 1
+
+	public soma
+	create soma[NumSoma]
+
+	public all, somatic, basal, apical, axonal
+	objref all, somatic, basal, apical, axonal
+	objref this
+
+	proc init() {
+    	//create soma
+
+		all = new SectionList()
+		somatic = new SectionList()
+		basal = new SectionList()
+		apical = new SectionList()
+		axonal = new SectionList()
+
+		for i=0,NumSoma soma[i] {
+			all.append()
+			somatic.append()
+		} 
+
+		soma[0] {
+			nseg=1
+			L=31830.98861837907 
+			diam=1000
+			cm = .0002   
+	    	}
+		define_shape()
+	}
+
+endtemplate IzhiCell
+
+/////////////////////
+// Model Templates //
+/////////////////////
+
+begintemplate CA3PyramidalCell
+
+	public NumSoma,NumDend
+	NumSoma = 1
+	NumDend = 2
+
+	public soma, dend
+	create soma[NumSoma]
+	create dend[NumDend]
+
+	public all, somatic, basal, apical, axonal
+	objref all, somatic, basal, apical, axonal
+	objref this
+
+	//public soma, dend, dendb
+	//create soma, dend, dendb
+
+
+	proc init() {
+
+		all = new SectionList()
+		somatic = new SectionList()
+		basal = new SectionList()
+		apical = new SectionList()
+		axonal = new SectionList()
+
+		for i=0,NumSoma soma[i] {
+			all.append()
+			somatic.append()
+		} 
+		for i=0,NumDend+1 dend[i] {
+			all.append()
+			basal.append()
+		}
+
+		//create soma, dend, dendb
+		connect dend[0](0), soma[0](1)
+		connect dend[1](0), soma[0](0)
+
+		soma[0] {nseg=1 L=30 diam=30} // changed L & diam
+			
+		dend[0] {nseg=3 L=500 diam=3}
+		dend[1] {nseg=1 L=400 diam=5}
+
+		soma[0]{
+			Ra = 150
+			cm = 1.5
+			Rm = 80000
+			Rmsoma = Rm
+			Rmdend = Rm/2
+			
+			insert hh 
+			
+			insert na1CA3
+			gbar_na1CA3 = 0.3
+			mhalf_na1CA3 = -38.43
+			hhalf_na1CA3 = -50
+			
+			insert k1CA3
+			gbar_k1CA3 = 0.01
+			vhalfn_k1CA3 = -15
+		}
+				
+		dend[0]{
+			Ra = 150
+			cm = 2.6
+			Rm = 80000
+			Rmsoma = Rm
+			Rmdend = Rm/2
+
+			insert na1CA3
+			gbar_na1CA3 = 0.7
+			mhalf_na1CA3 = -38.43
+			hhalf_na1CA3 = -50
+			
+			insert k1CA3
+			gbar_k1CA3 = 0.009
+			vhalfn_k1CA3 = -15
+		}	
+
+		dend[1] {
+			Ra = 150
+			cm = 2.6
+			Rm = 80000
+			Rmsoma = Rm
+			Rmdend = Rm/2
+
+			insert na1CA3
+			gbar_na1CA3 = 0.7
+			mhalf_na1CA3 = -38.43
+			hhalf_na1CA3 = -50
+			
+			insert k1CA3
+			gbar_k1CA3 = 0.009
+			vhalfn_k1CA3 = -15	
+		}
+		define_shape()	
+	}
+endtemplate CA3PyramidalCell
+
+////////////////////////////////////////////////////////////////
+/////////////////////////////////GC////////////////////////////
+begintemplate DGCell
+
+	public NumSoma,NumDend
+	NumSoma = 1
+	NumDend = 2
+
+	public soma, dend
+	create soma[NumSoma]
+	create dend[NumDend]
+
+	public all, somatic, basal, apical, axonal
+	objref all, somatic, basal, apical, axonal
+	objref this
+
+	//public soma, adend, bdend
+	//create soma, adend, bdend
+
+	proc init() { 
+		//create soma, adend, bdend
+
+		all = new SectionList()
+		somatic = new SectionList()
+		basal = new SectionList()
+		apical = new SectionList()
+		axonal = new SectionList()
+
+		for i=0,NumSoma soma[i] {
+			all.append()
+			somatic.append()
+		} 
+		for i=0,NumDend dend[i] {
+			all.append()
+			basal.append()
+		}
+
+		soma[0] {nseg=1 L=20 diam=15} 
+			
+		dend[0] {nseg=1 L=300 diam=2.5}
+
+		dend[1] {nseg=1 L=700 diam=2.5}
+		
+
+		
+		soma[0] {
+			Ra=100
+			cao_ccanl=2
+			
+			
+			insert ccanl
+			catau_ccanl = 10
+			caiinf_ccanl = 5.e-6
+			insert borgkaDG
+			gkabar_borgkaDG=0.00015
+			insert nca  // HAV-N- Ca channel
+			gncabar_nca=0.0008   
+			insert lca 
+			glcabar_lca=0.09
+			insert gskch
+			gskbar_gskch=0.000002
+			insert cagkDG
+			gkbar_cagkDG=0.0002
+		}
+		
+			dend[0] {
+			Ra=100
+			cao_ccanl=2
+			
+			
+			insert ccanl
+			catau_ccanl = 10
+			caiinf_ccanl = 5.e-6
+			insert borgkaDG
+			gkabar_borgkaDG=0.00015
+			insert nca  // HAV-N- Ca channel
+			gncabar_nca=0.0008   
+			insert lca 
+			glcabar_lca=0.09
+			insert gskch
+			gskbar_gskch=0.000002
+			insert cagkDG
+			gkbar_cagkDG=0.0002
+		}
+		
+		dend[1] {
+			Ra=100
+			cao_ccanl=2
+			
+			
+			insert ccanl
+			catau_ccanl = 10
+			caiinf_ccanl = 5.e-6
+			insert borgkaDG
+			gkabar_borgkaDG=0.00015
+			insert nca  // HAV-N- Ca channel
+			gncabar_nca=0.0008   
+			insert lca 
+			glcabar_lca=0.09
+			insert gskch
+			gskbar_gskch=0.000002
+			insert cagkDG
+			gkbar_cagkDG=0.0002
+		}
+
+		soma[0] {insert ichan2  //ildikos ichan
+				enat = 55 ekf = -90  ek=-90  elca=130	esk=-90
+			el_ichan2 =-64
+			gnatbar_ichan2=0.25  
+			gkfbar_ichan2=0.02  
+			gl_ichan2 = 0.0002
+			cm=2.5
+		} 
+
+		dend[0] {
+			insert ichan2
+				enat = 55 ekf = -90  ek=-90  elca=130	esk=-90
+			el_ichan2 =-64
+			gnatbar_ichan2=0.25  
+			gkfbar_ichan2=0.02
+			gl_ichan2 = 0.0002
+			cm=2.5
+		}	
+		
+		dend[1] {
+			insert ichan2
+			enat = 55 ekf = -90  ek=-90  elca=130	esk=-90
+			el_ichan2 =-64
+			gnatbar_ichan2=0.25
+			gkfbar_ichan2=0.02
+			gl_ichan2 = 0.0002
+			cm=2.5
+		}
+
+		connect soma[0](1), dend[0](0)
+		connect dend[1](1), soma[0](0)
+
+		define_shape()
+	}
+
+
+endtemplate DGCell
+
+////////////////////////////////////////////////////////////////
+/////////////////////////////////EC////////////////////////////
+begintemplate IzhiCell_EC
+	public NumSoma
+	NumSoma = 1
+
+	public soma
+	create soma[NumSoma]
+
+	public all, somatic, basal, apical, axonal
+	objref all, somatic, basal, apical, axonal
+	objref this
+
+	public IzhiSoma
+
+	public init, id
+	
+
+	objref IzhiSoma
+	public setv
+	proc setv() {
+	forall v = $1
+	}
+	proc init() {
+		all = new SectionList()
+		somatic = new SectionList()
+		basal = new SectionList()
+		apical = new SectionList()
+		axonal = new SectionList()
+
+		for i=0,NumSoma soma[i] {
+			all.append()
+			somatic.append()
+			} 
+		/////// topology ////////
+		//create soma
+		
+		/////// geometry ////////
+		soma[0] {nseg=1 L=40 diam=40} // changed L & diam
+			
+		
+		/////// biophysics ///////
+		soma[0] {
+			cm= 1//12		//(microF/cm2)
+			Ra= 210		//(ohm-cm)
+	
+			IzhiSoma = new IZH(0.5)
+			
+			IzhiSoma.k = 0.0008
+			IzhiSoma.vr = -64
+			IzhiSoma.vt = -55
+			IzhiSoma.a = 0.08
+			IzhiSoma.b = .014
+			IzhiSoma.vpeak = 40
+			IzhiSoma.c = -50
+			IzhiSoma.d = 0.6
+
+		  	}
+		define_shape()
+
+	}
+
+endtemplate IzhiCell_EC
+
+begintemplate IzhiCell_EC2
+	public NumSoma
+	NumSoma = 1
+	NumDend = 1
+
+	public soma, dend
+	create soma[NumSoma]
+	create dend[NumDend]
+
+	public all, somatic, basal, apical, axonal
+	objref all, somatic, basal, apical, axonal
+	objref this
+
+	public IzhiSoma
+
+	public init, id
+	
+
+	objref IzhiSoma
+	public setv
+	proc setv() {
+	forall v = $1
+	}
+	proc init() {
+		all = new SectionList()
+		somatic = new SectionList()
+		basal = new SectionList()
+		apical = new SectionList()
+		axonal = new SectionList()
+
+		for i=0,NumSoma soma[i] {
+			all.append()
+			somatic.append()
+			} 
+		for i=0,NumDend dend[i] {
+			all.append()
+			basal.append()
+		}
+		/////// topology ////////
+		//create soma
+		
+		/////// geometry ////////
+		soma[0] {nseg=1 L=40 diam=40} // changed L & diam
+		dend[0] {nseg=1 L=1 diam=1}	
+		
+		/////// biophysics ///////
+		soma[0] {
+			cm= 1//12		//(microF/cm2)
+			Ra= 210		//(ohm-cm)
+	
+			IzhiSoma = new IZH(0.5)
+			
+			IzhiSoma.k = 0.0008
+			IzhiSoma.vr = -64
+			IzhiSoma.vt = -55
+			IzhiSoma.a = 0.08
+			IzhiSoma.b = .014
+			IzhiSoma.vpeak = 40
+			IzhiSoma.c = -50
+			IzhiSoma.d = 0.6
+
+		  	}
+		dend[0]{
+			cm = 1
+			Ra=210
+
+			
+		}
+		connect soma[0](1), dend[0](0)
+		define_shape()
+
+	}
+
+endtemplate IzhiCell_EC2
+
+begintemplate IzhiCell_EC_BIO
+
+	public NumSoma,NumDend
+	NumSoma = 1
+	NumDend = 2
+
+	public soma, dend
+	create soma[NumSoma]
+	create dend[NumDend]
+
+	public all, somatic, basal, apical, axonal
+	objref all, somatic, basal, apical, axonal
+	objref this
+
+	//public soma, dend, dendb
+	//create soma, dend, dendb
+
+
+proc init() {
+
+	all = new SectionList()
+	somatic = new SectionList()
+	basal = new SectionList()
+	apical = new SectionList()
+	axonal = new SectionList()
+
+	for i=0,NumSoma soma[i] {
+		all.append()
+		somatic.append()
+	} 
+	for i=0,NumDend dend[i] {
+		all.append()
+		basal.append()
+	}
+
+	//create soma, dend, dendb
+	connect dend[0](0), soma[0](1)
+	connect dend[1](0), soma[0](0)
+
+	soma[0] {nseg=1 L=30 diam=30} // changed L & diam
+		
+	dend[0] {nseg=3 L=500 diam=3}
+	dend[1] {nseg=1 L=400 diam=5}
+
+	soma[0]{
+		Ra = 150
+		cm = 1.5
+		Rm = 1/0.0004
+		Rmsoma = Rm
+		Rmdend = Rm/2
+		
+		insert ccanlCA3
+			catau_ccanlCA3 = 10 // changed from 10
+			caiinf_ccanlCA3 = 54569.e-6
+			cao_ccanlCA3=2
+		insert ichan2CA3  //ildikos ichan
+			gnatbar_ichan2CA3= 0.42			
+			gkfbar_ichan2CA3= 0.06
+			gksbar_ichan2CA3=  0
+			gl_ichan2CA3 = 1/Rmsoma
+			el_ichan2CA3 = -64
+			enat = 55
+			ekf = -90
+			eks = -90
+		insert borgkaCA3
+			gkabar_borgkaCA3= 0.01
+			ek = -90
+		insert ncaCA3  
+			gncabar_ncaCA3= 0.0001
+		insert lcaCA3 
+			glcabar_lcaCA3= 0.0003
+			elca= 130
+		insert catCA3
+			gcatbar_catCA3= 0.0007
+			etca= 130
+		insert gskchCA3
+			gskbar_gskchCA3=0.00005
+			esk= -90	
+		insert hd
+			ehd = -30			
+			ghdbar_hd = 0.000045
+		insert im
+			gmbar_im = 0.014 / 100
+	    	}
+			
+	dend[0] {
+		Ra = 150
+		cm = 2.6
+		Rm = 80000
+		Rmsoma = Rm
+		Rmdend = Rm/2
+		
+		insert ccanlCA3
+			catau_ccanlCA3 = 10
+			caiinf_ccanlCA3 = 5.e-6
+			cao_ccanlCA3=2
+		insert ichan2CA3
+			gnatbar_ichan2CA3= 0.03
+			gkfbar_ichan2CA3= 0.004
+			gksbar_ichan2CA3= 0
+			gl_ichan2CA3 = 1/Rmdend
+			el_ichan2CA3 = -64
+			enat = 45
+			ekf = -90
+			eks = -90
+		insert ncaCA3  
+			gncabar_ncaCA3=0.0003
+		insert catCA3
+			gcatbar_catCA3= 0.0007
+			etca= 130
+		insert im
+			gmbar_im = 0.014 / 100
+		insert hd
+			ehd = -30			
+			ghdbar_hd = 0.000045
+		insert borgkaCA3
+			gkabar_borgkaCA3= 0.004
+			ek = -90	
+			}
+							
+	dend[1] {
+		Ra = 150
+		cm = 2.6
+		Rm = 80000
+		Rmsoma = Rm
+		Rmdend = Rm/2	
+	
+		insert ccanlCA3
+			catau_ccanlCA3 = 10
+			caiinf_ccanlCA3 = 5.e-6
+			cao_ccanlCA3=2
+		insert ichan2CA3
+			gnatbar_ichan2CA3= 0.03
+			gkfbar_ichan2CA3= 0.004
+			gksbar_ichan2CA3= 0
+			gl_ichan2CA3 = 1/Rmdend
+			el_ichan2CA3 = -64
+			enat = 45
+			ekf = -90
+			eks = -90
+		insert ncaCA3  
+			gncabar_ncaCA3=0.0003
+		insert catCA3
+			gcatbar_catCA3= 0.0007
+			etca= 130
+		insert im
+			gmbar_im = 0.014 / 100
+		insert hd
+			ehd = -30			
+			ghdbar_hd = 0.000045
+			
+		insert borgkaCA3
+			gkabar_borgkaCA3= 0.004
+			ek = -90	
+			}
+    
+		define_shape()
+		}
+
+endtemplate IzhiCell_EC_BIO
+
+////////////////////////////////////////////////////////////////
+/////////////////////////////////INT////////////////////////////
+begintemplate IzhiCell_int
+	public NumSoma
+	NumSoma = 1
+
+	public soma
+	create soma[NumSoma]
+
+	public all, somatic, basal, apical, axonal
+	objref all, somatic, basal, apical, axonal
+	objref this
+
+	public IzhiSoma
+	public init
+	objref IzhiSoma
+
+	proc init() {
+		/////// topology ////////
+		//create soma
+		all = new SectionList()
+		somatic = new SectionList()
+		basal = new SectionList()
+		apical = new SectionList()
+		axonal = new SectionList()
+
+		for i=0,NumSoma soma[i] {
+			all.append()
+			somatic.append()
+		} 
+		/////// geometry ////////
+		soma[0] {nseg=1 L=40 diam=40} // changed L & diam
+		/////// biophysics ///////
+		soma[0] {
+			cm= 1//12		//(microF/cm2)
+			Ra= 210		//(ohm-cm)
+	
+			IzhiSoma = new IZH(0.5)
+			
+			IzhiSoma.k = 0.001
+			IzhiSoma.vr = -65
+			IzhiSoma.vt = -45
+			IzhiSoma.a = 0.1
+			IzhiSoma.b = .0002
+			IzhiSoma.vpeak = 35
+			IzhiSoma.c = -65
+			IzhiSoma.d = 0.002
+			IzhiSoma.dACH = 0.0015
+			IzhiSoma.cACH = 0
+			IzhiSoma.vrACH = 5
+		}
+		define_shape()
+	}
+
+endtemplate IzhiCell_int
+
+////////////////////////////////////////////////////////////////
+/////////////////////////////////OLM////////////////////////////
+begintemplate IzhiCell_OLM
+	//public soma, adend, bdend
+	//create soma, adend, bdend
+	public NumSoma,NumDend
+	NumSoma = 1
+	NumDend = 2
+
+	public soma, dend
+	create soma[NumSoma]
+	create dend[NumDend]
+
+	public all, somatic, basal, apical, axonal
+	objref all, somatic, basal, apical, axonal
+	objref this
+
+	//public soma, adend, bdend
+	//create soma, adend, bdend
+
+	proc init() { 
+		//create soma, adend, bdend
+
+		all = new SectionList()
+		somatic = new SectionList()
+		basal = new SectionList()
+		apical = new SectionList()
+		axonal = new SectionList()
+
+		for i=0,NumSoma soma[i] {
+			all.append()
+			somatic.append()
+		} 
+		for i=0,NumDend dend[i] {
+			all.append()
+			basal.append()
+		}
+
+		/////// geometry ////////
+		soma[0] {
+			nseg = 1
+			L = 20 // (micrometer)
+			diam = 10 // (micrometer)
+	    	}
+		
+		dend[0] {
+			nseg = 1
+			L = 250 // (micrometer)
+			diam = 3 // (micrometer)
+			}
+			
+		dend[1] {
+			nseg = 1
+			L = 250 // (micrometer)
+			diam = 3 // (micrometer)
+			}
+			
+		/////// biophysics //////
+		
+		soma[0]{
+			cm = 2		// (microF/cm2)
+			Ra = 150	// (ohm-cm)
+			insert IAOLM
+			gkAbar_IAOLM = 0.0001
+			insert IhOLM
+			gkhbar_IhOLM = 1e-5 		//	gkhbar_Ih = 0.001385
+			eh = -32.9
+			
+			insert ichan2OLM
+			enat = 55 ekf = -90  ek=-90  
+				
+		 	el_ichan2OLM =-60
+			gnatbar_ichan2OLM=0.08  
+			gkfbar_ichan2OLM=0.01  
+			gl_ichan2OLM = 3e-5
+			
+			insert ccanlOLM
+			catau_ccanlOLM = 10
+			caiinf_ccanlOLM = 5.e-6
+			
+			insert lcaOLM 
+			glcabar_lcaOLM=0.09
+			elca=130
+			
+			insert catOLM
+			gcatbar_catOLM = 0.0005
+			
+
+	    	}
+			
+		dend[0] {
+			cm = 3		// (microF/cm2)
+			Ra = 150	// (ohm-cm)
+			insert IAOLM
+			gkAbar_IAOLM = 0.0001
+			insert IhOLM
+			gkhbar_IhOLM = 1e-5
+			eh = -32.9
+
+			insert ichan2OLM
+			enat = 55 ekf = -90  ek=-90   
+
+			el_ichan2OLM =-60
+			gnatbar_ichan2OLM=0.08  
+			gkfbar_ichan2OLM=0.01  
+			gl_ichan2OLM = 3e-5
+
+			insert ccanlOLM
+			catau_ccanlOLM = 10
+			caiinf_ccanlOLM = 5.e-6
+
+			insert sAHPOLM
+			gsAHPbar_sAHPOLM=2e-5
+
+			insert lcaOLM 
+			glcabar_lcaOLM=0.09
+			elca=130
+
+			insert catOLM
+			gcatbar_catOLM = 0.0005
+
+
+		}
+			
+		dend[1] {
+			cm = 3		// (microF/cm2)
+			Ra = 150	// (ohm-cm)
+			insert IAOLM
+			gkAbar_IAOLM = 0.0001
+			insert IhOLM
+			gkhbar_IhOLM = 1e-5
+			eh = -32.9
+			insert ichan2OLM
+			enat = 55 ekf = -90  ek=-90  
+
+			el_ichan2OLM =-60
+			gnatbar_ichan2OLM=0  
+			gkfbar_ichan2OLM=0.01  
+			gl_ichan2OLM = 3e-5	
+
+			insert ccanlOLM
+			catau_ccanlOLM = 10
+			caiinf_ccanlOLM = 5.e-6
+
+			insert sAHPOLM
+			gsAHPbar_sAHPOLM=4e-5
+
+			insert lcaOLM 
+			glcabar_lcaOLM=0.09
+			elca=130
+
+			insert catOLM
+			gcatbar_catOLM = 0.0005
+	
+		}
+	
+  	connect soma[0](1), dend[0](0)
+	connect dend[1](1), soma[0](0)
+	define_shape()
+
+	}
+
+endtemplate IzhiCell_OLM
+
+////////////////////////////////////////////////////////////////
+/////////////////////////////////Basket//////////////////////////
+
+begintemplate IzhiCell_BC
+
+	//public soma, adend, bdend
+	//create soma, adend, bdend
+	public NumSoma,NumDend
+	NumSoma = 1
+	NumDend = 2
+
+	public soma, dend
+	create soma[NumSoma]
+	create dend[NumDend]
+
+	public all, somatic, basal, apical, axonal
+	objref all, somatic, basal, apical, axonal
+	objref this
+
+	//public soma, adend, bdend
+	//create soma, adend, bdend
+
+	proc init() { 
+		//create soma, adend, bdend
+
+		all = new SectionList()
+		somatic = new SectionList()
+		basal = new SectionList()
+		apical = new SectionList()
+		axonal = new SectionList()
+
+		for i=0,NumSoma soma[i] {
+			all.append()
+			somatic.append()
+		} 
+		for i=0,NumDend dend[i] {
+			all.append()
+			basal.append()
+		}
+
+		soma[0] {nseg=1 L=20 diam=15 Ra=100 cm=2.5} 
+		dend[0] {nseg=1 L=300 diam=2.5 Ra=100 cm=2.5}
+		dend[1] {nseg=1 L=700 diam=2.5 Ra=100 cm=2.5}
+		
+
+		
+		soma[0] {
+			insert hh 
+			
+			insert na1BC
+			gbar_na1BC = 0.4
+			mhalf_na1BC = -38.43
+			hhalf_na1BC = -50
+			
+			insert k1BC
+			gbar_k1BC = 0.0095
+			vhalfn_k1BC = -15
+			
+			insert napBC
+			gbar_napBC = 0.0002 //0.0005
+		}
+		
+		dend[0] {
+			insert hh 
+			
+			insert na1BC
+			gbar_na1BC = 0.4
+			mhalf_na1BC = -38.43
+			hhalf_na1BC = -50
+			
+			insert k1BC
+			gbar_k1BC = 0.0095
+			vhalfn_k1BC = -15
+		}
+		
+		dend[1] {
+			insert hh 
+			
+			insert na1BC
+			gbar_na1BC = 0.4
+			mhalf_na1BC = -38.43
+			hhalf_na1BC = -50
+			
+			insert k1BC
+			gbar_k1BC = 0.0095
+			vhalfn_k1BC = -15
+		}
+
+		connect soma[0](1), dend[0](0)
+		connect dend[1](1), soma[0](0)
+		define_shape()
+
+	}
+endtemplate IzhiCell_BC
+
+begintemplate IzhiCell_EmoExcitatory
+	//public soma
+	//create soma
+
+	public NumSoma
+	NumSoma = 1
+
+	public soma
+	create soma[NumSoma]
+
+	public all, somatic, basal, apical, axonal
+	objref all, somatic, basal, apical, axonal
+	objref this
+	public IzhiSoma
+
+	public init
+	//public SpikeTimeRec, mygid
+
+	objref IzhiSoma
+
+	public setv
+	proc setv() {
+		forall v = $1
+	}
+
+	proc init() {
+    	//create soma
+
+		all = new SectionList()
+		somatic = new SectionList()
+		basal = new SectionList()
+		apical = new SectionList()
+		axonal = new SectionList()
+
+		for i=0,NumSoma soma[i] {
+			all.append()
+			somatic.append()
+		} 
+		/////// topology ////////
+		//create soma
+		
+		/////// geometry ////////
+		soma[0] {nseg=1 L=40 diam=40} // changed L & diam
+	
+		/////// biophysics ///////
+		soma[0] {
+			cm= 1.5		//(microF/cm2)
+			Ra= 210		//(ohm-cm)
+	
+			IzhiSoma = new IZH(0.5)
+		
+			IzhiSoma.k = 0.0015
+			IzhiSoma.vr = -75
+			IzhiSoma.vt = -58
+			IzhiSoma.a = 0.01
+			IzhiSoma.b = .002
+			IzhiSoma.vpeak = 29
+			IzhiSoma.c = -63
+			IzhiSoma.d = 0.06//3.9
+			// IzhiSoma.dACH = 0.01
+			// IzhiSoma.cACH = 2
+			// IzhiSoma.vrACH = 5
+		}
+
+		define_shape()
+	}
+	
+endtemplate IzhiCell_EmoExcitatory
+
+
+////////////////////////////////////////////////////////////////
+////////////////////////////////EmoInhibitory////////////////////////////
+begintemplate IzhiCell_EmoInhibitory
+	//public soma
+	//create soma
+	public NumSoma
+	NumSoma = 1
+
+	public soma
+	create soma[NumSoma]
+
+	public all, somatic, basal, apical, axonal
+	objref all, somatic, basal, apical, axonal
+	objref this
+
+	public IzhiSoma
+	public init
+	objref IzhiSoma
+
+	proc init() {
+		/////// topology ////////
+		//create soma
+		all = new SectionList()
+		somatic = new SectionList()
+		basal = new SectionList()
+		apical = new SectionList()
+		axonal = new SectionList()
+
+		for i=0,NumSoma soma[i] {
+			all.append()
+			somatic.append()
+		} 
+
+		/////// geometry ////////
+		//soma {nseg=1 L=16.8 diam=16.8} // changed L & diam
+		soma[0] {nseg=1 L=40 diam=40} // changed L & diam
+					//0.004cm 16e-6 * 5 = 80e-6 microF = 80pF
+		/////// biophysics ///////
+		soma[0] {
+			cm= 5//12		//(microF/cm2)
+			Ra= 210		//(ohm-cm)
+
+			IzhiSoma = new IZH(0.5)
+	
+			IzhiSoma.k = 0.0015
+			IzhiSoma.vr = -68 // taken from the first cell in Ali AB, Thomson AM (1998)
+			IzhiSoma.vt = -53 // Estimated from graph in Ali AB, Thomson AM (1998)
+			IzhiSoma.a = 0.0031
+			IzhiSoma.b = .01
+			IzhiSoma.vpeak = 30 //This is actually about 8mv but I'm worried that netCon might not register it as a spike so leaving it at this
+			IzhiSoma.c = -65
+			IzhiSoma.d = 0.03//3.9
+			
+			// IzhiSoma.alphaShutdown = 0 //To allow a to be calcuated as a function of ACH
+			// IzhiSoma.ACHshutdown = 1
+			
+			// IzhiSoma.peakFactor = 30
+			// IzhiSoma.cFactor = 10
+
+		}
+		define_shape()
+	}
+
+
+endtemplate IzhiCell_EmoInhibitory

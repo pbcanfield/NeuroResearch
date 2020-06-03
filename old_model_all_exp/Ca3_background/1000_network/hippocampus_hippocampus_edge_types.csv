@@ -1,0 +1,2 @@
+edge_type_id target_query source_query syn_weight target_sections model_template dynamics_params distance_range
+100 pop_name=='CA3e' pop_name=='bgnoisenodesCA3' 1 ['soma'] bg2pyr background2CA3.bg2pyr.json "[0.0, 9999]"

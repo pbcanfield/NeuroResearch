@@ -1,0 +1,6 @@
+*.dll
+tk
+lib
+tcl
+mpl-data
+.git

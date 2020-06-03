@@ -1,0 +1,14 @@
+{
+    "frequency": 3,
+    "number":1e100,
+    "start":0,
+    "noise":1,
+    "threshold":0.5,
+    "delay":0,
+    "weight":1.000000001,
+    "tau": 1e9, 
+    "refrac": 10,
+    "m":0,
+    "timestep":0.01
+}
+  

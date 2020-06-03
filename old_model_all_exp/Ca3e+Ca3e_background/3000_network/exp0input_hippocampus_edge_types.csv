@@ -1,0 +1,2 @@
+edge_type_id target_query source_query syn_weight delay dynamics_params
+100 pop_name=='bgnoisenodesCA3' pop_name=='bgnoisevirtCA3' 1 0 instanteneousExc.json
