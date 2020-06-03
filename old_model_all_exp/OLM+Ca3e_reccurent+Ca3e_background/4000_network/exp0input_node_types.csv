@@ -1,6 +1,0 @@
-node_type_id pop_group pat pop_name model_type exp
-100 exp0pat1 pat1 exp0pat1 virtual 0
-101 exp0pat2 pat2 exp0pat2 virtual 0
-102 bgnoisevirtCA3 NULL bgnoisevirtCA3 virtual NULL
-103 bgnoisevirtDG NULL bgnoisevirtDG virtual NULL
-104 bgnoisevirtEC NULL bgnoisevirtEC virtual NULL
