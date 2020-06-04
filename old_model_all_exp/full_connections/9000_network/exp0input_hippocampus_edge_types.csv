@@ -1,6 +1,0 @@
-edge_type_id target_query source_query target_sections dynamics_params distance_range model_template syn_weight delay
-100 pop_name=='EC' pat=='pat1' ['soma'] NetCon2EC.exc.json "[0.0, 300]" pyr2pyr 1 0
-101 pop_name=='EC' pat=='pat2' ['soma'] NetCon2EC.exc.json "[0.0, 300]" pyr2pyr 1 0
-102 pop_name=='bgnoisenodesCA3' pop_name=='bgnoisevirtCA3' NULL instanteneousExc.json NULL NULL 1 0
-103 pop_name=='bgnoisenodesDG' pop_name=='bgnoisevirtDG' NULL instanteneousExc.json NULL NULL 1 0
-104 pop_name=='bgnoisenodesEC' pop_name=='bgnoisevirtEC' NULL instanteneousExc.json NULL NULL 1 0
