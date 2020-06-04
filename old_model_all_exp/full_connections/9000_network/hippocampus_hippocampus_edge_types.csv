@@ -1,0 +1,21 @@
+edge_type_id target_query source_query target_sections dynamics_params distance_range model_template syn_weight
+100 pop_name=='CA3e' pop_name=='EC' ['soma'] EC2CA3e.exc.json "[0.0, 300.0]" pyr2pyr 1
+101 pop_name=='CA3b' pop_name=='EC' ['soma'] EC2CA3b.exc.json "[0.0, 300.0]" pyr2pyr 1
+102 pop_name=='CA3b' pop_name=='DGg' ['soma'] DGg2CA3b.exc.json "[0.0, 300.0]" pyr2pyr 1
+103 pop_name=='CA3e' pop_name=='CA3e' ['soma'] CA3e2CA3e.exc.json "[0.0, 300.0]" pyr2pyr 1
+104 pop_name=='CA3b' pop_name=='CA3e' ['soma'] CA3e2CA3b.exc.json "[0.0, 300.0]" pyr2pyr 1
+105 pop_name=='CA3e' pop_name=='CA3o' ['soma'] CA3o2CA3e.inh.json "[0.0, 300.0]" inter2pyr 1
+106 pop_name=='CA3e' pop_name=='CA3b' ['soma'] CA3b2CA3e.inh.json "[0.0, 300.0]" inter2pyr 1
+107 pop_name=='CA3o' pop_name=='CA3b' ['soma'] CA3e2CA3e.inh.json "[0.0, 300.0]" inter2pyr 1
+108 pop_name=='DGg' pop_name=='EC' ['soma'] EC2DGg.exc.json "[0.0, 300.0]" pyr2pyr 1
+109 pop_name=='DGb' pop_name=='EC' ['soma'] EC2DGb.exc.json "[0.0, 300.0]" pyr2pyr 1
+110 pop_name=='DGb' pop_name=='DGg' ['soma'] DGg2DGb.exc.json "[0.0, 300.0]" pyr2pyr 1
+111 pop_name=='DGg' pop_name=='DGh' ['soma'] DGh2DGg.inh.json "[0.0, 300.0]" inter2pyr 1
+112 pop_name=='DGg' pop_name=='DGb' ['soma'] DGb2DGg.inh.json "[0.0, 300.0]" inter2pyr 1
+113 pop_name=='DGh' pop_name=='DGb' ['soma'] DGb2DGh.inh.json "[0.0, 300.0]" inter2pyr 1
+114 pop_name=='CA3o' pop_name=='CA3e' ['soma'] CA3e2CA3o.exc.json "[0.0, 300.0]" pyr2pyr 1
+115 pop_name=='DGh' pop_name=='DGg' ['soma'] DGg2DGh.exc.json "[0.0, 300.0]" pyr2pyr 1
+116 pop_name=='CA3e' pop_name=='DGg' ['soma'] DGg2CA3e.exc.json "[0.0, 300.0]" pyr2pyr 1
+117 pop_name=='CA3e' pop_name=='bgnoisenodesCA3' ['soma'] background2CA3.bg2pyr.json "[0.0, 9999]" bg2pyr 1
+118 pop_name=='DGg' pop_name=='bgnoisenodesDG' ['soma'] background2DG.bg2pyr.json "[0.0, 9999]" bg2pyr 1
+119 pop_name=='EC' pop_name=='bgnoisenodesEC' ['soma'] background2CA3.bg2pyr.json "[0.0, 9999]" bg2pyr 1

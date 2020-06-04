@@ -1,0 +1,3 @@
+edge_type_id target_query source_query target_sections syn_weight dynamics_params distance_range model_template
+100 pop_name=='CA3e' pop_name=='CA3o' ['soma'] 1 CA3o2CA3e.inh.json "[0.0, 300.0]" inter2pyr
+101 pop_name=='CA3o' pop_name=='CA3e' ['soma'] 1 CA3e2CA3o.exc.sfn19exp2d.json "[0.0, 300.0]" pyr2pyr
