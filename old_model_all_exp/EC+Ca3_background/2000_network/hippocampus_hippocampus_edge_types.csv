@@ -1,0 +1,3 @@
+edge_type_id target_query source_query syn_weight distance_range dynamics_params target_sections model_template
+100 pop_name=='CA3e' pop_name=='EC' 1 "[0.0, 300.0]" EC2CA3e.exc.json ['soma'] pyr2pyr
+101 pop_name=='EC' pop_name=='bgnoisenodesEC' 1 "[0.0, 9999]" background2CA3.bg2pyr.json ['soma'] bg2pyr

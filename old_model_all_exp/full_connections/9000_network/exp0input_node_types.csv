@@ -1,0 +1,6 @@
+node_type_id pat model_type pop_name exp pop_group
+100 pat1 virtual exp0pat1 0 exp0pat1
+101 pat2 virtual exp0pat2 0 exp0pat2
+102 NULL virtual bgnoisevirtCA3 NULL bgnoisevirtCA3
+103 NULL virtual bgnoisevirtDG NULL bgnoisevirtDG
+104 NULL virtual bgnoisevirtEC NULL bgnoisevirtEC

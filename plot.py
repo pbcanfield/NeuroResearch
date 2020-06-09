@@ -226,6 +226,7 @@ def plot_firing_rates(seed, cellGroup, files_dir='legacy'):
 
     fireIds.sort()
 
+
     startInd = 0
     ind = 0
 
@@ -239,6 +240,8 @@ def plot_firing_rates(seed, cellGroup, files_dir='legacy'):
                                                 
         fireFreqs.append(count/10.0) #divided by 10 becuase the simulation runtime is 10 seconds.
         startInd = ind
+
+    print ("Max firing freqeuncy: " + str(max(fireFreqs)))
 
     print("Cells in group " + cellGroup + " that do not fire: ")
     print(dontFire)
@@ -304,6 +307,7 @@ def plot_instantaneous_frequencies(seed, cellGroup, cell_num = 2, files_dir='leg
     for i in toGenerate: 
         freqs[i] = ([0],[0])
 
+
     for elem in data:
         for id in toGenerate:
             if elem[0] == id:
@@ -324,8 +328,39 @@ def plot_instantaneous_frequencies(seed, cellGroup, cell_num = 2, files_dir='leg
     fig.text(0.5, 0.03, 'Time (ms)', ha='center')
     fig.text(0.03, 0.5, 'Frequncy (Hz)', va='center', rotation='vertical')
     
+    #orginize the data by firing ids, then by firing times.
+    data = np.sort(data,order=['f0','f1'])
+    
+    #Go through each ID id in the sorted data and extract a sublist for each cell.
+    #sort the sublist by firing time and then extract instantaneous firing info from it
+
+    #Find the maximum insatntaneous freqeuncy
+    maxFreq = 0
+    index = 0
+
+    cellID = None
+    firingStartTime = None
+    firingEndTime = None
+
+    while index < data.size - 1:
+        nextID = data[index + 1][0]
+        if nextID == data[index][0]:
+            freq = 1/((data[index + 1][1] - data[index][1])/1000)
+            if freq > maxFreq:
+                maxFreq = freq
+                firingStartTime = data[index][1]
+                firingEndTime = data[index + 1][1]
+                cellID = data[index][0]
+            
+        index += 1
+
+
+    print("Cell with ID: " + str(cellID) + " fired at: " + str(firingStartTime) + " and " + str(firingEndTime) + " ms leading to a maxium frequency of : " + str(maxFreq) + " Hz.")
 
     plt.show()
+
+    #Now lets generate the 
+    
 
 if __name__ == '__main__':
 

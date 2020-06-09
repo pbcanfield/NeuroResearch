@@ -1,0 +1,11 @@
+node_type_id model_template pop_name morphology model_type dynamics_params pop_group
+100 hoc:IzhiCell_EC2 EC blank.swc biophysical NULL EC
+101 hoc:CA3PyramidalCell CA3e blank.swc biophysical NULL CA3
+102 hoc:IzhiCell_OLM CA3o blank.swc biophysical NULL CA3
+103 hoc:IzhiCell_BC CA3b blank.swc biophysical NULL CA3
+104 hoc:DGCell DGg blank.swc biophysical NULL DG
+105 hoc:IzhiCell_OLM DGh blank.swc biophysical NULL DG
+106 hoc:IzhiCell_BC DGb blank.swc biophysical NULL DG
+107 nrn:IntFire1 bgnoisenodesCA3 NULL point_process background2CA3_IntFire1Netstim.json bgnoisenodesCA3
+108 nrn:IntFire1 bgnoisenodesDG NULL point_process background2DG_IntFire1Netstim.json bgnoisenodesDG
+109 nrn:IntFire1 bgnoisenodesEC NULL point_process background2CA3_IntFire1Netstim.json bgnoisenodesEC

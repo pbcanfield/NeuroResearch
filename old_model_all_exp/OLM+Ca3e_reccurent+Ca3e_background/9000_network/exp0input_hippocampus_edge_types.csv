@@ -1,0 +1,2 @@
+edge_type_id target_query source_query model_template syn_weight delay dynamics_params
+100 pop_name=='CA3e' pop_name=='bgnoisevirtCA3' pyr2pyr 1 0 NetCon2EC.exc.json
