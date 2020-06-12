@@ -1,4 +1,0 @@
-edge_type_id target_query source_query target_sections model_template distance_range dynamics_params syn_weight
-100 pop_name=='CA3b' pop_name=='CA3e' ['soma'] pyr2pyr "[0.0, 300.0]" CA3e2CA3b.exc.json 1
-101 pop_name=='CA3e' pop_name=='CA3b' ['soma'] inter2pyr "[0.0, 300.0]" CA3b2CA3e.inh.json 1
-102 pop_name=='CA3e' pop_name=='bgnoisenodesCA3' ['soma'] bg2pyr "[0.0, 9999]" background2CA3.bg2pyr.json 1
