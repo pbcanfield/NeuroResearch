@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 
 from mpl_toolkits.mplot3d import Axes3D
 
-from bmtk.analyzer.cell_vars import plot_report
+#from bmtk.analyzer.cell_vars import plot_report
 
 
 def original_connection_totals(synapses_file):
