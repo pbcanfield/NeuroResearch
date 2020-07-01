@@ -11,10 +11,6 @@ def convert(input_dir, output_dir, seed = '0041'):
     f_out.create_group('spikes/hippocampus')
     hipp = f_out['spikes/hippocampus']
 
-    
-
-    size = 0
-
     fireIds = np.empty((0,),dtype=np.uint64)
     fireTimes = np.empty((0,),dtype=np.dtype('<f8'))
     for i in range(7):
