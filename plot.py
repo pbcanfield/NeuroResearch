@@ -390,11 +390,11 @@ if __name__ == '__main__':
     group = sys.argv[2]
     plot_firing_rates(seed, group)
 
-    nCells = int(sys.argv[3])
+    #nCells = int(sys.argv[3])
 
     #(seed,group,nCells)
     #plot_lfp(output_dir)
     #print_average_frequencies('./legacy/'+seed+'_output/spikes.csv')
     
-    plot_instantaneous_frequencies(seed,group,nCells)
+    #plot_instantaneous_frequencies(seed,group,nCells)
 
