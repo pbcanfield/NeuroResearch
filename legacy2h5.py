@@ -4,9 +4,9 @@ import h5py
 
 def convert(input_dir, output_dir, seed = '0041'):
 
-    cell_offsets = [0,30,63,8,8,384,32,32]
-    total_cells = sum(cell_offsets)
+    cell_offsets = np.cumsum(np.array([30,63,8,8,384,32,32])) - 30
     
+
     f_out = h5py.File(output_dir,'a')
     f_out.create_group('spikes/hippocampus')
     hipp = f_out['spikes/hippocampus']
