@@ -1,0 +1,19 @@
+begintemplate DGCell
+    public soma, dend
+    
+    create soma
+    //create dend[2]
+
+    proc init(){
+        
+
+        soma {
+            Ra = 150
+		    cm = 1
+	    	Rm = 80000   
+
+            insert leak 
+        }
+    }
+
+endtemplate DGCell
