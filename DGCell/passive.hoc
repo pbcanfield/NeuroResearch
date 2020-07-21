@@ -24,7 +24,7 @@ run()
 
 v_rest = membrane_voltage.x[membrane_voltage.size() - 1]
 
-printf("Cell v_rest: %f\n",v_rest)
+printf("The cell's v_rest is: %f\n",v_rest)
 
 //Provide negative current injection to calculate r_in
 
@@ -38,7 +38,7 @@ run()
 
 v_final_rin = membrane_voltage.x[membrane_voltage.size() - 1]
 
-r_in = v_final_rin/RINAMP
+r_in = (v_final_rin - v_rest)/RINAMP
 
 printf("The cell's R_in is: %f\n", r_in)
 
