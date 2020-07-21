@@ -43,7 +43,7 @@ r_in = (v_final_rin - v_rest)/RINAMP
 printf("The cell's R_in is: %f\n", r_in)
 
 //Now calculate tau
-target = (membrane_voltage.x[membrane_voltage.size() - 1] - v_rest) * 0.636
+target = (membrane_voltage.x[membrane_voltage.size() - 1] - v_rest) * 0.632
 target = target + v_rest
 
 //Search through the vector for a suitable candidate
