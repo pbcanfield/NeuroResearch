@@ -5,7 +5,7 @@ DELAY = 300
 RINAMP = -0.1
 
 //Should match the cells leak reversal potential
-v_init = -75
+v_init = -84
 
 objectvar cell
 cell = new DGCell()

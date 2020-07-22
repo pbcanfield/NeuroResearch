@@ -2,17 +2,34 @@ begintemplate DGCell
     public soma, dend
     
     create soma
-    //create dend[2]
+    create dend[2]
 
     proc init(){
         
         soma {L = 20 diam = 15 nseg = 1}
+        dend[0] {diam= 3 L=270 nseg=8}     
+		dend[1] {diam =5 L=555 nseg=7} 
 
         soma { 
-
-            insert leak
-            glbar = 3.3842e-04
+            insert leakDG
+            
         }
+
+        dend[0] {
+            insert leakDG
+            
+        }
+
+        dend[1] {
+            insert leakDG
+            
+        }
+
+
+        connect soma(1), dend[0](0)
+		connect dend[1](1), soma(0)
+
+        define_shape()
     }
 
 endtemplate DGCell

@@ -1,7 +1,7 @@
 : passive leak current
 
 NEURON {
-	SUFFIX leak
+	SUFFIX leakDG
 	NONSPECIFIC_CURRENT il
 	RANGE il, el, glbar
 }
@@ -12,8 +12,8 @@ UNITS {
 }
 
 PARAMETER {
-	glbar = 2.857142857142857e-05  :3.333333e-5 (siemens/cm2) < 0, 1e9 >
-	el = -75 (mV)
+	glbar = 3.593554677e-05  
+	el = -84 (mV)
 }
 
 ASSIGNED {
