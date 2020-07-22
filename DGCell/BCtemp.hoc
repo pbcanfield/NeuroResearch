@@ -1,0 +1,164 @@
+begintemplate BC
+nsoma = 1
+ndend=2	
+v_init=-55
+
+public soma
+
+create soma				// creates a new section with default properties diam=500 um, L=100 um, cm =1uF/cm^2, Ra=35.4 ohm-cm
+create dend[ndend]
+
+
+
+
+
+ soma {nseg=1 L=20 diam=15 Ra=100 cm=2.5} 
+
+ dend[0] {nseg=1 L=300 diam=2.5 Ra=100 cm=2.5}
+
+ dend[1] {nseg=1 L=700 diam=2.5 Ra=100 cm=2.5}
+		
+
+		
+		soma {
+
+		insert hh 
+		
+		insert na1BC
+		gbar_na1BC = 0.4
+		mhalf_na1BC = -38.43
+		hhalf_na1BC = -50
+		
+		insert k1BC
+		gbar_k1BC = 0.0095
+		vhalfn_k1BC = -15
+		
+		insert napBC
+		gbar_napBC = 0.0005
+
+/*
+			cao_ccanlBC=2
+
+
+			insert ccanlBC
+			catau_ccanlBC = 10
+			caiinf_ccanlBC = 5.e-6
+			insert borgkaBC
+			gkabar_borgkaBC=0.00015
+			insert ncaBC  // HAV-N- Ca channel
+			gncabar_ncaBC=0.0008   
+			insert lcaBC 
+			glcabar_lcaBC=0.09
+			insert gskchBC
+			gskbar_gskchBC=0.000002
+			insert cagkBC
+			gkbar_cagkBC=0.0002
+*/
+		}
+		
+		dend[0] {
+
+		insert hh 
+		
+		insert na1BC
+		gbar_na1BC = 0.4
+		mhalf_na1BC = -38.43
+		hhalf_na1BC = -50
+		
+		insert k1BC
+		gbar_k1BC = 0.0095
+		vhalfn_k1BC = -15
+/*
+
+			cao_ccanlBC=2
+
+
+			insert ccanlBC
+			catau_ccanlBC = 10
+			caiinf_ccanlBC = 5.e-6
+			insert borgkaBC
+			gkabar_borgkaBC=0.00015
+			insert ncaBC  // HAV-N- Ca channel
+			gncabar_ncaBC=0.0008   
+			insert lcaBC 
+			glcabar_lcaBC=0.09
+			insert gskchBC
+			gskbar_gskchBC=0.000002
+			insert cagkBC
+			gkbar_cagkBC=0.0002
+*/
+		}
+		
+		dend[1] {
+
+		insert hh 
+		
+		insert na1BC
+		gbar_na1BC = 0.4
+		mhalf_na1BC = -38.43
+		hhalf_na1BC = -50
+		
+		insert k1BC
+		gbar_k1BC = 0.0095
+		vhalfn_k1BC = -15
+/*
+
+			cao_ccanlBC=2
+
+
+			insert ccanlBC
+			catau_ccanlBC = 10
+			caiinf_ccanlBC = 5.e-6
+			insert borgkaBC
+			gkabar_borgkaBC=0.00015
+			insert ncaBC  // HAV-N- Ca channel
+			gncabar_ncaBC=0.0008   
+			insert lcaBC 
+			glcabar_lcaBC=0.09
+			insert gskchBC
+			gskbar_gskchBC=0.000002
+			insert cagkBC
+			gkbar_cagkBC=0.0002
+*/
+		}
+/*
+		soma[0] {
+
+			insert ichan2BC  //ildikos ichan
+			enat = 55 ekf = -90  ek=-90  elca=130	esk=-90
+			el_ichan2BC =-64
+			gnatbar_ichan2BC=0.36
+			gkfbar_ichan2BC=0.013  
+			gl_ichan2BC = 0.0002
+
+		} 
+
+		dend[0] {
+
+
+			insert ichan2BC
+			enat = 55 ekf = -90  ek=-90  elca=130	esk=-90
+			el_ichan2BC =-64
+			gnatbar_ichan2BC=0.12  
+			gkfbar_ichan2BC=0.013
+			gl_ichan2BC = 0.0002
+			
+
+		}	
+		
+		dend[1] {
+
+
+			insert ichan2BC
+			enat = 55 ekf = -90  ek=-90  elca=130	esk=-90
+			el_ichan2BC =-64
+			gnatbar_ichan2BC=0.12
+			gkfbar_ichan2BC=0.013
+			gl_ichan2BC = 0.0002
+			
+
+		}
+*/
+		connect soma(1), dend[0](0)
+		connect dend[1](1), soma(0)
+endtemplate BC
