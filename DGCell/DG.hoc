@@ -6,13 +6,12 @@ begintemplate DGCell
 
     proc init(){
         
+        soma {L = 20 diam = 15 nseg = 1}
 
-        soma {
-            Ra = 150
-		    cm = 1
-	    	Rm = 80000   
+        soma { 
 
-            insert leak 
+            insert leak
+            glbar = 3.3842e-04
         }
     }
 

@@ -50,7 +50,7 @@ target = target + v_rest
 index = 0
 
 //You may have to change this to find a tau value
-padding = 0.001
+padding = 0.01
 
 for (i = 0; i < membrane_voltage.size(); i = i + 1) {
 
@@ -61,9 +61,11 @@ for (i = 0; i < membrane_voltage.size(); i = i + 1) {
     }
 }
 
+final = membrane_voltage.x[membrane_voltage.size() - 1]
+
 objectvar g
 g = new Graph()
-g.size(0,SIMTIME + DELAY, -80,-70)
+g.size(0,SIMTIME + DELAY, final - 1, v_rest + 1)
 g.vector(membrane_voltage.size(), &time.x[0], &membrane_voltage.x[0])
 g.flush()
 
