@@ -12,7 +12,7 @@ UNITS {
 }
 
 PARAMETER {
-	glbar = 3.593554677e-05  
+	glbar = 2.85e-05
 	el = -84 (mV)
 }
 
