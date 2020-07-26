@@ -1,0 +1,69 @@
+begintemplate BCCell
+
+	public soma, dend
+	create soma, dend
+
+	
+
+	proc init() {	
+		
+		cap = 3.4
+
+		/////// topology ////////
+		connect dend(0), soma(1)
+
+		/////// geometry ////////
+		soma { nseg=1 L=15 diam=15}
+
+		dend { nseg=1 L=150	diam=10}
+
+		/////// biophysics //////
+		soma {
+			cm = cap//1		    // (microF/cm2)
+			//Ra = 150*22.5	// (ohm-cm)
+			//Rm = 20000	    // (ohm-cm2)
+			
+			insert leakBC
+
+			//insert nainter
+			//insert kdrinter
+
+	    	}
+
+		dend {
+			cm = cap//1		// (microF/cm2)
+			//Ra = 150	// (ohm-cm)
+			//Rm = 20000	// (ohm-cm2)
+			
+			insert leakBC
+
+			//insert nainter
+			//insert kdrinter
+		}
+		/*
+		soma {
+			ena = 45		// (mV)
+			gnabar_nainter = 0.035	// (siemens/cm2)
+
+			ek = -80		// (mV)
+			gkdrbar_kdrinter = 0.008 // (siemens/cm2)
+			
+			
+			insert xtraimemrec	//x_xtra=$1*1000 y_xtra=$2*1000 z_xtra=$3*1000
+		}
+
+		dend {
+			ena = 45		// (mV)
+			gnabar_nainter = 0.010	// (siemens/cm2)
+
+			ek = -80		// (mV)
+			gkdrbar_kdrinter = 0.003 // (siemens/cm2)
+			
+			insert ca_ion
+			eca = 120
+			insert xtraimemrec	
+		}
+		*/
+	}
+
+endtemplate BCCell

@@ -13,7 +13,6 @@ begintemplate DGCell
 		gh = 4.2e-05
 		gnat = 0.07
 
-
         soma { 
             cm = 0.8
 			insert leakDG
@@ -28,11 +27,6 @@ begintemplate DGCell
 			insert hd
 			ghdbar_hd = gh
 			ehd = -45
-			
-			/*
-            insert Nap
-            gbar_nap = 0.005
-			*/
             
         }
 
@@ -51,10 +45,6 @@ begintemplate DGCell
 			insert hd
 			ghdbar_hd = gh
 			ehd = -45
-			/*
-            insert Nap
-            gbar_nap = 0.005
-			*/
 
         }
 
@@ -73,11 +63,6 @@ begintemplate DGCell
 			insert hd
 			ghdbar_hd = 1.5e-05
 			ehd = -45
-
-            /*
-			insert Nap
-            gbar_nap = 0.005
-			*/	
                         
         }
 		
