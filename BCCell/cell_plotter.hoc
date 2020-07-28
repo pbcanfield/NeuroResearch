@@ -3,11 +3,11 @@ load_file("BC.hoc")
 //simuation constants
 SIMRUNTIME = 600
 DELAY = 200
-INJTIME = 300
-I_INJ = 0.2
+INJTIME = 200
+I_INJ = 0.4
 
 tstop = SIMRUNTIME
-v_init = -84
+v_init = -61.1
 
 objectvar membrane_voltage, time
 membrane_voltage = new Vector()
@@ -36,6 +36,7 @@ run()
 objectvar g_mvt
 g_mvt = new Graph()
 g_mvt.size(0,SIMRUNTIME, 30, -90)
+
 g_mvt.vector(membrane_voltage.size(), &time.x[0], &membrane_voltage.x[0])
 g_mvt.flush()
 

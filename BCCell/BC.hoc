@@ -3,67 +3,116 @@ begintemplate BCCell
 	public soma, dend
 	create soma, dend
 
-	
-
 	proc init() {	
 		
-		cap = 3.4
+		cap = 1
 
+		gna = 0.1
+		kmna = 14
+		khna = 4
+
+		gkdr = 1.0385e-03 //1.04e-03
+		khkdr = 11
+		
+		//gh = 1.5e-04
+		gnap = 5e-05
+		
 		/////// topology ////////
 		connect dend(0), soma(1)
 
 		/////// geometry ////////
 		soma { nseg=1 L=15 diam=15}
-
-		dend { nseg=1 L=150	diam=10}
+		dend { nseg=1 L=400	diam=15}
 
 		/////// biophysics //////
 		soma {
-			cm = cap//1		    // (microF/cm2)
+			cm = cap //1		    // (microF/cm2)
 			//Ra = 150*22.5	// (ohm-cm)
 			//Rm = 20000	    // (ohm-cm2)
 			
 			insert leakBC
 
+			
+			insert nat
+			insert kdr
+
+			insert nap
+
 			//insert nainter
 			//insert kdrinter
 
+			//insert hd
+			
 	    	}
 
 		dend {
-			cm = cap//1		// (microF/cm2)
+			cm = cap //1		// (microF/cm2)
 			//Ra = 150	// (ohm-cm)
 			//Rm = 20000	// (ohm-cm2)
 			
 			insert leakBC
 
+			
+			insert nat
+			insert kdr
+
+			insert nap
+
 			//insert nainter
 			//insert kdrinter
+
+			//insert hd
+			
 		}
-		/*
+		
 		soma {
+			/*
 			ena = 45		// (mV)
-			gnabar_nainter = 0.035	// (siemens/cm2)
+			gnabar_nainter = gna	// (siemens/cm2)
 
 			ek = -80		// (mV)
-			gkdrbar_kdrinter = 0.008 // (siemens/cm2)
+			gkdrbar_kdrinter = gkdr // (siemens/cm2)
+			*/
+
 			
+			ena = 54
+			gbar_nat = gna
+			km_nat = kmna
+			kh_nat = khna
+
+			gbar_nap = gnap
+
+			ek = -90
+			gbar_kdr = gkdr
+			kh_kdr = khkdr
 			
-			insert xtraimemrec	//x_xtra=$1*1000 y_xtra=$2*1000 z_xtra=$3*1000
+			//ghdbar_hd = gh
+			
 		}
 
 		dend {
+			/*
 			ena = 45		// (mV)
-			gnabar_nainter = 0.010	// (siemens/cm2)
+			gnabar_nainter = gna	// (siemens/cm2)
 
 			ek = -80		// (mV)
-			gkdrbar_kdrinter = 0.003 // (siemens/cm2)
+			gkdrbar_kdrinter = gkdr // (siemens/cm2)
+			*/
+
 			
-			insert ca_ion
-			eca = 120
-			insert xtraimemrec	
+			ena = 54
+			gbar_nat = gna
+			km_nat = kmna
+			kh_nat = khna
+
+			gbar_nap = gnap
+
+			ek = -90
+			gbar_kdr = gkdr
+			kh_kdr = khkdr
+
+			//ghdbar_hd = gh
 		}
-		*/
 	}
 
 endtemplate BCCell
