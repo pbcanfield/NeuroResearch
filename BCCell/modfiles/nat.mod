@@ -19,15 +19,15 @@ PARAMETER {
 	Ra   = .4	(/ms)		: open (v)		
 	Rb   = 0.5 	(/ms)		: close (v) (0.124)	
 
-	thi1  = -45	(mV)		: v 1/2 for inact 	
-	thi2  = -45 	(mV)		: v 1/2 for inact 	
-	qd   = 1.5	(mV)	        : inact tau slope
+	thi1  = -40	(mV)		: v 1/2 for inact 	
+	thi2  = -35 	(mV)	: v 1/2 for inact 	
+	qd   = 1.5		(mV)    : inact tau slope
 	qg   = 1.5      (mV)
 	mmin=0.02	
 	hmin=0.5			
 	q10=2
 	Rg   = 0.01 	(/ms)		: inact recov (v) 	
-	Rd   = .03 	(/ms)		: inact (v)	
+	Rd   = .029 	(/ms)		: inact (v)	
 	qq   = 10        (mV)
 	tq   = -55      (mV)
 
