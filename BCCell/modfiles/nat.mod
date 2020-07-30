@@ -15,9 +15,9 @@ PARAMETER {
 	gbar = 0.010   	(mho/cm2)	
 								
 	tha  =  -30	(mV)		: v 1/2 for act	
-	qa   = 7.2	(mV)		: act slope (4.5)		
-	Ra   = 0.4	(/ms)		: open (v)		
-	Rb   = 0.124 	(/ms)		: close (v)		
+	qa   = 10	(mV)		: act slope (4.5)		
+	Ra   = .4	(/ms)		: open (v)		
+	Rb   = 0.5 	(/ms)		: close (v) (0.124)	
 
 	thi1  = -45	(mV)		: v 1/2 for inact 	
 	thi2  = -45 	(mV)		: v 1/2 for inact 	
@@ -95,7 +95,7 @@ PROCEDURE trates(vm,a2) {
 		tha1 = tha 
 	a = trap0(vm,tha1,Ra,qa)
 	b = trap0(-vm,-tha1,Rb,qa)
-	mtau = 1/(a+b)/qt
+	mtau = (1/(a+b)/qt)
         if (mtau<mmin) {mtau=mmin}
 	if (v < -60 ) {
 	minf = 0
@@ -105,7 +105,8 @@ PROCEDURE trates(vm,a2) {
 	a = trap0(vm,thi1,Rd,qd)
 	b = trap0(-vm,-thi2,Rg,qg)
 	htau =  1/(a+b)/qt
-        if (htau<hmin) {htau=hmin}
+        
+	if (htau<hmin) {htau=hmin}
 	hinf  = 1 / ( 1 + exp( ( v + vhalfh ) / kh ) )
 }
 

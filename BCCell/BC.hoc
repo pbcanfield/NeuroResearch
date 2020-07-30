@@ -8,14 +8,15 @@ begintemplate BCCell
 		cap = 1
 
 		gna = 0.1
-		kmna = 14
+		kmna = 7.2 //14
 		khna = 4
 
-		gkdr = 1.0385e-03 //1.04e-03
+		gkdr = 1.0385e-03 //1.0385e-03
 		khkdr = 11
 		
 		//gh = 1.5e-04
-		gnap = 5e-05
+		//gnap = 5e-05
+		
 		
 		/////// topology ////////
 		connect dend(0), soma(1)
@@ -26,92 +27,47 @@ begintemplate BCCell
 
 		/////// biophysics //////
 		soma {
-			cm = cap //1		    // (microF/cm2)
-			//Ra = 150*22.5	// (ohm-cm)
-			//Rm = 20000	    // (ohm-cm2)
+			cm = cap 		    // (microF/cm2)
 			
 			insert leakBC
-
-			
+	
 			insert nat
 			insert kdr
 
-			insert nap
-
-			//insert nainter
-			//insert kdrinter
-
-			//insert hd
-			
-	    	}
+	    }
 
 		dend {
-			cm = cap //1		// (microF/cm2)
-			//Ra = 150	// (ohm-cm)
-			//Rm = 20000	// (ohm-cm2)
+			cm = cap 
 			
 			insert leakBC
-
-			
+		
 			insert nat
 			insert kdr
-
-			insert nap
-
-			//insert nainter
-			//insert kdrinter
-
-			//insert hd
-			
+		
 		}
 		
 		soma {
-			/*
-			ena = 45		// (mV)
-			gnabar_nainter = gna	// (siemens/cm2)
-
-			ek = -80		// (mV)
-			gkdrbar_kdrinter = gkdr // (siemens/cm2)
-			*/
-
 			
 			ena = 54
 			gbar_nat = gna
 			km_nat = kmna
 			kh_nat = khna
 
-			gbar_nap = gnap
-
 			ek = -90
 			gbar_kdr = gkdr
-			kh_kdr = khkdr
-			
-			//ghdbar_hd = gh
-			
+			kh_kdr = khkdr		
 		}
 
 		dend {
-			/*
-			ena = 45		// (mV)
-			gnabar_nainter = gna	// (siemens/cm2)
-
-			ek = -80		// (mV)
-			gkdrbar_kdrinter = gkdr // (siemens/cm2)
-			*/
-
 			
 			ena = 54
 			gbar_nat = gna
 			km_nat = kmna
 			kh_nat = khna
 
-			gbar_nap = gnap
-
 			ek = -90
 			gbar_kdr = gkdr
 			kh_kdr = khkdr
-
-			//ghdbar_hd = gh
 		}
 	}
 

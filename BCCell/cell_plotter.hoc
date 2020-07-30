@@ -9,9 +9,13 @@ I_INJ = 0.4
 tstop = SIMRUNTIME
 v_init = -61.1
 
-objectvar membrane_voltage, time
+objectvar membrane_voltage, time, current_nat, current_ca, current_kdr , current_nap
 membrane_voltage = new Vector()
 time = new Vector()
+current_nat = new Vector()
+current_ca = new Vector()
+current_kdr = new Vector()
+current_nap = new Vector()
 
 objectvar cell
 cell = new BCCell()
@@ -19,6 +23,11 @@ cell = new BCCell()
 //record the cells membrane voltage.
 membrane_voltage.record(&cell.soma.v(0.5))
 time.record(&t)
+
+current_nat.record(&cell.soma.i_nat(0.5))
+current_kdr.record(&cell.soma.i_kdr(0.5))
+//current_nap.record(&cell.soma.i_nap(0.5))
+//current_ca.record(&cell.soma.i_cadyn(0.5))
 
 //First graph the membrane potential vs time plot.
 
@@ -33,13 +42,40 @@ i_inj.amp = I_INJ
 run()
 
 //Membrane voltage vs. time
-objectvar g_mvt
+objectvar g_mvt, g_cvt
 g_mvt = new Graph()
 g_mvt.size(0,SIMRUNTIME, 30, -90)
-
 g_mvt.vector(membrane_voltage.size(), &time.x[0], &membrane_voltage.x[0])
 g_mvt.flush()
 
+
+g_cvt = new Graph()
+g_cvt.size(DELAY,SIMRUNTIME - DELAY, -3, 1)
+
+
+g_cvt.color(1)
+g_cvt.label("black: i_nat")
+g_cvt.vector(current_nat.size(), &time.x[0], &current_nat.x[0])
+
+
+/*
+g_cvt.color(3)
+g_cvt.label("blue: i_cadyn")
+g_cvt.vector(current_ca.size(), &time.x[0], &current_ca.x[0])
+*/
+
+
+g_cvt.color(2)
+g_cvt.label("red: i_kdr")
+g_cvt.vector(current_kdr.size(), &time.x[0], &current_kdr.x[0])
+
+/*
+g_cvt.color(6)
+g_cvt.label("brown: i_nap")
+g_cvt.vector(current_nap.size(), &time.x[0], &current_nap.x[0])
+*/
+
+g_cvt.flush()
 
 objref nc, nil, spvec
 func runSim(){

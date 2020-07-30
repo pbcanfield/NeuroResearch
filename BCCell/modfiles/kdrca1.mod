@@ -20,7 +20,7 @@ PARAMETER {
         zetan=-3    (1)
         gmn=0.7  (1)
 	nmax=2  (1)
-	qt=1
+	qt=2.4
 
 	kh = 11 (ms)
 }
@@ -64,7 +64,7 @@ FUNCTION alpn(v(mV)) {
 }
 
 FUNCTION betn(v(mV)) {
-  betn = exp(1.e-3*(-3)*(0.7)*(v-vhalfn)*9.648e4/(8.315*(273.16+celsius))) 
+  betn = exp(1.e-3*(-3)*(0.1)*(v-vhalfn)*9.648e4/(8.315*(273.16+celsius))) 
 }
 
 DERIVATIVE states {     : exact when v held constant; integrates over dt step
@@ -74,14 +74,17 @@ DERIVATIVE states {     : exact when v held constant; integrates over dt step
 
 PROCEDURE rates(v (mV)) { :callable from hoc
         LOCAL a
-        a = alpn(v)
-		if (v < -55 ) {              ::::::::::::::::::::   -55
+        
+	if (v < -61 ) {              ::::::::::::::::::::   -55
 		ninf = 0
-		} else{
+		
+	} else{
+		
 		ninf = 1 / ( 1 + exp( ( vhalfn - v ) / kh ) )
-		:ninf = 1 / ( 1 + exp( ( - v + 13 ) / 8.738 ) )
         }
-		taun = betn(v)/(qt*(0.02)*(1+a))
+
+	a = alpn(v)
+	taun = betn(v)/(qt*0.05 *(1+a))
 	if (taun<nmax) {taun=nmax}
 }
 		
