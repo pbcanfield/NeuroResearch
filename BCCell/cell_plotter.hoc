@@ -24,8 +24,8 @@ cell = new BCCell()
 membrane_voltage.record(&cell.soma.v(0.5))
 time.record(&t)
 
-current_nat.record(&cell.soma.i_nat(0.5))
-current_kdr.record(&cell.soma.i_kdr(0.5))
+current_nat.record(&cell.soma.i_natBC(0.5))
+current_kdr.record(&cell.soma.i_kdrBC(0.5))
 //current_nap.record(&cell.soma.i_nap(0.5))
 //current_ca.record(&cell.soma.i_cadyn(0.5))
 

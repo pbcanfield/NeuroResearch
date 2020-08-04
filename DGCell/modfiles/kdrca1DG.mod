@@ -25,7 +25,7 @@ PARAMETER {
 
 
 NEURON {
-	SUFFIX kdr
+	SUFFIX kdrDG
 	USEION k READ ek WRITE ik
         RANGE gkdr, i, gbar
 	RANGE ninf,taun

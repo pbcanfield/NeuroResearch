@@ -17,15 +17,15 @@ begintemplate DGCell
             cm = 0.8
 			insert leakDG
             
-			insert nat
-			gbar_nat = gnat
+			insert natDG
+			gbar_natDG = gnat
 			ena = 45
 		
-            insert kdr
+            insert kdrDG
 			ek = -80
 
-			insert hd
-			ghdbar_hd = gh
+			insert hdDG
+			ghdbar_hdDG = gh
 			ehd = -45
             
         }
@@ -35,15 +35,15 @@ begintemplate DGCell
 			cm = 0.8
             insert leakDG
 			
-			insert nat
-			gbar_nat = gnat
+			insert natDG
+			gbar_natDG = gnat
 			ena = 45
 		
-            insert kdr
+            insert kdrDG
             ek = -80
             
-			insert hd
-			ghdbar_hd = gh
+			insert hdDG
+			ghdbar_hdDG = gh
 			ehd = -45
 
         }
@@ -53,15 +53,15 @@ begintemplate DGCell
 
             insert leakDG
 			
-			insert nat
-			gbar_nat = 0.009
+			insert natDG
+			gbar_natDG = 0.009
 			ena = 45
 		
-            insert kdr
+            insert kdrDG
             ek = -80
 
-			insert hd
-			ghdbar_hd = 1.5e-05
+			insert hdDG
+			ghdbar_hdDG = 1.5e-05
 			ehd = -45
                         
         }

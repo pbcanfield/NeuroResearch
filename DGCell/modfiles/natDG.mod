@@ -4,7 +4,7 @@ TITLE nat
 :  ---------- modified -------M.Migliore may97
 
 NEURON {
-	SUFFIX nat
+	SUFFIX natDG
 	USEION na READ ena WRITE ina
 	:RANGE  , i :, ar2
 	RANGE gbar, gna, i, minf, hinf, mtau, htau : , qinf, thinf
