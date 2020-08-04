@@ -31,8 +31,8 @@ begintemplate BCCell
 			
 			insert leakBC
 	
-			insert nat
-			insert kdr
+			insert natBC
+			insert kdrBC
 
 	    }
 
@@ -41,33 +41,33 @@ begintemplate BCCell
 			
 			insert leakBC
 		
-			insert nat
-			insert kdr
+			insert natBC
+			insert kdrBC
 		
 		}
 		
 		soma {
 			
 			ena = 54
-			gbar_nat = gna
-			km_nat = kmna
-			kh_nat = khna
+			gbar_natBC = gna
+			km_natBC = kmna
+			kh_natBC = khna
 
 			ek = -90
-			gbar_kdr = gkdr
-			kh_kdr = khkdr		
+			gbar_kdrBC = gkdr
+			kh_kdrBC = khkdr		
 		}
 
 		dend {
 			
 			ena = 54
-			gbar_nat = gna
-			km_nat = kmna
-			kh_nat = khna
+			gbar_natBC = gna
+			km_natBC = kmna
+			kh_natBC = khna
 
 			ek = -90
-			gbar_kdr = gkdr
-			kh_kdr = khkdr
+			gbar_kdrBC = gkdr
+			kh_kdrBC = khkdr
 		}
 	}
 
