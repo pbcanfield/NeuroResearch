@@ -1,0 +1,14 @@
+2020-08-24 23:44:24,764 [INFO] Created log file
+2020-08-24 23:44:24,886 [INFO] Building cells.
+2020-08-24 23:44:26,788 [INFO] Building recurrent connections
+2020-08-24 23:44:27,447 [INFO] Building virtual cell stimulations for ca3noise
+2020-08-24 23:44:28,546 [INFO] Running simulation for 3000.000 ms with the time step 0.100 ms
+2020-08-24 23:44:28,546 [INFO] Starting timestep: 0 at t_sim: 0.000 ms
+2020-08-24 23:44:28,546 [INFO] Block save every 5000 steps
+2020-08-24 23:44:51,608 [INFO]     step:5000 t_sim:500.00 ms
+2020-08-24 23:45:14,262 [INFO]     step:10000 t_sim:1000.00 ms
+2020-08-24 23:45:36,938 [INFO]     step:15000 t_sim:1500.00 ms
+2020-08-24 23:45:59,547 [INFO]     step:20000 t_sim:2000.00 ms
+2020-08-24 23:46:22,095 [INFO]     step:25000 t_sim:2500.00 ms
+2020-08-24 23:46:44,573 [INFO]     step:30000 t_sim:3000.00 ms
+2020-08-24 23:46:48,060 [INFO] Simulation completed in 2.0 minutes, 19.51 seconds 
