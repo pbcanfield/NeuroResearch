@@ -1,0 +1,14 @@
+2020-08-26 18:38:46,289 [INFO] Created log file
+2020-08-26 18:38:46,437 [INFO] Building cells.
+2020-08-26 18:38:48,255 [INFO] Building recurrent connections
+2020-08-26 18:38:48,811 [INFO] Building virtual cell stimulations for ecnoise
+2020-08-26 18:38:49,074 [INFO] Running simulation for 3000.000 ms with the time step 0.100 ms
+2020-08-26 18:38:49,074 [INFO] Starting timestep: 0 at t_sim: 0.000 ms
+2020-08-26 18:38:49,074 [INFO] Block save every 5000 steps
+2020-08-26 18:39:12,816 [INFO]     step:5000 t_sim:500.00 ms
+2020-08-26 18:39:36,372 [INFO]     step:10000 t_sim:1000.00 ms
+2020-08-26 18:39:59,623 [INFO]     step:15000 t_sim:1500.00 ms
+2020-08-26 18:40:22,440 [INFO]     step:20000 t_sim:2000.00 ms
+2020-08-26 18:40:45,326 [INFO]     step:25000 t_sim:2500.00 ms
+2020-08-26 18:41:08,504 [INFO]     step:30000 t_sim:3000.00 ms
+2020-08-26 18:41:09,628 [INFO] Simulation completed in 2.0 minutes, 20.55 seconds 
