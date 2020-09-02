@@ -384,11 +384,11 @@ if __name__ == '__main__':
 
     seed = sys.argv[1]
     #output_dir = seed + "_output"
-    #plot_raster(seed)
+    plot_raster(seed)
     
 
-    group = sys.argv[2]
-    plot_firing_rates(seed, group)
+    #group = sys.argv[2]
+    #plot_firing_rates(seed, group)
 
     #nCells = int(sys.argv[3])
 

@@ -56,3 +56,37 @@ func runSim(){
 }
 
 printf("Cell fi at %f nA injection: %f\n",I_INJ,runSim(I_INJ))
+
+objectvar g_fi, target, reported, current_inj
+g_fi = new Graph()
+reported = new Vector(10)
+current_inj = new Vector(10)
+
+count = 0
+for (i = 0; i < 1.0; i += 0.1) {
+    reported.x[count] = runSim(i)
+    current_inj.x[count] = i
+    count += 1
+}
+
+target = new Vector(10)
+target.x[0] = 0
+target.x[1] = 0
+target.x[2] = 53
+target.x[3] = 99
+target.x[4] = 135
+target.x[5] = 166
+target.x[6] = 193
+target.x[7] = 219
+target.x[8] = 243
+target.x[9] = 266
+
+g_fi.color(4)
+g_fi.vector(10, &current_inj.x[0],&target.x[0])
+
+g_fi.color(1)
+g_fi.vector(10, &current_inj.x[0],&reported.x[0])
+
+g_fi.size(0,1.0,0,target.x[target.size() - 1] + 10)
+
+g_fi.flush()
