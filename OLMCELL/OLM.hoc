@@ -40,14 +40,14 @@ begintemplate OLMCell
 		/////// geometry ////////
 		soma[0] {
 			nseg = 1
-			L = 20 // (micrometer)
-			diam = 10 // (micrometer)
+			L = 40 // (micrometer)
+			diam = 40 // (micrometer)
 	    	}
 		
 		dend[0] {
 			nseg = 1
-			L = 250 // (micrometer)
-			diam = 3 // (micrometer)
+			L = 200 // (micrometer)
+			diam = 10 // (micrometer)
 			}
 			
 		
