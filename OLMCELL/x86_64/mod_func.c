@@ -12,10 +12,10 @@ void modl_reg(){
   if (!nrn_nobanner_) if (nrnmpi_myid < 1) {
     fprintf(stderr, "Additional mechanisms from files\n");
 
-    fprintf(stderr," kaproxOLM.mod");
-    fprintf(stderr," kdrca1OLM.mod");
-    fprintf(stderr," leakinterOLM.mod");
-    fprintf(stderr," natOLM.mod");
+    fprintf(stderr," modfiles//kaproxOLM.mod");
+    fprintf(stderr," modfiles//kdrca1OLM.mod");
+    fprintf(stderr," modfiles//leakinterOLM.mod");
+    fprintf(stderr," modfiles//natOLM.mod");
     fprintf(stderr, "\n");
   }
   _kaproxOLM_reg();

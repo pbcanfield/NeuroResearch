@@ -1,10 +1,10 @@
 load_file("CA3.hoc")
 
 //simuation constants
-SIMRUNTIME = 600
-DELAY = 200
-INJTIME = 200
-I_INJ = 0.4
+SIMRUNTIME = 1000
+DELAY = 400
+INJTIME = 400
+I_INJ = 0.2
 
 tstop = SIMRUNTIME
 v_init = -75
@@ -55,6 +55,7 @@ func runSim(){
 }
 
 printf("Cell fi at %f nA injection: %f\n",I_INJ,runSim(I_INJ))
+
 
 objectvar g_fi, target, reported, current_inj
 g_fi = new Graph()

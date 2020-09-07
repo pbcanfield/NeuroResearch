@@ -1,1 +1,1 @@
-../natOLM.mod
+../modfiles//natOLM.mod

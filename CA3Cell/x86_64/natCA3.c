@@ -363,7 +363,7 @@ static int  trates ( _threadargsprotocomma_ double _lvm , double _la2 ) {
      minf = 0.0 ;
      }
    else {
-     minf = 1.0 / ( 1.0 + exp ( ( - v - 38.43 ) / 7.2 ) ) ;
+     minf = 1.0 / ( 1.0 + exp ( ( - v - 35.5 ) / 7.2 ) ) ;
      }
    _la = trap0 ( _threadargscomma_ _lvm , thi1 , Rd , qd ) ;
    _lb = trap0 ( _threadargscomma_ - _lvm , - thi2 , Rg , qg ) ;
@@ -717,7 +717,7 @@ static const char* nmodl_file_text =
   "	if (v < -57.5 ) {\n"
   "	minf = 0\n"
   "	} else{\n"
-  "	minf  = 1 / ( 1 + exp( ( - v - 38.43 ) / 7.2 ) )\n"
+  "	minf  = 1 / ( 1 + exp( ( - v - 35.5 ) / 7.2 ) )\n"
   "	}\n"
   "	a = trap0(vm,thi1,Rd,qd)\n"
   "	b = trap0(-vm,-thi2,Rg,qg)\n"
