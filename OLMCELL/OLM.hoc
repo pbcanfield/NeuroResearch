@@ -26,7 +26,7 @@ begintemplate OLMCell
 		apical = new SectionList()
 		axonal = new SectionList()
 
-		v_init = -80
+		v_init = -55
 
 		for i=0,NumSoma soma[i] {
 			all.append()
@@ -76,7 +76,7 @@ begintemplate OLMCell
 			gbar_kdrOLM = 0.03// (siemens/cm2)
 			
 			gkabar_kapOLM = 0.0142
-			gbar_natOLM = 0.008
+			gbar_natOLM = 0.0085
 			
 
 	    	}
@@ -100,7 +100,7 @@ begintemplate OLMCell
 			ek = -80		// (mV)
 			gbar_kdrOLM = 0.03 // (siemens/cm2)
 			gkabar_kapOLM = 0.0142
-			gbar_natOLM = 0.008
+			gbar_natOLM = 0.0085
 
 		}
 			
