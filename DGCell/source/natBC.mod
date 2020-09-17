@@ -4,7 +4,7 @@ TITLE nat
 :  ---------- modified -------M.Migliore may97
 
 NEURON {
-	SUFFIX natDG
+	SUFFIX natBC
 	USEION na READ ena WRITE ina
 	:RANGE  , i :, ar2
 	RANGE gbar, gna, i, minf, hinf, mtau, htau, km, kh, vhalfh, vhalfm : , qinf, thinf
@@ -42,7 +42,7 @@ PARAMETER {
 	km = 7.2 	(ms)
 	kh = 4 		(ms)
 
-	vhalfm = 40  (mV)
+	vhalfm = 38.43  (mV)
 	vhalfh = 50	(mV)
 
 }

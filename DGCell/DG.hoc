@@ -10,9 +10,9 @@ begintemplate DGCell
         dend[0] {diam= 3 L=270 nseg=8}     
 		dend[1] {diam =5 L=555 nseg=7} 
 
-		gh = 0
-		gnat = 0.09
-		gk = 0.001
+		gh = 4.00e-05
+		gnat = 0.3
+		gk = 0.005
 
         soma { 
             cm = 0.8
