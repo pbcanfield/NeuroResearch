@@ -1,0 +1,17 @@
+load_file("CA3.hoc")
+
+objref cell, nc, ns, syn
+
+cell = new CA3Cell()
+
+cell.dend syn = new pyr2pyr(0)
+
+ns = new NetStim()
+ns.start = 1000
+ns.number = 5
+ns.interval = 50
+
+nc = new NetCon(ns, syn)
+nc.weight = 1
+
+tstop = 2000
