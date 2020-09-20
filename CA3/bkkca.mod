@@ -4,7 +4,7 @@
 NEURON {
 	SUFFIX bkkca
 	USEION k READ ek WRITE ik
-	USEION cac READ caci VALENCE 2 
+	USEION cas READ casi VALENCE 2 
 	RANGE G, g
 	RANGE minf, taum, i
 	RANGE kca
@@ -37,7 +37,7 @@ PARAMETER {
 
 ASSIGNED {
 	v (mV)
-	caci
+	casi
 	ek (mV)
 	i
 	ik (mA/cm2)
@@ -56,13 +56,13 @@ BREAKPOINT {
 }
 
 INITIAL {
-	a = ainf(v,caci)
-	b = binf(caci)
+	a = ainf(v,casi)
+	b = binf(casi)
 }
 
 DERIVATIVE states {
-	a' = (ainf(v,caci)-a)*koa
-	b' = (binf(caci)-b)*kob
+	a' = (ainf(v,casi)-a)*koa
+	b' = (binf(casi)-b)*kob
 }
 
 FUNCTION ainf(v(mV),ca) {

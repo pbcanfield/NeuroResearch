@@ -49,7 +49,7 @@ extern double hoc_Exp(double);
 #define G _p[2]
 #define a _p[3]
 #define b _p[4]
-#define caci _p[5]
+#define casi _p[5]
 #define ek _p[6]
 #define ik _p[7]
 #define Da _p[8]
@@ -59,7 +59,7 @@ extern double hoc_Exp(double);
 #define _ion_ek	*_ppvar[0]._pval
 #define _ion_ik	*_ppvar[1]._pval
 #define _ion_dikdv	*_ppvar[2]._pval
-#define _ion_caci	*_ppvar[3]._pval
+#define _ion_casi	*_ppvar[3]._pval
  
 #if MAC
 #if !defined(v)
@@ -202,7 +202,7 @@ static void _ode_matsol(_NrnThread*, _Memb_list*, int);
  0,
  0};
  static Symbol* _k_sym;
- static Symbol* _cac_sym;
+ static Symbol* _cas_sym;
  
 extern Prop* need_memb(Symbol*);
 
@@ -222,9 +222,9 @@ static void nrn_alloc(Prop* _prop) {
  	_ppvar[0]._pval = &prop_ion->param[0]; /* ek */
  	_ppvar[1]._pval = &prop_ion->param[3]; /* ik */
  	_ppvar[2]._pval = &prop_ion->param[4]; /* _ion_dikdv */
- prop_ion = need_memb(_cac_sym);
+ prop_ion = need_memb(_cas_sym);
  nrn_promote(prop_ion, 1, 0);
- 	_ppvar[3]._pval = &prop_ion->param[1]; /* caci */
+ 	_ppvar[3]._pval = &prop_ion->param[1]; /* casi */
  
 }
  static void _initlists();
@@ -244,9 +244,9 @@ extern void _cvode_abstol( Symbol**, double*, int);
 	int _vectorized = 1;
   _initlists();
  	ion_reg("k", -10000.);
- 	ion_reg("cac", 2.0);
+ 	ion_reg("cas", 2.0);
  	_k_sym = hoc_lookup("k_ion");
- 	_cac_sym = hoc_lookup("cac_ion");
+ 	_cas_sym = hoc_lookup("cas_ion");
  	register_mech(_mechanism, nrn_alloc,nrn_cur, nrn_jacob, nrn_state, nrn_init, hoc_nrnpointerindex, 1);
  _mechtype = nrn_get_mechtype(_mechanism[1]);
      _nrn_setdata_reg(_mechtype, _setdata);
@@ -259,12 +259,12 @@ extern void _cvode_abstol( Symbol**, double*, int);
   hoc_register_dparam_semantics(_mechtype, 0, "k_ion");
   hoc_register_dparam_semantics(_mechtype, 1, "k_ion");
   hoc_register_dparam_semantics(_mechtype, 2, "k_ion");
-  hoc_register_dparam_semantics(_mechtype, 3, "cac_ion");
+  hoc_register_dparam_semantics(_mechtype, 3, "cas_ion");
   hoc_register_dparam_semantics(_mechtype, 4, "cvodeieq");
  	hoc_register_cvode(_mechtype, _ode_count, _ode_map, _ode_spec, _ode_matsol);
  	hoc_register_tolerance(_mechtype, _hoc_state_tol, &_atollist);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 bkkca C:/Users/nopsa/Desktop/Nate-hippocampal cells/CA3/bkkca.mod\n");
+ 	ivoc_help("help ?1 bkkca C:/Users/nopsa/Desktop/NeuroResearch/CA3/bkkca.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -283,8 +283,8 @@ static int _ode_spec1(_threadargsproto_);
  
 /*CVODE*/
  static int _ode_spec1 (double* _p, Datum* _ppvar, Datum* _thread, _NrnThread* _nt) {int _reset = 0; {
-   Da = ( ainf ( _threadargscomma_ v , caci ) - a ) * koa ;
-   Db = ( binf ( _threadargscomma_ caci ) - b ) * kob ;
+   Da = ( ainf ( _threadargscomma_ v , casi ) - a ) * koa ;
+   Db = ( binf ( _threadargscomma_ casi ) - b ) * kob ;
    }
  return _reset;
 }
@@ -295,8 +295,8 @@ static int _ode_spec1(_threadargsproto_);
 }
  /*END CVODE*/
  static int states (double* _p, Datum* _ppvar, Datum* _thread, _NrnThread* _nt) { {
-    a = a + (1. - exp(dt*(( ( ( - 1.0 ) ) )*( koa ))))*(- ( ( ( ainf ( _threadargscomma_ v , caci ) ) )*( koa ) ) / ( ( ( ( - 1.0 ) ) )*( koa ) ) - a) ;
-    b = b + (1. - exp(dt*(( ( ( - 1.0 ) ) )*( kob ))))*(- ( ( ( binf ( _threadargscomma_ caci ) ) )*( kob ) ) / ( ( ( ( - 1.0 ) ) )*( kob ) ) - b) ;
+    a = a + (1. - exp(dt*(( ( ( - 1.0 ) ) )*( koa ))))*(- ( ( ( ainf ( _threadargscomma_ v , casi ) ) )*( koa ) ) / ( ( ( ( - 1.0 ) ) )*( koa ) ) - a) ;
+    b = b + (1. - exp(dt*(( ( ( - 1.0 ) ) )*( kob ))))*(- ( ( ( binf ( _threadargscomma_ casi ) ) )*( kob ) ) / ( ( ( ( - 1.0 ) ) )*( kob ) ) - b) ;
    }
   return 0;
 }
@@ -347,7 +347,7 @@ static void _ode_spec(_NrnThread* _nt, _Memb_list* _ml, int _type) {
     _nd = _ml->_nodelist[_iml];
     v = NODEV(_nd);
   ek = _ion_ek;
-  caci = _ion_caci;
+  casi = _ion_casi;
      _ode_spec1 (_p, _ppvar, _thread, _nt);
   }}
  
@@ -375,7 +375,7 @@ static void _ode_matsol(_NrnThread* _nt, _Memb_list* _ml, int _type) {
     _nd = _ml->_nodelist[_iml];
     v = NODEV(_nd);
   ek = _ion_ek;
-  caci = _ion_caci;
+  casi = _ion_casi;
  _ode_matsol_instance1(_threadargs_);
  }}
  extern void nrn_update_ion_pointer(Symbol*, Datum*, int, int);
@@ -383,7 +383,7 @@ static void _ode_matsol(_NrnThread* _nt, _Memb_list* _ml, int _type) {
    nrn_update_ion_pointer(_k_sym, _ppvar, 0, 0);
    nrn_update_ion_pointer(_k_sym, _ppvar, 1, 3);
    nrn_update_ion_pointer(_k_sym, _ppvar, 2, 4);
-   nrn_update_ion_pointer(_cac_sym, _ppvar, 3, 1);
+   nrn_update_ion_pointer(_cas_sym, _ppvar, 3, 1);
  }
 
 static void initmodel(double* _p, Datum* _ppvar, Datum* _thread, _NrnThread* _nt) {
@@ -391,8 +391,8 @@ static void initmodel(double* _p, Datum* _ppvar, Datum* _thread, _NrnThread* _nt
   a = a0;
   b = b0;
  {
-   a = ainf ( _threadargscomma_ v , caci ) ;
-   b = binf ( _threadargscomma_ caci ) ;
+   a = ainf ( _threadargscomma_ v , casi ) ;
+   b = binf ( _threadargscomma_ casi ) ;
    }
  
 }
@@ -419,7 +419,7 @@ for (_iml = 0; _iml < _cntml; ++_iml) {
   }
  v = _v;
   ek = _ion_ek;
-  caci = _ion_caci;
+  casi = _ion_casi;
  initmodel(_p, _ppvar, _thread, _nt);
  }
 }
@@ -454,7 +454,7 @@ for (_iml = 0; _iml < _cntml; ++_iml) {
     _v = NODEV(_nd);
   }
   ek = _ion_ek;
-  caci = _ion_caci;
+  casi = _ion_casi;
  _g = _nrn_current(_p, _ppvar, _thread, _nt, _v + .001);
  	{ double _dik;
   _dik = ik;
@@ -523,7 +523,7 @@ for (_iml = 0; _iml < _cntml; ++_iml) {
  v=_v;
 {
   ek = _ion_ek;
-  caci = _ion_caci;
+  casi = _ion_casi;
  {   states(_p, _ppvar, _thread, _nt);
   } }}
 
@@ -553,7 +553,7 @@ static const char* nmodl_file_text =
   "NEURON {\n"
   "	SUFFIX bkkca\n"
   "	USEION k READ ek WRITE ik\n"
-  "	USEION cac READ caci VALENCE 2 \n"
+  "	USEION cas READ casi VALENCE 2 \n"
   "	RANGE G, g\n"
   "	RANGE minf, taum, i\n"
   "	RANGE kca\n"
@@ -586,7 +586,7 @@ static const char* nmodl_file_text =
   "\n"
   "ASSIGNED {\n"
   "	v (mV)\n"
-  "	caci\n"
+  "	casi\n"
   "	ek (mV)\n"
   "	i\n"
   "	ik (mA/cm2)\n"
@@ -605,13 +605,13 @@ static const char* nmodl_file_text =
   "}\n"
   "\n"
   "INITIAL {\n"
-  "	a = ainf(v,caci)\n"
-  "	b = binf(caci)\n"
+  "	a = ainf(v,casi)\n"
+  "	b = binf(casi)\n"
   "}\n"
   "\n"
   "DERIVATIVE states {\n"
-  "	a' = (ainf(v,caci)-a)*koa\n"
-  "	b' = (binf(caci)-b)*kob\n"
+  "	a' = (ainf(v,casi)-a)*koa\n"
+  "	b' = (binf(casi)-b)*kob\n"
   "}\n"
   "\n"
   "FUNCTION ainf(v(mV),ca) {\n"
