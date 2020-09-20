@@ -33,6 +33,7 @@ hi.record(&cell.soma.i_hdCA3)
 capi.record(&cell.soma.xx_capool)
 
 
+
 //record the cells membrane voltage.
 membrane_voltage.record(&cell.soma.v(0.5))
 time.record(&t)

@@ -120,7 +120,6 @@ extern void hoc_reg_nmodl_filename(int, const char*);
 };
  static HocParmUnits _hoc_parm_units[] = {
  "w_capool", "micrometer",
- "taucas_capool", "ms",
  "cainf_capool", "mM",
  0,0
 };
@@ -173,7 +172,7 @@ static void nrn_alloc(Prop* _prop) {
 	double *_p; Datum *_ppvar;
  	_p = nrn_prop_data_alloc(_mechtype, 11, _prop);
  	/*initialize range parameters*/
- 	taucas = 1000;
+ 	taucas = 100;
  	cainf = 5e-005;
  	fcas = 0.024;
  	_prop->param = _p;
@@ -478,7 +477,7 @@ static const char* nmodl_file_text =
   "\n"
   "PARAMETER {\n"
   "	pi = 3.14159265\n"
-  "	taucas= 1000 (ms) 	: decay time constant\n"
+  "	taucas= 100 :1000 (ms) 	: decay time constant\n"
   "    cainf= 50e-6   (mM)  	: equilibrium ca2+ concentration\n"
   "	fcas = 0.024\n"
   "    w = 1 (micrometer)     	: thickness of shell for ca2+ diffusion\n"
