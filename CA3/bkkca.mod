@@ -35,11 +35,13 @@ PARAMETER {
 	c3 =  15  :(uM)
 }
 
+	g = 0.002  :0.012 (siemens/cm2) <0,1e9>
 ASSIGNED {
 	v (mV)
 	casi
 	ek (mV)
 	i
+	g = 0.002  :0.012 (siemens/cm2) <0,1e9>
 	ik (mA/cm2)
 	G (siemens/cm2)
 }
