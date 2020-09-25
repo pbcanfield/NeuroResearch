@@ -60,7 +60,7 @@ PROCEDURE rate(v (mV)) {
 	minf  = 1 / ( 1 + exp( ( vhalf - v ) / k ) )
 	}
 	if( v < -40.0 ) {
-		mtau = 100*(0.025 + 0.14 * exp( ( v + 60 ) / 10 ))	:40
+		mtau = 100*(0.025 + 0.14 * exp( ( v + 40 ) / 3 ))	:40/10
 	}else{
 		mtau = 100*(0.02 + 0.145 * exp( ( - v - 40 ) / 10 ))
 	}

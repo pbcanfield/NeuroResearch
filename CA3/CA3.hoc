@@ -13,10 +13,10 @@ RaDend = 150
 Vpas = -75
 
 gna = 0.04 						//0.025
-gnap = 8e-4				// 0.000551 
+gnap = 6e-4				// 0.000551 
 gkdr = 0.02					//0.002 
 ghd = 0 //1.5e-5 					//1.5e-5
-gca = 0.008 //1e-4 
+gca = 0.007 //1e-4 
 gm = 0.00224 					// 0.00222  
 gsAHP = 0.05					//0.0019
 gkap = 0.002 
@@ -37,7 +37,6 @@ p_dend {diam =5 L=555 nseg=7}
 
 soma {
 	insert leakCA3 el_leakCA3 = -75  glbar_leakCA3 = gleak_dend Ra=RaDend cm = Cm // 2.5
-	//insert na3 sh_na3=nash ar_na3=1	gbar_na3 = gna
 	insert natCA3  gbar_natCA3 = gna
 
 	insert hdCA3 ghdbar_hdCA3 =ghd 
@@ -48,8 +47,9 @@ soma {
 	gbar_nap = gnap //3.9e-4
 	
 	insert bkkca	
-	
+		
 	insert cal
+	gcalbar_cal = gca
 	insert capool
 	
 	ena=45  ek=-80  ehd=-45
@@ -67,8 +67,9 @@ dend {
 	gbar_nap = gnap
 	
 	insert bkkca
-	
+		
 	insert cal
+	gcalbar_cal = gca
 	insert capool
 	
 	
@@ -88,9 +89,9 @@ p_dend {
 	gbar_nap = gnap
 	
 	insert bkkca
-	
+		
 	insert cal
-	
+	gcalbar_cal = gca
 	insert capool
 	
 	

@@ -16,19 +16,19 @@ UNITS {
 }
 
 PARAMETER {
-	g = 0.002  :0.012 (siemens/cm2) <0,1e9>
+	g = 0.002 :0.012 (siemens/cm2) <0,1e9>
 
-	f = 0.08    :(mV/uM)
+	f = 0.08 :0.08    :(mV/uM)
 	
-	koa = 0.4  (1/msec)
-	kob = 0.2 (1/msec)
+	koa = 0.4 :0.4  (1/msec)
+	kob = 0.2 :0.2 (1/msec)
 	kCa = 0.36  (1/msec)
 	
-	Vao1 =   -5   (mV)
-	Vao2 = -5 (mV)
+	Vao1 = -5 :-5   (mV)
+	Vao2 = -5 :-5 (mV)
 	
-	sao1 = -15   :-23 (mV)
-	sao2 = -9    :-5 (mV)
+	sao1 = -15 :-15   :-23 (mV)
+	sao2 = -9 :-9    :-5 (mV)
 	
 	c1 = 0.0001  :3.2  : 2.5  :(uM)
 	c2 =  14  :(uM)
@@ -74,3 +74,4 @@ FUNCTION ainf(v(mV),ca) {
 FUNCTION binf(ca) {
 	binf = c2/(c3+ca)
 }
+

@@ -145,11 +145,7 @@ extern void hoc_reg_nmodl_filename(int, const char*);
  0,0,0
 };
  static HocParmUnits _hoc_parm_units[] = {
- "koa_bkkca", "1/msec",
- "kob_bkkca", "1/msec",
  "kCa_bkkca", "1/msec",
- "Vao1_bkkca", "mV",
- "Vao2_bkkca", "mV",
  "G_bkkca", "siemens/cm2",
  0,0
 };
@@ -264,7 +260,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
  	hoc_register_cvode(_mechtype, _ode_count, _ode_map, _ode_spec, _ode_matsol);
  	hoc_register_tolerance(_mechtype, _hoc_state_tol, &_atollist);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 bkkca C:/Users/nopsa/Desktop/NeuroResearch/CA3/bkkca.mod\n");
+ 	ivoc_help("help ?1 bkkca C:/Users/nopsa/Desktop/Nate-hippocampal cells/CA3/bkkca.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -565,19 +561,19 @@ static const char* nmodl_file_text =
   "}\n"
   "\n"
   "PARAMETER {\n"
-  "	g = 0.002  :0.012 (siemens/cm2) <0,1e9>\n"
+  "	g = 0.002 :0.012 (siemens/cm2) <0,1e9>\n"
   "\n"
-  "	f = 0.08    :(mV/uM)\n"
+  "	f = 0.08 :0.08    :(mV/uM)\n"
   "	\n"
-  "	koa = 0.4  (1/msec)\n"
-  "	kob = 0.2 (1/msec)\n"
+  "	koa = 0.4 :0.4  (1/msec)\n"
+  "	kob = 0.2 :0.2 (1/msec)\n"
   "	kCa = 0.36  (1/msec)\n"
   "	\n"
-  "	Vao1 =   -5   (mV)\n"
-  "	Vao2 = -5 (mV)\n"
+  "	Vao1 = -5 :-5   (mV)\n"
+  "	Vao2 = -5 :-5 (mV)\n"
   "	\n"
-  "	sao1 = -15   :-23 (mV)\n"
-  "	sao2 = -9    :-5 (mV)\n"
+  "	sao1 = -15 :-15   :-23 (mV)\n"
+  "	sao2 = -9 :-9    :-5 (mV)\n"
   "	\n"
   "	c1 = 0.0001  :3.2  : 2.5  :(uM)\n"
   "	c2 =  14  :(uM)\n"
@@ -621,5 +617,6 @@ static const char* nmodl_file_text =
   "FUNCTION binf(ca) {\n"
   "	binf = c2/(c3+ca)\n"
   "}\n"
+  "\n"
   ;
 #endif

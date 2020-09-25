@@ -269,7 +269,7 @@ static int  rate ( _threadargsprotocomma_ double _lv ) {
      minf = 1.0 / ( 1.0 + exp ( ( vhalf - _lv ) / k ) ) ;
      }
    if ( _lv < - 40.0 ) {
-     mtau = 100.0 * ( 0.025 + 0.14 * exp ( ( _lv + 60.0 ) / 10.0 ) ) ;
+     mtau = 100.0 * ( 0.025 + 0.14 * exp ( ( _lv + 40.0 ) / 3.0 ) ) ;
      }
    else {
      mtau = 100.0 * ( 0.02 + 0.145 * exp ( ( - _lv - 40.0 ) / 10.0 ) ) ;
@@ -553,7 +553,7 @@ static const char* nmodl_file_text =
   "	minf  = 1 / ( 1 + exp( ( vhalf - v ) / k ) )\n"
   "	}\n"
   "	if( v < -40.0 ) {\n"
-  "		mtau = 100*(0.025 + 0.14 * exp( ( v + 60 ) / 10 ))	:40\n"
+  "		mtau = 100*(0.025 + 0.14 * exp( ( v + 40 ) / 3 ))	:40/10\n"
   "	}else{\n"
   "		mtau = 100*(0.02 + 0.145 * exp( ( - v - 40 ) / 10 ))\n"
   "	}\n"
