@@ -4,7 +4,8 @@ NEURON {
 	SUFFIX kca
 	USEION k READ ek WRITE ik
 	USEION ca READ cai
-        RANGE g, gbar, ik
+    RANGE g, gbar, ik
+	RANGE cinf, cinfvhalf, cinfk, cseg
 }
 
 UNITS {
@@ -15,6 +16,9 @@ UNITS {
 
 PARAMETER {
 	gbar (siemens/cm2)
+	cinfvhalf = 28.3 (mV)
+	cinfk = 12.6
+	cseg = -999 (mV)
 }
 
 ASSIGNED {
@@ -41,6 +45,7 @@ BREAKPOINT {
 
 INITIAL {
 	rate(v,cai)
+	segment(v)
 	c = cinf
 }
 
@@ -51,7 +56,13 @@ DERIVATIVE states {
 PROCEDURE rate(v (mV), cai (mM)) {
 	UNITSOFF
 	:activation based on internal concentration of capool
-	cinf = ((cai)/(cai + 0.003))*((1.0)/(1+ (exp (-(v+28.3)/(12.6)))))        
+	cinf = ((cai)/(cai + 0.003))*((1.0)/(1+ (exp (-(v+cinfvhalf)/(cinfk)))))        
 	ctau = ((180.6)-(150.2)/(1+(exp (-(v+46)/(22.7))))) 
 	UNITSON		
+}
+
+PROCEDURE segment(v){
+	if (v < cseg){
+		cinf = 0
+	}
 }
