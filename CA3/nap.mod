@@ -16,6 +16,7 @@ NEURON {
 	SUFFIX nap
 	USEION na READ ena WRITE ina
 	RANGE i, minf, mtau, gnap, gbar :, vhalf, k
+	RANGE mseg, vhalf
 }
 
 PARAMETER { 
@@ -23,6 +24,7 @@ PARAMETER {
 	v ena 		(mV)  
 	k = 5      (mV)
 	vhalf = -48 (mV)
+	mseg = -999 
 } 
 ASSIGNED { 
 	ina 		(mA/cm2) 
@@ -44,6 +46,7 @@ BREAKPOINT {
 
 INITIAL { 
 	rate(v)
+	segment(v)
 	m = minf
 } 
 
@@ -66,3 +69,9 @@ PROCEDURE rate(v (mV)) {
 	}
 }
 UNITSON
+
+PROCEDURE segment(v){
+	if (v < mseg){
+		minf = 0
+	}
+}

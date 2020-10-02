@@ -5,9 +5,8 @@ NEURON {
 	SUFFIX bkkca
 	USEION k READ ek WRITE ik
 	USEION cas READ casi VALENCE 2 
-	RANGE G, g
-	RANGE minf, taum, i
-	RANGE kca
+	RANGE G, g, ainf, binf, vao1seg, vao2seg, Vao1, Vao2
+	RANGE i
 }
 
 UNITS {
@@ -33,17 +32,22 @@ PARAMETER {
 	c1 = 0.0001  :3.2  : 2.5  :(uM)
 	c2 =  14  :(uM)
 	c3 =  15  :(uM)
+
+	vao1seg = -999
+	vao2seg = -999
 }
 
-	g = 0.002  :0.012 (siemens/cm2) <0,1e9>
+	:g = 0.002  :0.012 (siemens/cm2) <0,1e9>
 ASSIGNED {
 	v (mV)
 	casi
 	ek (mV)
 	i
-	g = 0.002  :0.012 (siemens/cm2) <0,1e9>
+	:g := 0.002  :0.012 (siemens/cm2) <0,1e9>
 	ik (mA/cm2)
 	G (siemens/cm2)
+	ainf
+	binf
 }
 
 STATE {
@@ -58,20 +62,29 @@ BREAKPOINT {
 }
 
 INITIAL {
-	a = ainf(v,casi)
-	b = binf(casi)
+	a = ainf
+	b = binf
 }
 
 DERIVATIVE states {
-	a' = (ainf(v,casi)-a)*koa
-	b' = (binf(casi)-b)*kob
+	rate(v,casi)
+	segment(v)
+	a' = (ainf-a)*koa
+	b' = (binf-b)*kob
 }
 
-FUNCTION ainf(v(mV),ca) {
+PROCEDURE rate(v(mV),ca) {
 	ainf = 1/(1+exp((v-Vao1+f*ca)/sao1))*1/(1+exp((v-Vao2+f*ca)/sao2))*(ca/(c1+ca))
-}
-
-FUNCTION binf(ca) {
 	binf = c2/(c3+ca)
 }
 
+: Segmentation functions
+
+PROCEDURE segment(v){
+	if (v < vao1seg){
+		ainf = 0
+	}
+	if (v < vao2seg){
+		ainf = 0
+	}
+}
