@@ -5,7 +5,7 @@ NEURON {
 	SUFFIX bkkca
 	USEION k READ ek WRITE ik
 	USEION cas READ casi VALENCE 2 
-	RANGE G, g, ainf, binf, vao1seg, vao2seg, Vao1, Vao2
+	RANGE G, g, ainf, binf, vao1seg, vao2seg, Vao1, Vao2, sao1, sao2
 	RANGE i
 }
 
