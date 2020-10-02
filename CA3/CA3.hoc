@@ -1,6 +1,6 @@
 begintemplate CA3Cell
 
-public soma,dend
+public soma,dend, p_dend
 create soma, dend, p_dend
 
 proc init(){
