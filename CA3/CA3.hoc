@@ -46,7 +46,7 @@ soma {
 	insert nap
 	gbar_nap = gnap //3.9e-4
 	
-	insert bkkca	
+	insert kca	
 		
 	insert cal
 	gcalbar_cal = gca
@@ -66,7 +66,7 @@ dend {
 	insert nap
 	gbar_nap = gnap
 	
-	insert bkkca
+	insert kca
 		
 	insert cal
 	gcalbar_cal = gca
@@ -88,7 +88,7 @@ p_dend {
 	insert nap
 	gbar_nap = gnap
 	
-	insert bkkca
+	insert kca
 		
 	insert cal
 	gcalbar_cal = gca
