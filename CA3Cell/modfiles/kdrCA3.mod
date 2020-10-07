@@ -79,7 +79,7 @@ PROCEDURE rates(v (mV)) { :callable from hoc
 		ninf = 1 / ( 1 + exp( ( vhalfn - v ) / 11 ) )
 		:ninf = 1 / ( 1 + exp( ( - v + 13 ) / 8.738 ) )
         }
-		taun = betn(v)/(qt*(0.02)*(1+a))
+		taun = betn(v)/(qt*(0.08)*(1+a))
 	if (taun<nmax) {taun=nmax}
 }
 		

@@ -93,7 +93,7 @@ PROCEDURE trates(vm,a2) {
 	if (v < -57.5 ) {
 	minf = 0
 	} else{
-	minf  = 1 / ( 1 + exp( ( - v - 35.5 ) / 7.2 ) )
+	minf  = 1 / ( 1 + exp( ( - v - 35.5) / 7.2 ) ) :35.5
 	}
 	a = trap0(vm,thi1,Rd,qd)
 	b = trap0(-vm,-thi2,Rg,qg)

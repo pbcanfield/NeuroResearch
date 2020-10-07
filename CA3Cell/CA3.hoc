@@ -23,89 +23,131 @@ begintemplate CA3Cell
 
     proc init() {
 
-	all = new SectionList()
-	somatic = new SectionList()
-	basal = new SectionList()
-	apical = new SectionList()
-	axonal = new SectionList()
+		//Parameters.
+		gnat = 0.06
+		ghd = 1.0e-5
+		gkdr = 0.015
+		gsahp = 0.005 //0.0044
+		gnap = 0.00065
+		gcal = 0.017 //0.017
 
-	v_init = -75
+		all = new SectionList()
+		somatic = new SectionList()
+		basal = new SectionList()
+		apical = new SectionList()
+		axonal = new SectionList()
 
-	for i=0,NumSoma soma[i] {
-		all.append()
-		somatic.append()
-	} 
-	for i=0,NumDend dend[i] {
-		all.append()
-		basal.append()
-	}
-	
+		v_init = -75
 
-	//create soma, dend, dendb
-	connect dend[0](0), soma[0](0)
-	connect dend[1](0), soma[0](1)
-
-	soma[0] {nseg=1 L=25 diam=24.75} // changed L & diam
+		for i=0,NumSoma soma[i] {
+			all.append()
+			somatic.append()
+		} 
+		for i=0,NumDend dend[i] {
+			all.append()
+			basal.append()
+		}
 		
-	dend[0] {nseg=8 L=270 diam=3}
-	dend[1] {nseg=1 L=400 diam=5}
 
-	soma[0]{
-		insert leakCA3 
-		el_leakCA3 = -75  
-		glbar_leakCA3 = 1.57*3e-5 
-		Ra = 150 
-		cm = 2.4 // 2.5
-		
-		insert natCA3  
-		gbar_natCA3 = 0.025
+		//create soma, dend, dendb
+		connect dend[0](0), soma[0](0)
+		connect dend[1](0), soma[0](1)
 
-		insert hdCA3 
-		ghdbar_hdCA3 = 1.5e-5
-		insert kdrCA3 
-		gbar_kdrCA3 = 0.01
-	
-		ena=45  ek=-80  ehd=-45
+		soma[0] {nseg=1 L=25 diam=24.75} // changed L & diam
 			
-	    	}
+		dend[0] {nseg=8 L=270 diam=3}
+		dend[1] {nseg=1 L=400 diam=5}
+
+		soma[0]{
+			insert leakCA3 
+			el_leakCA3 = -75  
+			glbar_leakCA3 = 1.57*3e-5 
+			Ra = 150 
+			cm = 2.4 // 2.5
 			
-	dend[0] {
-		insert leakCA3 
-		el_leakCA3 = -75  
-		glbar_leakCA3 = 1.57*3e-5 
-		Ra = 150 
-		cm = 2.4
-		
-		insert natCA3  
-		gbar_natCA3 = 0.025
+			insert capool
+			
+			insert cal
+			gcalbar_cal = gcal
 
-		insert hdCA3 
-		ghdbar_hdCA3 = 1.5e-5
-		insert kdrCA3 
-		gbar_kdrCA3 = 0.01
-		
-		ena=45  ek=-80  ehd=-45
-			}
-							
-	dend[1] {
-		insert leakCA3 
-		el_leak = -75  
-		glbar_leakCA3 = 1.57*3e-5 
-		Ra = 150 
-		cm = 2.4 // 2.5
-		
-		insert natCA3  
-		gbar_natCA3 = 0.025
-	
+			insert natCA3  
+			gbar_natCA3 = gnat
 
-		insert hdCA3 
-		ghdbar_hdCA3 = 1.5e-5 
-		insert kdrCA3 
-		gbar_kdrCA3 = 0.01
+			insert nap//0.0
+			gbar_nap = gnap 
+
+			insert hdCA3 
+			ghdbar_hdCA3 = ghd
+			
+			insert kdrCA3 
+			gbar_kdrCA3 = gkdr
 		
-		ena=45  ek=-80  ehd=-45
-			}
-    
+			insert sAHP
+			gsAHPbar_sAHP = gsahp
+
+			ena=45  ek=-80  ehd=-45 eca = 134		
+		}
+				
+		dend[0] {
+			insert capool
+			
+			insert cal
+			gcalbar_cal = gcal
+
+			insert leakCA3 
+			el_leakCA3 = -75  
+			glbar_leakCA3 = 1.57*3e-5 
+			Ra = 150 
+			cm = 2.4
+			
+			insert natCA3  
+			gbar_natCA3 = gnat
+
+			insert nap
+			gbar_nap = gnap 
+
+			insert hdCA3 
+			ghdbar_hdCA3 = ghd
+			
+			insert kdrCA3 
+			gbar_kdrCA3 = gkdr
+			
+			insert sAHP
+			gsAHPbar_sAHP = gsahp
+
+			ena=45  ek=-80  ehd=-45 eca = 134
+		}
+								
+		dend[1] {
+			insert capool
+
+			insert cal
+			gcalbar_cal = gcal
+
+			insert leakCA3 
+			el_leak = -75  
+			glbar_leakCA3 = 1.57*3e-5 
+			Ra = 150 
+			cm = 2.4 // 2.5
+			
+			insert natCA3  
+			gbar_natCA3 = gnat
+
+			insert nap
+			gbar_nap = gnap 
+
+			insert hdCA3 
+			ghdbar_hdCA3 =ghd 
+			
+			insert kdrCA3 
+			gbar_kdrCA3 = gkdr
+
+			insert sAHP
+			gsAHPbar_sAHP = gsahp
+			
+			ena=45  ek=-80  ehd=-45 eca = 134
+		}
+		
 		define_shape()
 	}
 endtemplate CA3Cell

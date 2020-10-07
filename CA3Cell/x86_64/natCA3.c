@@ -307,7 +307,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
  	hoc_register_cvode(_mechtype, _ode_count, _ode_map, _ode_spec, _ode_matsol);
  	hoc_register_tolerance(_mechtype, _hoc_state_tol, &_atollist);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 natCA3 /home/pbcanfield/Desktop/NeuroResearch/CA3Cell/x86_64/natCA3.mod\n");
+ 	ivoc_help("help ?1 natCA3 /home/mizzou/Desktop/NeuroResearch/CA3Cell/x86_64/natCA3.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -620,7 +620,7 @@ _first = 0;
 #endif
 
 #if NMODL_TEXT
-static const char* nmodl_filename = "/home/pbcanfield/Desktop/NeuroResearch/CA3Cell/modfiles/natCA3.mod";
+static const char* nmodl_filename = "/home/mizzou/Desktop/NeuroResearch/CA3Cell/modfiles/natCA3.mod";
 static const char* nmodl_file_text = 
   "TITLE nat\n"
   ": Na current \n"
@@ -717,7 +717,7 @@ static const char* nmodl_file_text =
   "	if (v < -57.5 ) {\n"
   "	minf = 0\n"
   "	} else{\n"
-  "	minf  = 1 / ( 1 + exp( ( - v - 35.5 ) / 7.2 ) )\n"
+  "	minf  = 1 / ( 1 + exp( ( - v - 35.5) / 7.2 ) ) :35.5\n"
   "	}\n"
   "	a = trap0(vm,thi1,Rd,qd)\n"
   "	b = trap0(-vm,-thi2,Rg,qg)\n"

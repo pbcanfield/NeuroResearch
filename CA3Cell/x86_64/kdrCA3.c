@@ -244,7 +244,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
  	hoc_register_cvode(_mechtype, _ode_count, _ode_map, _ode_spec, _ode_matsol);
  	hoc_register_tolerance(_mechtype, _hoc_state_tol, &_atollist);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 kdrCA3 /home/pbcanfield/Desktop/NeuroResearch/CA3Cell/x86_64/kdrCA3.mod\n");
+ 	ivoc_help("help ?1 kdrCA3 /home/mizzou/Desktop/NeuroResearch/CA3Cell/x86_64/kdrCA3.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -325,7 +325,7 @@ static int  rates ( _threadargsprotocomma_ double _lv ) {
    else {
      ninf = 1.0 / ( 1.0 + exp ( ( vhalfn - _lv ) / 11.0 ) ) ;
      }
-   taun = betn ( _threadargscomma_ _lv ) / ( qt * ( 0.02 ) * ( 1.0 + _la ) ) ;
+   taun = betn ( _threadargscomma_ _lv ) / ( qt * ( 0.08 ) * ( 1.0 + _la ) ) ;
    if ( taun < nmax ) {
      taun = nmax ;
      }
@@ -544,7 +544,7 @@ _first = 0;
 #endif
 
 #if NMODL_TEXT
-static const char* nmodl_filename = "/home/pbcanfield/Desktop/NeuroResearch/CA3Cell/modfiles/kdrCA3.mod";
+static const char* nmodl_filename = "/home/mizzou/Desktop/NeuroResearch/CA3Cell/modfiles/kdrCA3.mod";
 static const char* nmodl_file_text = 
   "TITLE K-DR channel\n"
   ": from Klee Ficker and Heinemann\n"
@@ -627,7 +627,7 @@ static const char* nmodl_file_text =
   "		ninf = 1 / ( 1 + exp( ( vhalfn - v ) / 11 ) )\n"
   "		:ninf = 1 / ( 1 + exp( ( - v + 13 ) / 8.738 ) )\n"
   "        }\n"
-  "		taun = betn(v)/(qt*(0.02)*(1+a))\n"
+  "		taun = betn(v)/(qt*(0.08)*(1+a))\n"
   "	if (taun<nmax) {taun=nmax}\n"
   "}\n"
   "		\n"
