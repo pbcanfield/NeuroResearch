@@ -1,1 +1,0 @@
-MODOBJFILES= bkkca.o ca.o cadyn.o cal2.o capool.o hCA3.o im.o kca.o kdrCA3.o leakCA3.o nap.o natCA3.o pyr2pyr.o sahp.o synapse_inter2pyr.o

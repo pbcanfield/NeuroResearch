@@ -25,11 +25,14 @@ begintemplate CA3Cell
 
 		//Parameters.
 		gnat = 0.06
-		ghd = 1.e-5 //1.0e-5
+		ghd = 1.0e-5 //1.0e-5
 		gkdr = 0.015
-		gsahp = 0.005 //0.005 
-		gnap = 0.00065//0.00065
+		gsahp = 0.0007 //0.005 
+		gnap = 0.000//0.00065
 		gcal = 0.017 //0.017 
+
+		gim  = 0
+		gcas = 0.001
 
 		all = new SectionList()
 		somatic = new SectionList()
@@ -85,7 +88,13 @@ begintemplate CA3Cell
 			insert sAHP
 			gsAHPbar_sAHP = gsahp
 
-			ena=45  ek=-80  ehd=-45 eca = 134		
+			insert im
+			gbar_im = gim
+
+			insert cas
+			gbar_cas = gcas
+
+			ena=45  ek=-80  ehd=-45  eca = 134		
 		}
 				
 		dend[0] {
@@ -115,7 +124,13 @@ begintemplate CA3Cell
 			insert sAHP
 			gsAHPbar_sAHP = gsahp
 
-			ena=45  ek=-80  ehd=-45 eca = 134
+			insert im
+			gbar_im = gim
+
+			insert cas
+			gbar_cas = gcas
+
+			ena=45  ek=-80  ehd=-45  eca = 134
 		}
 								
 		dend[1] {
@@ -144,8 +159,14 @@ begintemplate CA3Cell
 
 			insert sAHP
 			gsAHPbar_sAHP = gsahp
+
+			insert im
+			gbar_im = gim
+
+			insert cas
+			gbar_cas = gcas
 			
-			ena=45  ek=-80  ehd=-45 eca = 134
+			ena=45  ek=-80  ehd=-45  eca = 134
 		}
 		
 		define_shape()

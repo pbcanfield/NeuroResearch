@@ -1,11 +1,10 @@
 load_file("CA3.hoc")
-load_file("graphics_library.hoc")
 
 //simuation constants
 SIMRUNTIME = 1500
 DELAY = 400
-INJTIME = 10
-I_INJ = 2
+INJTIME = 500
+I_INJ = 0.2
 
 tstop = SIMRUNTIME
 v_init = -75
@@ -22,21 +21,25 @@ membrane_voltage.record(&cell.soma.v(0.5))
 time.record(&t)
 
 //Record the currents.
-objref g_cvt, nap_vec, nat_vec, sahp_vec, kdr_vec, capool_vec, ca_vec
+objref g_cvt, nap_vec, nat_vec, sahp_vec, kdr_vec, capool_vec, cal_vec, im_vec, cas_vec
 g_cvt = new Graph()
 nap_vec = new Vector()
 nat_vec = new Vector()
 sahp_vec = new Vector()
 kdr_vec = new Vector()
 capool_vec = new Vector()
-ca_vec = new Vector()
+cal_vec = new Vector()
+im_vec = new Vector()
+cas_vec = new Vector()
 
 nap_vec.record(&cell.soma.i_nap(0.5))
 nat_vec.record(&cell.soma.i_natCA3(0.5))
 sahp_vec.record(&cell.soma.i_sAHP(0.5))
 kdr_vec.record(&cell.soma.i_kdrCA3(0.5))
 capool_vec.record(&cell.soma.xx_capool())
-ca_vec.record(&cell.soma.ica_cal)
+cal_vec.record(&cell.soma.ica_cal(0.5))
+im_vec.record(&cell.soma.i_im(0.5))
+cas_vec.record(&cell.soma.ica_cas(0.5))
 
 
 //First graph the membrane potential vs time plot.
@@ -103,8 +106,16 @@ proc cgraph() {
     g_cvt.vector(capool_vec.size(), &time.x[0], &capool_vec.x[0])
 
     g_cvt.color(6)
-    g_cvt.label("Brown: ca")
-    g_cvt.vector(ca_vec.size(), &time.x[0], &ca_vec.x[0])
+    g_cvt.label("Brown: cal")
+    g_cvt.vector(cal_vec.size(), &time.x[0], &cal_vec.x[0])
+
+    g_cvt.color(7)
+    g_cvt.label("Violet: im")
+    g_cvt.vector(im_vec.size(), &time.x[0], &im_vec.x[0])
+    
+    g_cvt.color(9)
+    g_cvt.label("Grey : cas")
+    g_cvt.vector(cas_vec.size(), &time.x[0], &cas_vec.x[0])
 
     g_cvt.flush()
 
