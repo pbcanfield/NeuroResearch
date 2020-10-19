@@ -49,13 +49,13 @@ DERIVATIVE states {
 
 FUNCTION alf(v (mV)) (/ms) {
 	UNITSOFF
-	alf = 0.016/exp(-(v+10)/23) :52.7/23
+	alf = 0.016/exp(-(v+52.7)/23) :52.7/23
 	UNITSON
 }
 
 FUNCTION bet(v (mV)) (/ms) {
 	UNITSOFF
-	bet = 0.016/exp((v+52.7)/18.8)
+	bet = 0.016/exp((v+52.7)/18.8) :52.7/18.8
 	UNITSON
 }
 
@@ -65,11 +65,11 @@ PROCEDURE rate(v (mV)) {
 	aa=alf(v) ab=bet(v) 
 	
 	sum = aa+ab
-	if (v < -75 ) {					:-67.5
+	if (v < -67.5 ) {					:-67.5
 	ninf = 0
 	} else {
-	ninf = 1 / ( 1 + exp( ( - v - 52.7 ) / 10.34 ) ) :-52.7
+	ninf = 1 / ( 1 + exp( ( - v - 35 ) / 10.34 ) ) :-52.7
 	}
-	taun = 1/sum
+	taun = 1.5/sum
 	UNITSON
 }

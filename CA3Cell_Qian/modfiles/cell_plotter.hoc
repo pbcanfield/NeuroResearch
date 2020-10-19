@@ -4,7 +4,7 @@ load_file("CA3.hoc")
 SIMRUNTIME = 1500
 DELAY = 400
 INJTIME = 500
-I_INJ = 0.8
+I_INJ = 0.2
 
 tstop = SIMRUNTIME
 v_init = -75

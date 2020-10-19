@@ -99,7 +99,7 @@ PROCEDURE trates(vm,a2) {
 	b = trap0(-vm,-thi2,Rg,qg)
 	htau =  1/(a+b)/qt
         if (htau<hmin) {htau=hmin}
-	hinf  = 1 / ( 1 + exp( ( v + 50 ) / 4 ) )
+	hinf  = 1 / ( 1 + exp( ( v + 40 ) / 4 ) )
 }
 
 FUNCTION trap0(v,th,a,q) {
