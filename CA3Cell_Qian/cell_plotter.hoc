@@ -20,6 +20,39 @@ cell = new CA3Cell()
 membrane_voltage.record(&cell.soma.v(0.5))
 time.record(&t)
 
+
+//Record the gating variables.
+objref gating_vec[9], g_g
+g_g = new Graph()
+for(i = 0; i < 9; i+=1) {
+    gating_vec[i] = new Vector()
+}
+
+//Manually assign what the tau varibles are for each one.
+gating_vec[0].record(&cell.soma.minf_natCA3)
+gating_vec[1].record(&cell.soma.hinf_natCA3)
+gating_vec[2].record(&cell.soma.ninf_kdrCA3)
+gating_vec[3].record(&cell.soma.minf_nap)
+gating_vec[4].record(&cell.soma.ninf_im)
+
+
+
+//Record the tau variables.
+objref tau_vec[9], g_t
+g_t = new Graph()
+for(i = 0; i < 9; i+=1) {
+    tau_vec[i] = new Vector()
+}
+
+//Manually assign what the tau varibles are for each one.
+tau_vec[0].record(&cell.soma.mtau_natCA3)
+tau_vec[1].record(&cell.soma.htau_natCA3)
+tau_vec[2].record(&cell.soma.taun_kdrCA3)
+tau_vec[3].record(&cell.soma.mtau_nap)
+tau_vec[4].record(&cell.soma.taun_im)
+
+
+
 //Record the currents.
 objref g_cvt, nap_vec, nat_vec, sahp_vec, kdr_vec, capool_vec, cal_vec, im_vec, cas_vec
 g_cvt = new Graph()
@@ -41,8 +74,6 @@ cal_vec.record(&cell.soma.ica_cal(0.5))
 im_vec.record(&cell.soma.i_im(0.5))
 cas_vec.record(&cell.soma.ica_cas(0.5))
 
-
-//First graph the membrane potential vs time plot.
 
 //Create a current clamp.
 objectvar i_inj
@@ -122,9 +153,68 @@ proc cgraph() {
     g_cvt.exec_menu("View = plot")
 }
 
+objref color_labels[9]
+//Tau graphs
+proc tgraph() {
+    
+    g_t.color(1)
+    g_t.label("Black: nat activation tau")
+    g_t.vector(tau_vec[0].size(), &time.x[0], &tau_vec[0].x[0])
+
+    g_t.color(2)
+    g_t.label("Red: nat inactivation tau")
+    g_t.vector(tau_vec[1].size(), &time.x[0], &tau_vec[1].x[0])
+
+    g_t.color(3)
+    g_t.label("Blue: kdr tau")
+    g_t.vector(tau_vec[2].size(), &time.x[0], &tau_vec[2].x[0])
+
+    g_t.color(4)
+    g_t.label("Green: nap tau")
+    g_t.vector(tau_vec[3].size(), &time.x[0], &tau_vec[3].x[0])
+
+    g_t.color(5)
+    g_t.label("Orange: im tau")
+    g_t.vector(tau_vec[4].size(), &time.x[0], &tau_vec[4].x[0])
+
+    g_t.flush()
+
+    g_t.exec_menu("View = plot")
+
+
+} 
+
+//M-infinity graphs.
+proc ggraph() {
+    g_g.color(1)
+    g_g.label("Black: nat activation inf")
+    g_g.vector(gating_vec[0].size(), &time.x[0], &gating_vec[0].x[0])
+
+    g_g.color(2)
+    g_g.label("Red: nat inactivation inf")
+    g_g.vector(gating_vec[1].size(), &time.x[0], &gating_vec[1].x[0])
+
+    g_g.color(3)
+    g_g.label("Blue: kdr inf")
+    g_g.vector(gating_vec[2].size(), &time.x[0], &gating_vec[2].x[0])
+
+    g_g.color(4)
+    g_g.label("Green: nap inf")
+    g_g.vector(gating_vec[3].size(), &time.x[0], &gating_vec[3].x[0])
+
+    g_g.color(5)
+    g_g.label("Orange: im inf")
+    g_g.vector(gating_vec[4].size(), &time.x[0], &gating_vec[4].x[0])
+
+    g_g.flush()
+
+    g_g.exec_menu("View = plot")
+}
+
 mgraph()
 cgraph()
-
+tgraph()
+ggraph()
 
 /*
 objectvar g_fi, target, reported, current_inj
