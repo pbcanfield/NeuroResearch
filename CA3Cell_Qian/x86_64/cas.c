@@ -223,7 +223,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
  	hoc_register_cvode(_mechtype, _ode_count, _ode_map, _ode_spec, _ode_matsol);
  	hoc_register_tolerance(_mechtype, _hoc_state_tol, &_atollist);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 cas /home/mizzou/Desktop/CA3Cell_napim/x86_64/cas.mod\n");
+ 	ivoc_help("help ?1 cas /home/pbcanfield/Desktop/NeuroResearch/CA3Cell_Qian/x86_64/cas.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -486,7 +486,7 @@ _first = 0;
 #endif
 
 #if NMODL_TEXT
-static const char* nmodl_filename = "/home/mizzou/Desktop/CA3Cell_napim/modfiles/cas.mod";
+static const char* nmodl_filename = "/home/pbcanfield/Desktop/NeuroResearch/CA3Cell_Qian/modfiles/cas.mod";
 static const char* nmodl_file_text = 
   ": Persistent Ca2+ current channel(I_CaS)\n"
   "\n"
