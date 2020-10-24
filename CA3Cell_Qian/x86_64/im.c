@@ -224,7 +224,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
  	hoc_register_cvode(_mechtype, _ode_count, _ode_map, _ode_spec, _ode_matsol);
  	hoc_register_tolerance(_mechtype, _hoc_state_tol, &_atollist);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 im /home/mizzou/Desktop/CA3Cell_napim/x86_64/im.mod\n");
+ 	ivoc_help("help ?1 im /home/pbcanfield/Desktop/NeuroResearch/CA3Cell_Qian/x86_64/im.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -305,9 +305,9 @@ static int  rate ( _threadargsprotocomma_ double _lv ) {
      ninf = 0.0 ;
      }
    else {
-     ninf = 1.0 / ( 1.0 + exp ( ( - _lv - 52.7 ) / 10.34 ) ) ;
+     ninf = 1.0 / ( 1.0 + exp ( ( - _lv - 35.0 ) / 10.34 ) ) ;
      }
-   taun = 1.0 / _lsum ;
+   taun = 2.0 / _lsum ;
      return 0; }
  
 static void _hoc_rate(void) {
@@ -523,7 +523,7 @@ _first = 0;
 #endif
 
 #if NMODL_TEXT
-static const char* nmodl_filename = "/home/mizzou/Desktop/CA3Cell_napim/modfiles/im.mod";
+static const char* nmodl_filename = "/home/pbcanfield/Desktop/NeuroResearch/CA3Cell_Qian/modfiles/im.mod";
 static const char* nmodl_file_text = 
   ": voltage-gated persistent muscarinic channel\n"
   "\n"
@@ -576,13 +576,13 @@ static const char* nmodl_file_text =
   "\n"
   "FUNCTION alf(v (mV)) (/ms) {\n"
   "	UNITSOFF\n"
-  "	alf = 0.016/exp(-(v+52.7)/23)\n"
+  "	alf = 0.016/exp(-(v+52.7)/23) :52.7/23\n"
   "	UNITSON\n"
   "}\n"
   "\n"
   "FUNCTION bet(v (mV)) (/ms) {\n"
   "	UNITSOFF\n"
-  "	bet = 0.016/exp((v+52.7)/18.8)\n"
+  "	bet = 0.016/exp((v+52.7)/18.8) :52.7/18.8\n"
   "	UNITSON\n"
   "}\n"
   "\n"
@@ -592,12 +592,12 @@ static const char* nmodl_file_text =
   "	aa=alf(v) ab=bet(v) \n"
   "	\n"
   "	sum = aa+ab\n"
-  "	if (v < -67.5 ) {\n"
+  "	if (v < -67.5 ) {					:-67.5\n"
   "	ninf = 0\n"
   "	} else {\n"
-  "	ninf = 1 / ( 1 + exp( ( - v - 52.7 ) / 10.34 ) )\n"
+  "	ninf = 1 / ( 1 + exp( ( - v - 35 ) / 10.34 ) ) :-52.7\n"
   "	}\n"
-  "	taun = 1/sum\n"
+  "	taun = 2.0/sum :increase\n"
   "	UNITSON\n"
   "}\n"
   ;
