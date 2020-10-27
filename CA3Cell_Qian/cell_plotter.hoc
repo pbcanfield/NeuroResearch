@@ -3,8 +3,8 @@ load_file("CA3.hoc")
 //simuation constants
 SIMRUNTIME = 1500
 DELAY = 400
-INJTIME = 500
-I_INJ = 1
+INJTIME = 2
+I_INJ = 2
 
 tstop = SIMRUNTIME
 v_init = -75
@@ -216,7 +216,7 @@ cgraph()
 tgraph()
 ggraph()
 
-/*
+
 objectvar g_fi, target, reported, current_inj
 g_fi = new Graph()
 reported = new Vector(10)
@@ -250,4 +250,3 @@ g_fi.vector(10, &current_inj.x[0],&reported.x[0])
 g_fi.size(0,1.0,0,target.x[target.size() - 1] + 10)
 
 g_fi.flush()
-*/
