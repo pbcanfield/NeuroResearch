@@ -99,3 +99,17 @@ PROCEDURE rate(v (mV)) { :callable from hoc
         tau = 1/(tfa*(a + bet(v)))
         minf = tfa*a*tau
 }
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+

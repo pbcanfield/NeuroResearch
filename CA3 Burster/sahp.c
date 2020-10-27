@@ -231,7 +231,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
  	hoc_register_cvode(_mechtype, _ode_count, _ode_map, _ode_spec, _ode_matsol);
  	hoc_register_tolerance(_mechtype, _hoc_state_tol, &_atollist);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 sAHP C:/Users/nopsa/Desktop/NeuroResearch/CA3 Burster/sahp.mod\n");
+ 	ivoc_help("help ?1 sAHP C:/Users/nopsa/Desktop/NeuroResearch/CA3Cell_Qian/modfiles/sahp.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -318,7 +318,7 @@ static int  rate ( _threadargsprotocomma_ double _lv , double _lcasi ) {
    else {
      cinf = _lca / _lcsum ;
      }
-   ctau = 30.0 ;
+   ctau = 50.0 ;
      return 0; }
  
 static void _hoc_rate(void) {
@@ -622,7 +622,7 @@ static const char* nmodl_file_text =
   "	} else{\n"
   "	cinf = ca/csum\n"
   "	}\n"
-  "	ctau = 30\n"
+  "	ctau = 50 :35\n"
   "	UNITSON\n"
   "}	\n"
   ;

@@ -256,7 +256,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
  	hoc_register_cvode(_mechtype, _ode_count, _ode_map, _ode_spec, _ode_matsol);
  	hoc_register_tolerance(_mechtype, _hoc_state_tol, &_atollist);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 cal C:/Users/nopsa/Desktop/NeuroResearch/CA3 Burster/cal2.mod\n");
+ 	ivoc_help("help ?1 cal C:/Users/nopsa/Desktop/NeuroResearch/CA3Cell_Qian/modfiles/cal2.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -777,5 +777,19 @@ static const char* nmodl_file_text =
   "        tau = 1/(tfa*(a + bet(v)))\n"
   "        minf = tfa*a*tau\n"
   "}\n"
+  " \n"
+  "\n"
+  "\n"
+  "\n"
+  "\n"
+  "\n"
+  "\n"
+  "\n"
+  "\n"
+  "\n"
+  "\n"
+  "\n"
+  "\n"
+  "\n"
   ;
 #endif

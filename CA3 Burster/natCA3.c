@@ -307,7 +307,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
  	hoc_register_cvode(_mechtype, _ode_count, _ode_map, _ode_spec, _ode_matsol);
  	hoc_register_tolerance(_mechtype, _hoc_state_tol, &_atollist);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 natCA3 C:/Users/nopsa/Desktop/NeuroResearch/CA3 Burster/natCA3.mod\n");
+ 	ivoc_help("help ?1 natCA3 C:/Users/nopsa/Desktop/CA3Cell_Qian/modfiles/natCA3.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -359,7 +359,7 @@ static int  trates ( _threadargsprotocomma_ double _lvm , double _la2 ) {
    if ( mtau < mmin ) {
      mtau = mmin ;
      }
-   if ( v < - 52.5 ) {
+   if ( v < - 57.5 ) {
      minf = 0.0 ;
      }
    else {
@@ -714,7 +714,7 @@ static const char* nmodl_file_text =
   "	b = trap0(-vm,-tha1,Rb,qa)\n"
   "	mtau = 1/(a+b)/qt\n"
   "        if (mtau<mmin) {mtau=mmin}\n"
-  "	if (v < -52.5 ) {			:-57.5 :-52.5\n"
+  "	if (v < -57.5 ) {			:-57.5\n"
   "	minf = 0\n"
   "	} else{\n"
   "	minf  = 1 / ( 1 + exp( ( - v - 35.5) / 7.2 ) ) :35.5\n"
@@ -723,7 +723,7 @@ static const char* nmodl_file_text =
   "	b = trap0(-vm,-thi2,Rg,qg)\n"
   "	htau =  1/(a+b)/qt\n"
   "        if (htau<hmin) {htau=hmin}\n"
-  "	hinf  = 1 / ( 1 + exp( ( v + 40 ) / 4 ) ) :40\n"
+  "	hinf  = 1 / ( 1 + exp( ( v + 40 ) / 4 ) )\n"
   "}\n"
   "\n"
   "FUNCTION trap0(v,th,a,q) {\n"

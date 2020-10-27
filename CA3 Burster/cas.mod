@@ -52,7 +52,11 @@ DERIVATIVE states {
 
 PROCEDURE rate(v(mV)) {
 	UNITSOFF
+	if (v < -57.5 ) {
+	jainf = 0
+	} else{
 	jainf = (1.0)/(1+ (exp ((v+33.0)/(-8.1)))) 
+	}
 	jatau = 2.8 + 14.0/( (exp ((v+27.0)/(10.0))) + (exp ((v+70.0)/(-13.0))))
 	kinf = 1.0/(1.0+(exp ((v+60.0)/(6.2))))
 	ktau = (120.0 + 300.0/( (exp ((v+55.0)/(9.0))) + (exp ((v+65)/(-16.0)))))

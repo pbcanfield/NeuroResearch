@@ -24,15 +24,16 @@ begintemplate CA3Cell
     proc init() {
 
 		//Parameters.
-		gnat = 0.06 //0.06
+		gnat = 0.065 //0.06
 		ghd = 1.0e-5 //1.0e-5
 		gkdr = 0.065 //0.03 //0.015
-		gsahp = 0.0008 //0.001 //0.005 
+		gsahp = 0 //0.003 //0.003 //0.001 //0.005 
 		gnap = 0 //0.002 //0.0013 //0.0009 //0.00065
-		gcal = 0.0005 //0.005 //0.017 //0.017 
+		gcal = 0.01 //0.015 //0.005 //0.017 //0.017 
 
+		gkca = 0.002
 		gim  = 0 //0.007 //0.00501 //0.005 //0.007 //0.009
-		gcas = 0.001 //0.0005 //0.0005 //0.0005
+		gcas = 0.002 //0.003 //0.0005 //0.0005 //0.0005
 
 		all = new SectionList()
 		somatic = new SectionList()
@@ -72,7 +73,10 @@ begintemplate CA3Cell
 			
 			insert cal
 			gcalbar_cal = gcal
-
+			
+			insert kca
+			gbar_kca = gkca
+			
 			insert natCA3  
 			gbar_natCA3 = gnat
 
@@ -102,6 +106,9 @@ begintemplate CA3Cell
 			
 			insert cal
 			gcalbar_cal = gcal
+
+			insert kca
+			gbar_kca = gkca
 
 			insert leakCA3 
 			el_leakCA3 = -75  
@@ -138,6 +145,9 @@ begintemplate CA3Cell
 
 			insert cal
 			gcalbar_cal = gcal
+			
+			insert kca
+			gbar_kca = gkca
 
 			insert leakCA3 
 			el_leak = -75  

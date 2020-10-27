@@ -223,7 +223,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
  	hoc_register_cvode(_mechtype, _ode_count, _ode_map, _ode_spec, _ode_matsol);
  	hoc_register_tolerance(_mechtype, _hoc_state_tol, &_atollist);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 cas C:/Users/nopsa/Desktop/NeuroResearch/CA3Cell_napim/modfiles/cas.mod\n");
+ 	ivoc_help("help ?1 cas C:/Users/nopsa/Desktop/CA3Cell_Qian/modfiles/cas.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -265,7 +265,12 @@ static int _ode_spec1(_threadargsproto_);
 }
  
 static int  rate ( _threadargsprotocomma_ double _lv ) {
-    jainf = ( 1.0 ) / ( 1.0 + ( exp ( ( _lv + 33.0 ) / ( - 8.1 ) ) ) ) ;
+    if ( _lv < - 57.5 ) {
+     jainf = 0.0 ;
+     }
+   else {
+     jainf = ( 1.0 ) / ( 1.0 + ( exp ( ( _lv + 33.0 ) / ( - 8.1 ) ) ) ) ;
+     }
    jatau = 2.8 + 14.0 / ( ( exp ( ( _lv + 27.0 ) / ( 10.0 ) ) ) + ( exp ( ( _lv + 70.0 ) / ( - 13.0 ) ) ) ) ;
    kinf = 1.0 / ( 1.0 + ( exp ( ( _lv + 60.0 ) / ( 6.2 ) ) ) ) ;
    ktau = ( 120.0 + 300.0 / ( ( exp ( ( _lv + 55.0 ) / ( 9.0 ) ) ) + ( exp ( ( _lv + 65.0 ) / ( - 16.0 ) ) ) ) ) ;
@@ -542,7 +547,11 @@ static const char* nmodl_file_text =
   "\n"
   "PROCEDURE rate(v(mV)) {\n"
   "	UNITSOFF\n"
+  "	if (v < -57.5 ) {\n"
+  "	jainf = 0\n"
+  "	} else{\n"
   "	jainf = (1.0)/(1+ (exp ((v+33.0)/(-8.1)))) \n"
+  "	}\n"
   "	jatau = 2.8 + 14.0/( (exp ((v+27.0)/(10.0))) + (exp ((v+70.0)/(-13.0))))\n"
   "	kinf = 1.0/(1.0+(exp ((v+60.0)/(6.2))))\n"
   "	ktau = (120.0 + 300.0/( (exp ((v+55.0)/(9.0))) + (exp ((v+65)/(-16.0)))))\n"
