@@ -24,7 +24,6 @@ PARAMETER {
 
 NEURON {
 	SUFFIX hdCA3
-    READ ehd
 	NONSPECIFIC_CURRENT i
         RANGE ghd, i, ghdbar :, vhalfl
         RANGE linf,taul
