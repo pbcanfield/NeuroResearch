@@ -68,8 +68,8 @@ PROCEDURE rate(v (mV)) {
 	if (v < -67.5 ) {					:-67.5
 	ninf = 0
 	} else {
-	ninf = 1 / ( 1 + exp( ( - v - 35 ) / 10.34 ) ) :-52.7
+	ninf = 1 / ( 1 + exp( ( - v - 35 ) / 10.34 ) ) :-35/10.34 :-52.7/10.34
 	}
-	taun = 2.0/sum :increase
+	taun = 5/sum :increase
 	UNITSON
 }
