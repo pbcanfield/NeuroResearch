@@ -1,1 +1,0 @@
-../modfiles//bgka.mod
