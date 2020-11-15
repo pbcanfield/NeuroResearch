@@ -10,6 +10,7 @@ extern void _OLM_cat_reg(void);
 extern void _OLM_ccanl_reg(void);
 extern void _OLM_ichan2_reg(void);
 extern void _OLM_sahp_reg(void);
+extern void _nap_reg(void);
 
 void modl_reg(){
   if (!nrn_nobanner_) if (nrnmpi_myid < 1) {
@@ -22,6 +23,7 @@ void modl_reg(){
     fprintf(stderr," modfiles//OLM_ccanl.mod");
     fprintf(stderr," modfiles//OLM_ichan2.mod");
     fprintf(stderr," modfiles//OLM_sahp.mod");
+    fprintf(stderr," modfiles//nap.mod");
     fprintf(stderr, "\n");
   }
   _OLM_IA_reg();
@@ -31,4 +33,5 @@ void modl_reg(){
   _OLM_ccanl_reg();
   _OLM_ichan2_reg();
   _OLM_sahp_reg();
+  _nap_reg();
 }

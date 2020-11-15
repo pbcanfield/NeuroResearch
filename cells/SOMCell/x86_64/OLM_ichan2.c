@@ -377,7 +377,7 @@ static int  rates (  double _lv ) {
    _lalpha = - 0.07 * vtrap ( _threadargscomma_ ( _lv + 65.0 - 47.0 ) , - 6.0 ) ;
    _lbeta = 0.264 / exp ( ( _lv + 65.0 - 22.0 ) / 40.0 ) ;
    _lsum = _lalpha + _lbeta ;
-   nftau = 1.0 / _lsum ;
+   nftau = 0.6 / _lsum ;
    nfinf = _lalpha / _lsum ;
     return 0; }
  
@@ -862,7 +862,7 @@ static const char* nmodl_file_text =
   "        alpha = -0.07*vtrap((v+65-47),-6)\n"
   "	beta = 0.264/exp((v+65-22)/40)\n"
   "	sum = alpha+beta        \n"
-  "	nftau = 1/sum      nfinf = alpha/sum\n"
+  "	nftau = 0.6/sum      nfinf = alpha/sum\n"
   "	\n"
   "}\n"
   " \n"

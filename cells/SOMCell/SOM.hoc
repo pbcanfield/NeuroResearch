@@ -17,14 +17,15 @@ begintemplate SOM_Cell
 	//create soma, adend, bdend
 
 	proc init() {
-        gnat   = 0.08
-        gkdr   = 0.01
+        gnat   = 0.04
+        gkdr   = 0.009
         ga     = 0.0001
         gh     = 0
         cattau = 10
-        glca   = 0.09
+        glca   = 0.1
         gcat   = 0.0005
-        gsahp  = 2e-5
+        gsahp  = 5e-5
+		gnap   = 0//1e-5
 
 		//create soma, adend, bdend
 
@@ -91,6 +92,9 @@ begintemplate SOM_Cell
 			
 			insert catOLM
 			gcatbar_catOLM = gcat
+
+			insert nap
+			gbar_nap = gnap
 			
 
 	    	}
@@ -126,6 +130,9 @@ begintemplate SOM_Cell
 			insert catOLM
 			gcatbar_catOLM = gcat
 
+			insert nap
+			gbar_nap = gnap
+
 
 		}
 			
@@ -158,6 +165,9 @@ begintemplate SOM_Cell
 
 			insert catOLM
 			gcatbar_catOLM = gcat
+
+			insert nap
+			gbar_nap = gnap
 	
 		}
 	

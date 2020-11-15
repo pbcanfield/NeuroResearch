@@ -7,7 +7,7 @@ INJTIME = 500
 I_INJ = 0.3
 
 tstop = SIMRUNTIME
-v_init = -58
+v_init = -60
 
 objectvar membrane_voltage, time
 membrane_voltage = new Vector()
@@ -36,6 +36,7 @@ current_vectors[2].record(&cell.dend[0].ik_IAOLM)
 current_vectors[3].record(&cell.dend[0].ih_IhOLM)
 current_vectors[4].record(&cell.dend[0].ilca_lcaOLM)
 current_vectors[5].record(&cell.dend[0].itca_catOLM)
+current_vectors[6].record(&cell.dend[0].i_nap)
 //current_vectors[6].record(&cell.dend[0].ik_sAHPOLM)
 
 
@@ -76,7 +77,7 @@ func runSim(){
     return (spvec.size() / (INJTIME)) * 1000
 }
 
-printf("Cell fi at %f nA injection: %f\n",I_INJ,runSim(I_INJ))
+
 
 
 proc cgraph() {
@@ -107,9 +108,9 @@ proc cgraph() {
     g_cvt.label("Brown: CaT")
     g_cvt.vector(current_vectors[5].size(), &time.x[0], &current_vectors[5].x[0])
 
-    //g_cvt.color(7)
-    //g_cvt.label("Violet: sAHP")
-    //g_cvt.vector(current_vectors[6].size(), &time.x[0], &current_vectors[6].x[0])
+    g_cvt.color(7)
+    g_cvt.label("Violet: NaP")
+    g_cvt.vector(current_vectors[6].size(), &time.x[0], &current_vectors[6].x[0])
 
     g_cvt.flush()
 
@@ -160,3 +161,5 @@ g_fi.vector(10, &current_inj.x[0],&reported.x[0])
 g_fi.size(0,0.27,0,target.x[target.size() - 1] + 10)
 
 g_fi.flush()
+
+printf("Cell fi at %f nA injection: %f\n",I_INJ,runSim(I_INJ))
