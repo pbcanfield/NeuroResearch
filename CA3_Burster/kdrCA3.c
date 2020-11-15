@@ -244,7 +244,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
  	hoc_register_cvode(_mechtype, _ode_count, _ode_map, _ode_spec, _ode_matsol);
  	hoc_register_tolerance(_mechtype, _hoc_state_tol, &_atollist);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 kdrCA3 C:/Users/nopsa/Desktop/NeuroResearch/CA3Cell_Qian/modfiles/kdrCA3.mod\n");
+ 	ivoc_help("help ?1 kdrCA3 C:/Users/nopsa/Desktop/NeuroResearch/CA3_Burster/kdrCA3.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -319,7 +319,7 @@ static void _hoc_betn(void) {
 static int  rates ( _threadargsprotocomma_ double _lv ) {
    double _la ;
  _la = alpn ( _threadargscomma_ _lv ) ;
-   if ( _lv < - 55.0 ) {
+   if ( _lv < - 57.5 ) {
      ninf = 0.0 ;
      }
    else {
@@ -621,7 +621,7 @@ static const char* nmodl_file_text =
   "PROCEDURE rates(v (mV)) { :callable from hoc\n"
   "        LOCAL a\n"
   "        a = alpn(v)\n"
-  "		if (v < -55 ) {              ::::::::::::::::::::   -55\n"
+  "		if (v < -57.5 ) {              ::::::::::::::::::::   -55\n"
   "		ninf = 0\n"
   "		} else{\n"
   "		ninf = 1 / ( 1 + exp( ( vhalfn - v ) / 11 ) )\n"

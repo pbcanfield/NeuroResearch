@@ -244,7 +244,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
  	hoc_register_cvode(_mechtype, _ode_count, _ode_map, _ode_spec, _ode_matsol);
  	hoc_register_tolerance(_mechtype, _hoc_state_tol, &_atollist);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 kdrCA3 C:/Users/nopsa/Desktop/NeuroResearch/CA3Cell_napim/modfiles/kdrCA3.mod\n");
+ 	ivoc_help("help ?1 kdrCA3 C:/Users/nopsa/Desktop/CA3Cell_Qian/modfiles/kdrCA3.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -624,7 +624,7 @@ static const char* nmodl_file_text =
   "		if (v < -55 ) {              ::::::::::::::::::::   -55\n"
   "		ninf = 0\n"
   "		} else{\n"
-  "		ninf = 1 / ( 1 + exp( ( vhalfn - v ) / 11 ) )\n"
+  "		ninf = 1 / ( 1 + exp( ( vhalfn - v ) / 11 ) ) :/11\n"
   "		:ninf = 1 / ( 1 + exp( ( - v + 13 ) / 8.738 ) )\n"
   "        }\n"
   "		taun = betn(v)/(qt*(0.08)*(1+a))\n"

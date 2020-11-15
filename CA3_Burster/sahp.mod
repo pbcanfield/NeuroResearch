@@ -78,6 +78,6 @@ PROCEDURE rate(v (mV), casi (mM)) {LOCAL  csum, ca, cb
 	} else{
 	cinf = ca/csum
 	}
-	ctau = 50 :35
+	ctau = 100 :35
 	UNITSON
 }	

@@ -76,7 +76,7 @@ PROCEDURE rates(v (mV)) { :callable from hoc
 		if (v < -55 ) {              ::::::::::::::::::::   -55
 		ninf = 0
 		} else{
-		ninf = 1 / ( 1 + exp( ( vhalfn - v ) / 11 ) )
+		ninf = 1 / ( 1 + exp( ( vhalfn - v ) / 11 ) ) :/11
 		:ninf = 1 / ( 1 + exp( ( - v + 13 ) / 8.738 ) )
         }
 		taun = betn(v)/(qt*(0.08)*(1+a))

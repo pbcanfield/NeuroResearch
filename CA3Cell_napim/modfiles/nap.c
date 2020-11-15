@@ -124,7 +124,6 @@ extern void hoc_reg_nmodl_filename(int, const char*);
 };
  static HocParmUnits _hoc_parm_units[] = {
  "k_nap", "mV",
- "vhalf_nap", "mV",
  "i_nap", "mA/cm2",
  "minf_nap", "1",
  "mtau_nap", "ms",
@@ -229,7 +228,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
  	hoc_register_cvode(_mechtype, _ode_count, _ode_map, _ode_spec, _ode_matsol);
  	hoc_register_tolerance(_mechtype, _hoc_state_tol, &_atollist);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 nap C:/Users/nopsa/Desktop/NeuroResearch/CA3Cell_napim/modfiles/nap.mod\n");
+ 	ivoc_help("help ?1 nap C:/Users/nopsa/Desktop/NeuroResearch/CA3Cell_Qian/modfiles/nap.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -269,7 +268,7 @@ static int _ode_spec1(_threadargsproto_);
 }
  
 static int  rate ( _threadargsprotocomma_ double _lv ) {
-   if ( _lv < - 67.5 ) {
+   if ( _lv < - 65.0 ) {
      minf = 0.0 ;
      }
    else {
@@ -541,7 +540,7 @@ static const char* nmodl_file_text =
   "	gbar = 3e-4 :1e-4 	(mho/cm2)\n"
   "	v ena 		(mV)  \n"
   "	k = 5      (mV)\n"
-  "	vhalf = -48 (mV)\n"
+  "	vhalf = -48 :-48 (mV)\n"
   "	mseg = -999 \n"
   "} \n"
   "ASSIGNED { \n"
@@ -575,7 +574,7 @@ static const char* nmodl_file_text =
   "UNITSOFF\n"
   " \n"
   "PROCEDURE rate(v (mV)) {\n"
-  "	if (v < -67.5 ) {\n"
+  "	if (v < -65 ) { :-67.5\n"
   "	minf = 0\n"
   "	} else{\n"
   "	minf  = 1 / ( 1 + exp( ( vhalf - v ) / k ) )\n"
