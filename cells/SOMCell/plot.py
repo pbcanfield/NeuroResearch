@@ -22,20 +22,22 @@ fi = h.reported.as_numpy()
 
 fig = plt.figure(figsize = (7,5))
 gs = mpl.gridspec.GridSpec(3, 1, height_ratios=[4,4,1])
+
 ax = plt.subplot(gs[0])
+plt.ylabel("Frequency (Hz)")
+plt.plot(current_inj, fi, color = 'red', lw = 0.9)
+
+
+ax = plt.subplot(gs[1])
 plt.plot(time, trace, color = 'red', lw = 0.9)
 plt.ylabel('voltage (mV)')
 ax.set_xticks([])
 ax.set_yticks([-80, -20, 40])
 
-ax = plt.subplot(gs[1])
-plt.plot(current_inj, fi, color = 'red', lw = 0.9)
-ax.set_xticks([])
-ax.set_yticks([0, 30, 60])
 
 ax = plt.subplot(gs[2])
 plt.plot(time, inj, color = 'black', lw = 0.9)
-plt.ylabel('voltage (mV)')
+plt.ylabel('current (nA)')
 plt.xlabel('time (ms)')
 
 plt.show()
