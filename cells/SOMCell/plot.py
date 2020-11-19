@@ -17,7 +17,7 @@ time = h.time.as_numpy()
 inj = np.array([i_inj_plot(t) for t in time])
 
 current_inj = h.current_inj.as_numpy()
-fi = h.reported.as_numpy()
+fi = h.target.as_numpy()
 
 
 fig = plt.figure(figsize = (7,5))
