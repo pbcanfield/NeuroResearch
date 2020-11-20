@@ -118,8 +118,8 @@ proc cgraph() {
 }
 
 
-mgraph()
-cgraph()
+//mgraph()
+//cgraph()
 
 
 objectvar g_fi, target, reported, current_inj

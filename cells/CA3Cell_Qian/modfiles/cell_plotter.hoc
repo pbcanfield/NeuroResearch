@@ -1,10 +1,10 @@
 load_file("CA3.hoc")
 
 //simuation constants
-SIMRUNTIME = 2000
+SIMRUNTIME = 1500
 DELAY = 400
-INJTIME = 500
-I_INJ = .65
+INJTIME = 1000
+I_INJ = 0.8
 
 tstop = SIMRUNTIME
 v_init = -75
@@ -54,7 +54,7 @@ tau_vec[4].record(&cell.soma.taun_im)
 
 
 //Record the currents.
-objref g_cvt, nap_vec, nat_vec, sahp_vec, kdr_vec, capool_vec, cal_vec, im_vec, cas_vec, kca_vec
+objref g_cvt, nap_vec, nat_vec, sahp_vec, kdr_vec, capool_vec, cal_vec, im_vec, cas_vec
 g_cvt = new Graph()
 nap_vec = new Vector()
 nat_vec = new Vector()
@@ -64,7 +64,6 @@ capool_vec = new Vector()
 cal_vec = new Vector()
 im_vec = new Vector()
 cas_vec = new Vector()
-kca_vec = new Vector()
 
 nap_vec.record(&cell.soma.i_nap(0.5))
 nat_vec.record(&cell.soma.i_natCA3(0.5))
@@ -74,7 +73,6 @@ capool_vec.record(&cell.soma.xx_capool())
 cal_vec.record(&cell.soma.ica_cal(0.5))
 im_vec.record(&cell.soma.i_im(0.5))
 cas_vec.record(&cell.soma.ica_cas(0.5))
-kca_vec.record(&cell.soma.ik_kca(0.5))
 
 
 //Create a current clamp.
@@ -149,10 +147,6 @@ proc cgraph() {
     g_cvt.color(9)
     g_cvt.label("Grey : cas")
     g_cvt.vector(cas_vec.size(), &time.x[0], &cas_vec.x[0])
-	
-	g_cvt.color(8)
-	g_cvt.label("Yellow : Kca")
-	g_cvt.vector(cas_vec.size(), &time.x[0], &kca_vec.x[0])
 
     g_cvt.flush()
 
@@ -257,3 +251,7 @@ g_fi.size(0,1.0,0,target.x[target.size() - 1] + 10)
 
 g_fi.flush()
 */
+
+objref Fvt
+fvt = new File()
+fvt.wopen("spiking.csv")
