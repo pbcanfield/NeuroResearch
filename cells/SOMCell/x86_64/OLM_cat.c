@@ -260,7 +260,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
  	hoc_register_cvode(_mechtype, _ode_count, _ode_map, _ode_spec, _ode_matsol);
  	hoc_register_tolerance(_mechtype, _hoc_state_tol, &_atollist);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 catOLM /home/pbcanfield/Desktop/NeuroResearch/cells/SOMCell/x86_64/OLM_cat.mod\n");
+ 	ivoc_help("help ?1 catOLM /home/mizzou/Desktop/NeuroResearch/cells/SOMCell/x86_64/OLM_cat.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -781,7 +781,7 @@ _first = 0;
 }
 
 #if NMODL_TEXT
-static const char* nmodl_filename = "/home/pbcanfield/Desktop/NeuroResearch/cells/SOMCell/modfiles/OLM_cat.mod";
+static const char* nmodl_filename = "/home/mizzou/Desktop/NeuroResearch/cells/SOMCell/modfiles/OLM_cat.mod";
 static const char* nmodl_file_text = 
   "TITLE T-calcium channel From Migliore CA3\n"
   ": T-type calcium channel\n"

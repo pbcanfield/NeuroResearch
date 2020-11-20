@@ -306,7 +306,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
   hoc_register_dparam_semantics(_mechtype, 8, "ks_ion");
  	hoc_register_cvode(_mechtype, _ode_count, 0, 0, 0);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 ichan2OLM /home/pbcanfield/Desktop/NeuroResearch/cells/SOMCell/x86_64/OLM_ichan2.mod\n");
+ 	ivoc_help("help ?1 ichan2OLM /home/mizzou/Desktop/NeuroResearch/cells/SOMCell/x86_64/OLM_ichan2.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -377,7 +377,7 @@ static int  rates (  double _lv ) {
    _lalpha = - 0.07 * vtrap ( _threadargscomma_ ( _lv + 65.0 - 47.0 ) , - 6.0 ) ;
    _lbeta = 0.264 / exp ( ( _lv + 65.0 - 22.0 ) / 40.0 ) ;
    _lsum = _lalpha + _lbeta ;
-   nftau = 0.6 / _lsum ;
+   nftau = 1.0 / _lsum ;
    nfinf = _lalpha / _lsum ;
     return 0; }
  
@@ -723,7 +723,7 @@ _first = 0;
 }
 
 #if NMODL_TEXT
-static const char* nmodl_filename = "/home/pbcanfield/Desktop/NeuroResearch/cells/SOMCell/modfiles/OLM_ichan2.mod";
+static const char* nmodl_filename = "/home/mizzou/Desktop/NeuroResearch/cells/SOMCell/modfiles/OLM_ichan2.mod";
 static const char* nmodl_file_text = 
   "TITLE ichan2.mod  \n"
   " \n"
@@ -862,7 +862,7 @@ static const char* nmodl_file_text =
   "        alpha = -0.07*vtrap((v+65-47),-6)\n"
   "	beta = 0.264/exp((v+65-22)/40)\n"
   "	sum = alpha+beta        \n"
-  "	nftau = 0.6/sum      nfinf = alpha/sum\n"
+  "	nftau = 1/sum      nfinf = alpha/sum\n"
   "	\n"
   "}\n"
   " \n"
