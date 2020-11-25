@@ -319,7 +319,7 @@ static void _hoc_betn(void) {
 static int  rates ( _threadargsprotocomma_ double _lv ) {
    double _la ;
  _la = alpn ( _threadargscomma_ _lv ) ;
-   if ( _lv < - 55.0 ) {
+   if ( _lv < - 58.0 ) {
      ninf = 0.0 ;
      }
    else {
@@ -621,7 +621,7 @@ static const char* nmodl_file_text =
   "PROCEDURE rates(v (mV)) { :callable from hoc\n"
   "        LOCAL a\n"
   "        a = alpn(v)\n"
-  "		if (v < -55 ) {              ::::::::::::::::::::   -55\n"
+  "		if (v < -58 ) {              ::::::::::::::::::::   -55\n"
   "		ninf = 0\n"
   "		} else{\n"
   "		ninf = 1 / ( 1 + exp( ( vhalfn - v ) / 11 ) ) :/11\n"

@@ -1,9 +1,9 @@
 load_file("CA3.hoc")
 
 //simuation constants
-SIMRUNTIME = 1000
+SIMRUNTIME = 1500
 DELAY = 400
-INJTIME = 500
+INJTIME = 1000
 I_INJ = 0.3
 
 tstop = SIMRUNTIME

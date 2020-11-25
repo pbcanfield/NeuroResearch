@@ -307,7 +307,7 @@ static int  rate ( _threadargsprotocomma_ double _lv ) {
    else {
      ninf = 1.0 / ( 1.0 + exp ( ( - _lv - 35.0 ) / 10.34 ) ) ;
      }
-   taun = 5.0 / _lsum ;
+   taun = 4.0 / _lsum ;
      return 0; }
  
 static void _hoc_rate(void) {
@@ -597,7 +597,7 @@ static const char* nmodl_file_text =
   "	} else {\n"
   "	ninf = 1 / ( 1 + exp( ( - v - 35 ) / 10.34 ) ) :-35/10.34 :-52.7/10.34\n"
   "	}\n"
-  "	taun = 5/sum :increase\n"
+  "	taun = 4/sum :increase\n"
   "	UNITSON\n"
   "}\n"
   ;

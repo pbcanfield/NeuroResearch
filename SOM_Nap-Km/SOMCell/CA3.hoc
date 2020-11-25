@@ -157,7 +157,7 @@ begintemplate CA3Cell
 
 			insert leakCA3 
 			el_leak = -60 
-			glbar_leakCA3 = 6e-5 
+			glbar_leakCA3 = 6*3e-5 
 			Ra = 150 
 			cm = 1.3 // 2.5
 			
