@@ -1,8 +1,8 @@
 load_file("CA3.hoc")
 
 //simuation constants
-SIMRUNTIME = 1000
-DELAY = 400
+SIMRUNTIME = 700
+DELAY = 100
 INJTIME = 500
 I_INJ = 0.3
 
@@ -248,12 +248,12 @@ target.x[13] = 58
 
 
 g_fi.color(4)
-g_fi.vector(10, &current_inj.x[0],&target.x[0])
+g_fi.vector(14, &current_inj.x[0],&target.x[0])
 
 g_fi.color(1)
-g_fi.vector(10, &current_inj.x[0],&reported.x[0])
+g_fi.vector(14, &current_inj.x[0],&reported.x[0])
 
-g_fi.size(0,0.27,0,target.x[target.size() - 1] + 10)
+g_fi.size(0,0.35,0,target.x[target.size() - 1] + 15)
 
 g_fi.flush()
 
