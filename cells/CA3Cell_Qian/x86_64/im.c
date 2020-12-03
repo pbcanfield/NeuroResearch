@@ -224,7 +224,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
  	hoc_register_cvode(_mechtype, _ode_count, _ode_map, _ode_spec, _ode_matsol);
  	hoc_register_tolerance(_mechtype, _hoc_state_tol, &_atollist);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 im /home/pbcanfield/Desktop/NeuroResearch/CA3Cell_Qian/x86_64/im.mod\n");
+ 	ivoc_help("help ?1 im /home/pbcanfield/Desktop/NeuroResearch/cells/CA3Cell_Qian/x86_64/im.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -301,7 +301,7 @@ static int  rate ( _threadargsprotocomma_ double _lv ) {
   _laa = alf ( _threadargscomma_ _lv ) ;
    _lab = bet ( _threadargscomma_ _lv ) ;
    _lsum = _laa + _lab ;
-   if ( _lv < - 67.5 ) {
+   if ( _lv < - 100.0 ) {
      ninf = 0.0 ;
      }
    else {
@@ -523,7 +523,7 @@ _first = 0;
 #endif
 
 #if NMODL_TEXT
-static const char* nmodl_filename = "/home/pbcanfield/Desktop/NeuroResearch/CA3Cell_Qian/modfiles/im.mod";
+static const char* nmodl_filename = "/home/pbcanfield/Desktop/NeuroResearch/cells/CA3Cell_Qian/modfiles/im.mod";
 static const char* nmodl_file_text = 
   ": voltage-gated persistent muscarinic channel\n"
   "\n"
@@ -592,7 +592,7 @@ static const char* nmodl_file_text =
   "	aa=alf(v) ab=bet(v) \n"
   "	\n"
   "	sum = aa+ab\n"
-  "	if (v < -67.5 ) {					:-67.5\n"
+  "	if (v < -100 ) {					:-67.5\n"
   "	ninf = 0\n"
   "	} else {\n"
   "	ninf = 1 / ( 1 + exp( ( - v - 35 ) / 10.34 ) ) :-35/10.34 :-52.7/10.34\n"

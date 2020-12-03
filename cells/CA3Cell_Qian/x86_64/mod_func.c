@@ -3,6 +3,8 @@
 extern int nrnmpi_myid;
 extern int nrn_nobanner_;
 
+extern void _Gfluct_new_exc_reg(void);
+extern void _Gfluct_new_inh_reg(void);
 extern void _cal2_reg(void);
 extern void _capool_reg(void);
 extern void _cas_reg(void);
@@ -20,6 +22,8 @@ void modl_reg(){
   if (!nrn_nobanner_) if (nrnmpi_myid < 1) {
     fprintf(stderr, "Additional mechanisms from files\n");
 
+    fprintf(stderr," modfiles//Gfluct_new_exc.mod");
+    fprintf(stderr," modfiles//Gfluct_new_inh.mod");
     fprintf(stderr," modfiles//cal2.mod");
     fprintf(stderr," modfiles//capool.mod");
     fprintf(stderr," modfiles//cas.mod");
@@ -34,6 +38,8 @@ void modl_reg(){
     fprintf(stderr," modfiles//sahp.mod");
     fprintf(stderr, "\n");
   }
+  _Gfluct_new_exc_reg();
+  _Gfluct_new_inh_reg();
   _cal2_reg();
   _capool_reg();
   _cas_reg();

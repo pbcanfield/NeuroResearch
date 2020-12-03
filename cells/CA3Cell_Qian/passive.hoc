@@ -8,7 +8,7 @@ RINAMP = -0.1
 v_init = -75
 
 objectvar cell
-cell = new CA3Cell()
+cell = new CA3PyramidalCell()
 
 objectvar membrane_voltage, time
 membrane_voltage = new Vector()

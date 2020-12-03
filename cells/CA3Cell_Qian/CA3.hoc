@@ -1,4 +1,4 @@
-begintemplate CA3Cell
+begintemplate CA3PyramidalCell
 	public NumSoma,NumDend
 	NumSoma = 1
 	NumDend = 2
@@ -16,6 +16,8 @@ begintemplate CA3Cell
 	create soma[NumSoma]
 	create dend[NumDend]
 	
+	objref noise_exc, noise_inh, cclA
+	objref noiseRandObj_exc, noiseRandObj_inh
 
 	public all, somatic, basal, apical, axonal
 	objref all, somatic, basal, apical, axonal
@@ -169,6 +171,32 @@ begintemplate CA3Cell
 			ena=45  ek=-80  ehd=-45  eca = 134
 		}
 		
+		insert_mechs(100)
 		define_shape()
 	}
-endtemplate CA3Cell
+
+	proc insert_mechs(){
+		r = $1
+		soma[0]{
+            noiseRandObj_exc=new Random()
+            noiseRandObj_exc.Random123(r)
+            noiseRandObj_exc.normal(0,1)
+
+	        noise_exc = new Gfluct2_exc(0.5)
+            noise_exc.g_e0 = 0.0016
+            noise_exc.std_e = 0.000178//0.003
+            noise_exc.setRandObj(noiseRandObj_exc)
+
+            noiseRandObj_inh=new Random()
+            noiseRandObj_inh.Random123(r)
+            noiseRandObj_inh.normal(0,1)
+
+            noise_inh = new Gfluct2_inh(0.5)
+
+            noise_inh.g_i0 = 0.01
+            noise_inh.std_i = 0.00264
+            noise_inh.setRandObj(noiseRandObj_inh)
+		}
+	}
+
+endtemplate CA3PyramidalCell

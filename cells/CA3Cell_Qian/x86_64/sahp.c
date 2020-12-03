@@ -231,11 +231,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
  	hoc_register_cvode(_mechtype, _ode_count, _ode_map, _ode_spec, _ode_matsol);
  	hoc_register_tolerance(_mechtype, _hoc_state_tol, &_atollist);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
-<<<<<<< HEAD:CA3_Burster/sahp.c
- 	ivoc_help("help ?1 sAHP C:/Users/nopsa/Desktop/NeuroResearch/CA3_Burster/sahp.mod\n");
-=======
- 	ivoc_help("help ?1 sAHP /home/pbcanfield/Desktop/NeuroResearch/CA3Cell_Qian/x86_64/sahp.mod\n");
->>>>>>> b7fa25bba06de2e59b520b92f84895b6f7e3d7d2:cells/CA3Cell_Qian/x86_64/sahp.c
+ 	ivoc_help("help ?1 sAHP /home/pbcanfield/Desktop/NeuroResearch/cells/CA3Cell_Qian/x86_64/sahp.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -322,7 +318,7 @@ static int  rate ( _threadargsprotocomma_ double _lv , double _lcasi ) {
    else {
      cinf = _lca / _lcsum ;
      }
-   ctau = 100.0 ;
+   ctau = 50.0 ;
      return 0; }
  
 static void _hoc_rate(void) {
@@ -544,7 +540,7 @@ _first = 0;
 #endif
 
 #if NMODL_TEXT
-static const char* nmodl_filename = "/home/pbcanfield/Desktop/NeuroResearch/CA3Cell_Qian/modfiles/sahp.mod";
+static const char* nmodl_filename = "/home/pbcanfield/Desktop/NeuroResearch/cells/CA3Cell_Qian/modfiles/sahp.mod";
 static const char* nmodl_file_text = 
   ":  iC   fast Ca2+/V-dependent K+ channel\n"
   "\n"
@@ -626,7 +622,7 @@ static const char* nmodl_file_text =
   "	} else{\n"
   "	cinf = ca/csum\n"
   "	}\n"
-  "	ctau = 100 :35\n"
+  "	ctau = 50 :35\n"
   "	UNITSON\n"
   "}	\n"
   ;

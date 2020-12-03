@@ -228,7 +228,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
  	hoc_register_cvode(_mechtype, _ode_count, _ode_map, _ode_spec, _ode_matsol);
  	hoc_register_tolerance(_mechtype, _hoc_state_tol, &_atollist);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 nap /home/pbcanfield/Desktop/NeuroResearch/CA3Cell_Qian/x86_64/nap.mod\n");
+ 	ivoc_help("help ?1 nap /home/pbcanfield/Desktop/NeuroResearch/cells/CA3Cell_Qian/x86_64/nap.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -268,7 +268,7 @@ static int _ode_spec1(_threadargsproto_);
 }
  
 static int  rate ( _threadargsprotocomma_ double _lv ) {
-   if ( _lv < - 65.0 ) {
+   if ( _lv < - 67.5 ) {
      minf = 0.0 ;
      }
    else {
@@ -513,7 +513,7 @@ _first = 0;
 #endif
 
 #if NMODL_TEXT
-static const char* nmodl_filename = "/home/pbcanfield/Desktop/NeuroResearch/CA3Cell_Qian/modfiles/nap.mod";
+static const char* nmodl_filename = "/home/pbcanfield/Desktop/NeuroResearch/cells/CA3Cell_Qian/modfiles/nap.mod";
 static const char* nmodl_file_text = 
   "TITLE Sodium persistent current for RD Traub, J Neurophysiol 89:909-921, 2003\n"
   "\n"
@@ -574,7 +574,7 @@ static const char* nmodl_file_text =
   "UNITSOFF\n"
   " \n"
   "PROCEDURE rate(v (mV)) {\n"
-  "	if (v < -65 ) { :-67.5\n"
+  "	if (v < -67.5 ) { :-67.5\n"
   "	minf = 0\n"
   "	} else{\n"
   "	minf  = 1 / ( 1 + exp( ( vhalf - v ) / k ) )\n"
