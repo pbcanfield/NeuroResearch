@@ -139,8 +139,8 @@ static void nrn_alloc(Prop* _prop) {
 	double *_p; Datum *_ppvar;
  	_p = nrn_prop_data_alloc(_mechtype, 5, _prop);
  	/*initialize range parameters*/
- 	glbar = 2.85714e-05;
- 	el = -75;
+ 	glbar = 6e-05;
+ 	el = -60;
  	_prop->param = _p;
  	_prop->param_size = 5;
  
@@ -164,7 +164,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
 #endif
   hoc_register_prop_size(_mechtype, 5, 0);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 leakCA3 /home/mizzou/Desktop/CA3Cell_napim/x86_64/leakCA3.mod\n");
+ 	ivoc_help("help ?1 leakCA3 /home/pbcanfield/Desktop/NeuroResearch/SOM_Nap-Km/SOMCell/x86_64/leakCA3.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -292,7 +292,7 @@ _first = 0;
 #endif
 
 #if NMODL_TEXT
-static const char* nmodl_filename = "/home/mizzou/Desktop/CA3Cell_napim/modfiles/leakCA3.mod";
+static const char* nmodl_filename = "/home/pbcanfield/Desktop/NeuroResearch/SOM_Nap-Km/SOMCell/modfiles/leakCA3.mod";
 static const char* nmodl_file_text = 
   ": passive leak current\n"
   "\n"
@@ -308,8 +308,8 @@ static const char* nmodl_file_text =
   "}\n"
   "\n"
   "PARAMETER {\n"
-  "	glbar = 2.857142857142857e-05  :3.333333e-5 (siemens/cm2) < 0, 1e9 >\n"
-  "	el = -75 (mV)\n"
+  "	glbar = 6e-05  :3.333333e-5 (siemens/cm2) < 0, 1e9 >\n"
+  "	el = -60 (mV)\n"
   "}\n"
   "\n"
   "ASSIGNED {\n"

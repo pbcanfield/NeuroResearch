@@ -172,7 +172,7 @@ static void nrn_alloc(Prop* _prop) {
 	double *_p; Datum *_ppvar;
  	_p = nrn_prop_data_alloc(_mechtype, 11, _prop);
  	/*initialize range parameters*/
- 	taucas = 100;
+ 	taucas = 750;
  	cainf = 5e-05;
  	fcas = 0.024;
  	_prop->param = _p;
@@ -226,7 +226,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
  	hoc_register_cvode(_mechtype, _ode_count, _ode_map, _ode_spec, _ode_matsol);
  	hoc_register_tolerance(_mechtype, _hoc_state_tol, &_atollist);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 capool /home/mizzou/Desktop/CA3Cell_napim/x86_64/capool.mod\n");
+ 	ivoc_help("help ?1 capool /home/pbcanfield/Desktop/NeuroResearch/SOM_Nap-Km/SOMCell/x86_64/capool.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -457,7 +457,7 @@ _first = 0;
 #endif
 
 #if NMODL_TEXT
-static const char* nmodl_filename = "/home/mizzou/Desktop/CA3Cell_napim/modfiles/capool.mod";
+static const char* nmodl_filename = "/home/pbcanfield/Desktop/NeuroResearch/SOM_Nap-Km/SOMCell/modfiles/capool.mod";
 static const char* nmodl_file_text = 
   ": Two Ca2+ pools for ic and isAHP\n"
   "\n"
@@ -477,7 +477,7 @@ static const char* nmodl_file_text =
   "\n"
   "PARAMETER {\n"
   "	pi = 3.14159265\n"
-  "	taucas= 100 :1000 (ms) 	: decay time constant\n"
+  "	taucas= 750 :1000 (ms) 	: decay time constant\n"
   "    cainf= 50e-6   (mM)  	: equilibrium ca2+ concentration\n"
   "	fcas = 0.024\n"
   "    w = 1 (micrometer)     	: thickness of shell for ca2+ diffusion\n"
