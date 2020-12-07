@@ -164,7 +164,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
 #endif
   hoc_register_prop_size(_mechtype, 5, 0);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 leakCA3 /home/mizzou/Desktop/NeuroResearch/CA3Cell_Qian/x86_64/leakCA3.mod\n");
+ 	ivoc_help("help ?1 leakCA3 /home/pbcanfield/Desktop/NeuroResearch/cells/CA3Cell_NoBurst/x86_64/leakCA3.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -292,7 +292,7 @@ _first = 0;
 #endif
 
 #if NMODL_TEXT
-static const char* nmodl_filename = "/home/mizzou/Desktop/NeuroResearch/CA3Cell_Qian/modfiles/leakCA3.mod";
+static const char* nmodl_filename = "/home/pbcanfield/Desktop/NeuroResearch/cells/CA3Cell_NoBurst/modfiles/leakCA3.mod";
 static const char* nmodl_file_text = 
   ": passive leak current\n"
   "\n"
