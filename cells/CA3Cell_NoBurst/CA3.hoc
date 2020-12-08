@@ -1,4 +1,4 @@
-begintemplate CA3Cell
+begintemplate CA3PyramidalCell
 	public NumSoma,NumDend
 	NumSoma = 1
 	NumDend = 2
@@ -171,4 +171,4 @@ begintemplate CA3Cell
 		
 		define_shape()
 	}
-endtemplate CA3Cell
+endtemplate CA3PyramidalCell

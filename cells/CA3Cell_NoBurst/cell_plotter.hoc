@@ -14,7 +14,7 @@ membrane_voltage = new Vector()
 time = new Vector()
 
 objectvar cell
-cell = new CA3Cell()
+cell = new CA3PyramidalCell()
 
 //record the cells membrane voltage.
 membrane_voltage.record(&cell.soma.v(0.5))
@@ -223,15 +223,15 @@ current_inj = new Vector(10)
 
 target = new Vector(10)
 target.x[0] = 0
-target.x[1] = 32
-target.x[2] = 48
-target.x[3] = 50
-target.x[4] = 54
-target.x[5] = 58
-target.x[6] = 62
-target.x[7] = 66
-target.x[8] = 68
-target.x[9] = 72
+target.x[1] = 8
+target.x[2] = 12
+target.x[3] = 13
+target.x[4] = 15
+target.x[5] = 11
+target.x[6] = 10
+target.x[7] = 14
+target.x[8] = 15
+target.x[9] = 8
 
 proc fgraph() {
     count = 0
