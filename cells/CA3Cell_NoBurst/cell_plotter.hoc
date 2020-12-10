@@ -20,39 +20,6 @@ cell = new CA3PyramidalCell()
 membrane_voltage.record(&cell.soma.v(0.5))
 time.record(&t)
 
-
-//Record the gating variables.
-objref gating_vec[9], g_g
-g_g = new Graph()
-for(i = 0; i < 9; i+=1) {
-    gating_vec[i] = new Vector()
-}
-
-//Manually assign what the tau varibles are for each one.
-gating_vec[0].record(&cell.soma.minf_natCA3)
-gating_vec[1].record(&cell.soma.hinf_natCA3)
-gating_vec[2].record(&cell.soma.ninf_kdrCA3)
-gating_vec[3].record(&cell.soma.minf_nap)
-gating_vec[4].record(&cell.soma.ninf_im)
-
-
-
-//Record the tau variables.
-objref tau_vec[9], g_t
-g_t = new Graph()
-for(i = 0; i < 9; i+=1) {
-    tau_vec[i] = new Vector()
-}
-
-//Manually assign what the tau varibles are for each one.
-tau_vec[0].record(&cell.soma.mtau_natCA3)
-tau_vec[1].record(&cell.soma.htau_natCA3)
-tau_vec[2].record(&cell.soma.taun_kdrCA3)
-tau_vec[3].record(&cell.soma.mtau_nap)
-tau_vec[4].record(&cell.soma.taun_im)
-
-
-
 //Record the currents.
 objref g_cvt, nap_vec, nat_vec, sahp_vec, kdr_vec, capool_vec, cal_vec, im_vec, cas_vec
 g_cvt = new Graph()
@@ -67,12 +34,8 @@ cas_vec = new Vector()
 
 nap_vec.record(&cell.soma.i_nap(0.5))
 nat_vec.record(&cell.soma.i_natCA3(0.5))
-sahp_vec.record(&cell.soma.i_sAHP(0.5))
 kdr_vec.record(&cell.soma.i_kdrCA3(0.5))
-capool_vec.record(&cell.soma.xx_capool())
-cal_vec.record(&cell.soma.ica_cal(0.5))
 im_vec.record(&cell.soma.i_im(0.5))
-cas_vec.record(&cell.soma.ica_cas(0.5))
 
 
 //Create a current clamp.
@@ -125,113 +88,35 @@ proc cgraph() {
     g_cvt.label("Red: nat")
     g_cvt.vector(nat_vec.size(), &time.x[0], &nat_vec.x[0])
 
-    g_cvt.color(3)
-    g_cvt.label("Blue: sAHP")
-    g_cvt.vector(sahp_vec.size(), &time.x[0], &sahp_vec.x[0])
-
     g_cvt.color(4)
     g_cvt.label("Green: kdr")
     g_cvt.vector(kdr_vec.size(), &time.x[0], &kdr_vec.x[0])
 
-    g_cvt.color(5)
-    g_cvt.label("Orange: ca_pool")
-    g_cvt.vector(capool_vec.size(), &time.x[0], &capool_vec.x[0])
-
-    g_cvt.color(6)
-    g_cvt.label("Brown: cal")
-    g_cvt.vector(cal_vec.size(), &time.x[0], &cal_vec.x[0])
-
     g_cvt.color(7)
     g_cvt.label("Violet: im")
     g_cvt.vector(im_vec.size(), &time.x[0], &im_vec.x[0])
-    
-    g_cvt.color(9)
-    g_cvt.label("Grey : cas")
-    g_cvt.vector(cas_vec.size(), &time.x[0], &cas_vec.x[0])
 
     g_cvt.flush()
 
     g_cvt.exec_menu("View = plot")
 }
 
-objref color_labels[9]
-//Tau graphs
-proc tgraph() {
-    
-    g_t.color(1)
-    g_t.label("Black: nat activation tau")
-    g_t.vector(tau_vec[0].size(), &time.x[0], &tau_vec[0].x[0])
-
-    g_t.color(2)
-    g_t.label("Red: nat inactivation tau")
-    g_t.vector(tau_vec[1].size(), &time.x[0], &tau_vec[1].x[0])
-
-    g_t.color(3)
-    g_t.label("Blue: kdr tau")
-    g_t.vector(tau_vec[2].size(), &time.x[0], &tau_vec[2].x[0])
-
-    g_t.color(4)
-    g_t.label("Green: nap tau")
-    g_t.vector(tau_vec[3].size(), &time.x[0], &tau_vec[3].x[0])
-
-    g_t.color(5)
-    g_t.label("Orange: im tau")
-    g_t.vector(tau_vec[4].size(), &time.x[0], &tau_vec[4].x[0])
-
-    g_t.flush()
-
-    g_t.exec_menu("View = plot")
-
-
-} 
-
-//M-infinity graphs.
-proc ggraph() {
-    g_g.color(1)
-    g_g.label("Black: nat activation inf")
-    g_g.vector(gating_vec[0].size(), &time.x[0], &gating_vec[0].x[0])
-
-    g_g.color(2)
-    g_g.label("Red: nat inactivation inf")
-    g_g.vector(gating_vec[1].size(), &time.x[0], &gating_vec[1].x[0])
-
-    g_g.color(3)
-    g_g.label("Blue: kdr inf")
-    g_g.vector(gating_vec[2].size(), &time.x[0], &gating_vec[2].x[0])
-
-    g_g.color(4)
-    g_g.label("Green: nap inf")
-    g_g.vector(gating_vec[3].size(), &time.x[0], &gating_vec[3].x[0])
-
-    g_g.color(5)
-    g_g.label("Orange: im inf")
-    g_g.vector(gating_vec[4].size(), &time.x[0], &gating_vec[4].x[0])
-
-    g_g.flush()
-
-    g_g.exec_menu("View = plot")
-}
-
-
-
-objectvar g_fi, target, reported, current_inj
-g_fi = new Graph()
+objref reported, current_inj, target, g_fi
 reported = new Vector(10)
 current_inj = new Vector(10)
-
-
+g_fi = new Graph()
 
 target = new Vector(10)
 target.x[0] = 0
-target.x[1] = 8
+target.x[1] = 7
 target.x[2] = 12
-target.x[3] = 13
-target.x[4] = 15
-target.x[5] = 11
-target.x[6] = 10
-target.x[7] = 14
-target.x[8] = 15
-target.x[9] = 8
+target.x[3] = 15
+target.x[4] = 18
+target.x[5] = 19
+target.x[6] = 21
+target.x[7] = 22
+target.x[8] = 23
+target.x[9] = 24
 
 proc fgraph() {
     count = 0
@@ -255,5 +140,3 @@ proc fgraph() {
 fgraph()
 mgraph()
 cgraph()
-tgraph()
-ggraph()

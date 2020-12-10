@@ -24,15 +24,12 @@ begintemplate CA3PyramidalCell
     proc init() {
 
 		//Parameters.
-		gnat = 0.035 //0.06
-		ghd = 1.0e-5 //1.0e-5
-		gkdr = 0.055 //0.03 //0.015
-		gsahp = 0 //0.0006 //0.001 //0.005 
-		gnap = 0.0005 //0.0013 //0.0009 //0.00065
-		gcal = 0 //0.015 //0.005 //0.017 //0.017 
+		gnat = 0.1 //0.07
+		ghd = 0 //1.0e-5
+		gkdr = 0.007 //0.03 //0.015
+		gnap = 0 //0.0013 //0.0009 //0.00065
 
-		gim  = 0 //0.007 //0.00501 //0.005 //0.007 //0.009
-		gcas = 0 //0.003 //0.0005 //0.0005 //0.0005
+		gim  = 0.003 //0.007 //0.00501 //0.005 //0.007 //0.009
 
 		all = new SectionList()
 		somatic = new SectionList()
@@ -68,11 +65,7 @@ begintemplate CA3PyramidalCell
 			Ra = 150 
 			cm = 2.4 // 2.5
 			
-			insert capool
 			
-			insert cal
-			gcalbar_cal = gcal
-
 			insert natCA3  
 			gbar_natCA3 = gnat
 
@@ -85,23 +78,14 @@ begintemplate CA3PyramidalCell
 			insert kdrCA3 
 			gbar_kdrCA3 = gkdr
 		
-			insert sAHP
-			gsAHPbar_sAHP = gsahp
-
 			insert im
 			gbar_im = gim
 
-			insert cas
-			gbar_cas = gcas
 
-			ena=45  ek=-80  ehd=-45  eca = 134		
+			ena=45  ek=-80  ehd=-45  
 		}
 				
 		dend[0] {
-			insert capool
-			
-			insert cal
-			gcalbar_cal = gcal
 
 			insert leakCA3 
 			el_leakCA3 = -78  
@@ -121,23 +105,14 @@ begintemplate CA3PyramidalCell
 			insert kdrCA3 
 			gbar_kdrCA3 = gkdr
 			
-			insert sAHP
-			gsAHPbar_sAHP = gsahp
-
 			insert im
 			gbar_im = gim
 
-			insert cas
-			gbar_cas = gcas
 
-			ena=45  ek=-80  ehd=-45  eca = 134
+			ena=45  ek=-80  ehd=-45  
 		}
 								
 		dend[1] {
-			insert capool
-
-			insert cal
-			gcalbar_cal = gcal
 
 			insert leakCA3 
 			el_leak = -78  
@@ -157,16 +132,10 @@ begintemplate CA3PyramidalCell
 			insert kdrCA3 
 			gbar_kdrCA3 = gkdr
 
-			insert sAHP
-			gsAHPbar_sAHP = gsahp
-
 			insert im
 			gbar_im = gim
 
-			insert cas
-			gbar_cas = gcas
-			
-			ena=45  ek=-80  ehd=-45  eca = 134
+			ena=45  ek=-80  ehd=-45  
 		}
 		
 		define_shape()

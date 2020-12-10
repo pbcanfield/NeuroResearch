@@ -90,7 +90,7 @@ PROCEDURE trates(vm,a2) {
 	b = trap0(-vm,-tha1,Rb,qa)
 	mtau = 1/(a+b)/qt
         if (mtau<mmin) {mtau=mmin}
-	if (v < -52.5 ) {			:-57.5
+	if (v < -57.5 ) {			:-57.5
 	minf = 0
 	} else{
 	minf  = 1 / ( 1 + exp( ( - v - 35.5) / 7.2 ) ) :35.5
