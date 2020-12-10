@@ -129,7 +129,7 @@ extern void hoc_reg_nmodl_filename(int, const char*);
 #define qt qt_kdrCA3
  double qt = 1;
 #define vhalfn vhalfn_kdrCA3
- double vhalfn = 0;
+ double vhalfn = -0;
 #define zetan zetan_kdrCA3
  double zetan = -3;
  /* some parameters have upper and lower limits */
@@ -244,7 +244,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
  	hoc_register_cvode(_mechtype, _ode_count, _ode_map, _ode_spec, _ode_matsol);
  	hoc_register_tolerance(_mechtype, _hoc_state_tol, &_atollist);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 kdrCA3 /home/mizzou/Desktop/CA3Cell_napim/x86_64/kdrCA3.mod\n");
+ 	ivoc_help("help ?1 kdrCA3 /home/pbcanfield/Desktop/NeuroResearch/cells/CA3_tonic/x86_64/kdrCA3.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -319,11 +319,11 @@ static void _hoc_betn(void) {
 static int  rates ( _threadargsprotocomma_ double _lv ) {
    double _la ;
  _la = alpn ( _threadargscomma_ _lv ) ;
-   if ( _lv < - 55.0 ) {
+   if ( _lv < - 74.0 ) {
      ninf = 0.0 ;
      }
    else {
-     ninf = 1.0 / ( 1.0 + exp ( ( vhalfn - _lv ) / 11.0 ) ) ;
+     ninf = 1.0 / ( 1.0 + exp ( ( vhalfn - _lv ) / 3.0 ) ) ;
      }
    taun = betn ( _threadargscomma_ _lv ) / ( qt * ( 0.08 ) * ( 1.0 + _la ) ) ;
    if ( taun < nmax ) {
@@ -544,7 +544,7 @@ _first = 0;
 #endif
 
 #if NMODL_TEXT
-static const char* nmodl_filename = "/home/mizzou/Desktop/CA3Cell_napim/modfiles/kdrCA3.mod";
+static const char* nmodl_filename = "/home/pbcanfield/Desktop/NeuroResearch/cells/CA3_tonic/modfiles/kdrCA3.mod";
 static const char* nmodl_file_text = 
   "TITLE K-DR channel\n"
   ": from Klee Ficker and Heinemann\n"
@@ -563,7 +563,7 @@ static const char* nmodl_file_text =
   "        ek (mV)		: must be explicitely def. in hoc\n"
   "	celsius		(degC)\n"
   "	gbar=.003 (mho/cm2)\n"
-  "        vhalfn = 0 :-15: 13 : -25  : -20  (mV)\n"
+  "        vhalfn = -0 :-15: 13 : -25  : -20  (mV)\n"
   "        a0n=0.02      (/ms)\n"
   "        zetan=-3    (1)\n"
   "        gmn=0.7  (1)\n"
@@ -621,10 +621,10 @@ static const char* nmodl_file_text =
   "PROCEDURE rates(v (mV)) { :callable from hoc\n"
   "        LOCAL a\n"
   "        a = alpn(v)\n"
-  "		if (v < -55 ) {              ::::::::::::::::::::   -55\n"
+  "		if (v < -74 ) {              ::::::::::::::::::::   -55\n"
   "		ninf = 0\n"
   "		} else{\n"
-  "		ninf = 1 / ( 1 + exp( ( vhalfn - v ) / 11 ) )\n"
+  "		ninf = 1 / ( 1 + exp( ( vhalfn - v ) / 3 ) ) :/11\n"
   "		:ninf = 1 / ( 1 + exp( ( - v + 13 ) / 8.738 ) )\n"
   "        }\n"
   "		taun = betn(v)/(qt*(0.08)*(1+a))\n"
