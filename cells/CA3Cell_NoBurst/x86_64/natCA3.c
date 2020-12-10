@@ -359,7 +359,7 @@ static int  trates ( _threadargsprotocomma_ double _lvm , double _la2 ) {
    if ( mtau < mmin ) {
      mtau = mmin ;
      }
-   if ( v < - 57.5 ) {
+   if ( v < - 74.0 ) {
      minf = 0.0 ;
      }
    else {
@@ -714,7 +714,7 @@ static const char* nmodl_file_text =
   "	b = trap0(-vm,-tha1,Rb,qa)\n"
   "	mtau = 1/(a+b)/qt\n"
   "        if (mtau<mmin) {mtau=mmin}\n"
-  "	if (v < -57.5 ) {			:-57.5\n"
+  "	if (v < -74 ) {			:-57.5\n"
   "	minf = 0\n"
   "	} else{\n"
   "	minf  = 1 / ( 1 + exp( ( - v - 35.5) / 7.2 ) ) :35.5\n"
