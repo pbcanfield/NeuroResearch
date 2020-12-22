@@ -23,11 +23,15 @@ x_data = x_data[:cutoff]
 y_burst = y_burst[:cutoff]
 y_noburst = y_noburst[:cutoff]
 
-plt.figure(figsize=(5,5))
+plt.figure(figsize=(5.5,5))
+for label in plt.gca().get_yticklabels():
+    label.set_fontsize(12)
+for label in plt.gca().get_xticklabels():
+    label.set_fontsize(12)
 plt.plot(x_data,y_burst, label='CA3 Tonic Cell')
 plt.plot(x_data,y_noburst, label='CA3 Adapting Cell')
-plt.ylabel("(spk/sec)$^2$/Hz", fontsize=14)
-plt.xlabel("Hz", fontsize = 14)
+plt.ylabel("(spk/sec)$^2$/Hz", fontsize=16)
+plt.xlabel("Hz", fontsize = 16)
 plt.ticklabel_format(axis="y", style="sci", scilimits=(0,0),useMathText=True)
 plt.legend()
 plt.tight_layout()

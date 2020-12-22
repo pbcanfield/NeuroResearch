@@ -47,30 +47,42 @@ def cat(vm):
         return 1.0 / (1.0+(math.exp((vm+27.1)/(-7.2))))
 
 x_data = np.linspace(-100,0, 1000)
-plt.figure(figsize=(5,5))
+plt.figure(figsize=(5,4))
+for label in plt.gca().get_yticklabels():
+    label.set_fontsize(12)
+for label in plt.gca().get_xticklabels():
+    label.set_fontsize(12)
 plt.plot(x_data,[nap(v) for v in x_data], label='Nap')
 plt.plot(x_data,[km(v) for v in x_data], label='KM')
 plt.plot(x_data,[nat(v) for v in x_data], label='Nat')
 plt.plot(x_data,[kdr(v) for v in x_data], label='Kdr')
 plt.plot(x_data,[h(v) for v in x_data], label='H')
 
-plt.ylabel("Activation", fontsize=14)
+plt.ylabel("Activation", fontsize=16)
 plt.xlabel("V (mV)", fontsize = 16)
-plt.legend(fontsize=8)
+plt.legend(fontsize=10)
+plt.legend(bbox_to_anchor=(0.25, 0.92),
+           bbox_transform=plt.gcf().transFigure)
 plt.tight_layout()
 
 plt.show() 
 
-plt.figure(figsize=(5,5))
+plt.figure(figsize=(5,4))
+for label in plt.gca().get_yticklabels():
+    label.set_fontsize(12)
+for label in plt.gca().get_xticklabels():
+    label.set_fontsize(12)
 plt.plot(x_data,[nat(v) for v in x_data], label='Nat')
 plt.plot(x_data,[kdr(v) for v in x_data], label='Kdr')
 plt.plot(x_data,[h(v) for v in x_data], label='H')
 plt.plot(x_data,[cas(v) for v in x_data], label='Cas')
 plt.plot(x_data,[cat(v) for v in x_data], label='Cat')
 
-plt.ylabel("Activation", fontsize=14)
+plt.ylabel("Activation", fontsize=16)
 plt.xlabel("V (mV)", fontsize = 16)
-plt.legend(fontsize=8)
+plt.legend(fontsize=10)
+plt.legend(bbox_to_anchor=(0.25, 0.92),
+           bbox_transform=plt.gcf().transFigure)
 plt.tight_layout()
 
 plt.show() 
