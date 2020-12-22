@@ -19,22 +19,29 @@ inj = np.array([i_inj_plot(t) for t in time])
 current_inj = h.current_inj.as_numpy()
 fi = h.reported.as_numpy()
 
+plt.rcParams['font.size'] = '16'
 
 fig = plt.figure(figsize = (7,5))
 gs = mpl.gridspec.GridSpec(2, 1, height_ratios=[4,1])
 
-
 ax = plt.subplot(gs[0])
+ax.set_xticks([])
+for label in ax.get_yticklabels():
+    label.set_fontsize(16)
+#ax.set_yticks([-80, -20, 40])
 #fig.suptitle('No Segregation', fontsize=20)
 plt.plot(time, trace, color = 'red', lw = 0.9)
-plt.ylabel('voltage (mV)', fontsize=20)
-ax.set_xticks([])
-ax.set_yticks([-80, -20, 40])
+plt.ylabel('Voltage (mV)', fontsize=20)
+
+
 
 
 ax = plt.subplot(gs[1])
+for label in ax.get_yticklabels():
+    label.set_fontsize(16)
+ax.set_yticks([0, 0.8])
 plt.plot(time, inj, color = 'black', lw = 0.9)
-plt.ylabel('current (nA)', fontsize=20)
-plt.xlabel('time (ms)', fontsize=20)
-
+plt.ylabel('Current (nA)', fontsize=20)
+plt.xlabel('Time (ms)', fontsize=20)
+plt.tight_layout()
 plt.show()
