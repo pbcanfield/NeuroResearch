@@ -28,7 +28,7 @@ ax = plt.subplot(gs[0])
 ax.set_xticks([])
 for label in ax.get_yticklabels():
     label.set_fontsize(16)
-#ax.set_yticks([-80, -20, 40])
+ax.set_yticks([-75, -50, -25, 0, 25])
 #fig.suptitle('No Segregation', fontsize=20)
 plt.plot(time, trace, color = 'red', lw = 0.9)
 plt.ylabel('Voltage (mV)', fontsize=20)
