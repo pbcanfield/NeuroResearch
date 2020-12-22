@@ -57,7 +57,7 @@ DERIVATIVE states {
 UNITSOFF
  
 PROCEDURE rate(v (mV)) {
-	if (v < -67.5 ) { :-67.5
+	if (v < -100.5 ) { :-67.5
 	minf = 0
 	} else{
 	minf  = 1 / ( 1 + exp( ( vhalf - v ) / k ) )
