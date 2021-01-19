@@ -12,8 +12,8 @@ UNITS {
 }
 
 PARAMETER {
-	glbar = 2.857142857142857e-05  :3.333333e-5 (siemens/cm2) < 0, 1e9 >
-	el = -75 (mV)
+	glbar = 3.5e-05  :3.333333e-5 (siemens/cm2) < 0, 1e9 >
+	el = -84 (mV)
 }
 
 ASSIGNED {

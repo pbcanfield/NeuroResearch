@@ -12,10 +12,10 @@ begintemplate DGCell
 		dend[1] {diam =5 L=555 nseg=7} 
 
 		gh = 0 //4.00e-05
-		gnat = 0.06
+		gnat = 0.08
 		gk = 0.02
-		gnap = 0.0008
-		gim = 0.008
+		gnap = 0.0005
+		gim = 0.0009
 
         soma { 
             cm = 0.8

@@ -1,17 +1,13 @@
 #!/bin/sh
 if test "x${NRNHOME}" = "x" ; then
-    NRNHOME="/home/pbczgf/nrn/conda/envs/py36/lib/python3.6/site-packages/neuron/.data"
-fi
-if test "${NEURONHOME}" = "" ; then
-    NEURONHOME=${NRNHOME}/share/nrn
-    export NEURONHOME
+	NRNHOME="/home/mizzou/tools/utils/nrn/neuron_install/nrn"
 fi
 if test "x${NRNBIN}" = "x" ; then
-    NRNBIN="/home/pbczgf/nrn/conda/envs/py36/bin"
+	NRNBIN="/home/mizzou/tools/utils/nrn/neuron_install/nrn/x86_64/bin/"
 fi
 if test "" = "yes" ; then
-    NRNIV="${NRNBIN}/nrniv.app/Contents/MacOS/nrniv"
+	NRNIV="${NRNBIN}nrniv.app/Contents/MacOS/nrniv"
 else
-    NRNIV="${NRNBIN}/nrniv"
+	NRNIV="${NRNBIN}nrniv"
 fi
-"${NRNIV}" -dll "/home/pbczgf/NeuroResearch/cells/CA3Cell_Qian/x86_64/.libs/libnrnmech.so" "$@"
+"${NRNIV}" -dll "/home/mizzou/Desktop/NeuroResearch/cells/CA3Cell_Qian/x86_64/.libs/libnrnmech.so" "$@"

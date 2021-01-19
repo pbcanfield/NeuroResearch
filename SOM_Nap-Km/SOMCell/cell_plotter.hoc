@@ -1,26 +1,26 @@
-load_file("DG.hoc")
+load_file("CA3.hoc")
 
 //simuation constants
-SIMRUNTIME = 1500
+SIMRUNTIME = 1000
 DELAY = 400
-INJTIME = 1000
-I_INJ = 0.05
+INJTIME = 500
+I_INJ = 0.3
 
 tstop = SIMRUNTIME
-v_init = -75
+v_init = -60
 
 objectvar membrane_voltage, time
 membrane_voltage = new Vector()
 time = new Vector()
 
 objectvar cell
-cell = new DGCell()
+cell = new CA3Cell()
 
 //record the cells membrane voltage.
 membrane_voltage.record(&cell.soma.v(0.5))
 time.record(&t)
 
-/*
+
 //Record the gating variables.
 objref gating_vec[9], g_g
 g_g = new Graph()
@@ -34,9 +34,9 @@ gating_vec[1].record(&cell.soma.hinf_natCA3)
 gating_vec[2].record(&cell.soma.ninf_kdrCA3)
 gating_vec[3].record(&cell.soma.minf_nap)
 gating_vec[4].record(&cell.soma.ninf_im)
-*/
 
-/*
+
+
 //Record the tau variables.
 objref tau_vec[9], g_t
 g_t = new Graph()
@@ -50,21 +50,30 @@ tau_vec[1].record(&cell.soma.htau_natCA3)
 tau_vec[2].record(&cell.soma.taun_kdrCA3)
 tau_vec[3].record(&cell.soma.mtau_nap)
 tau_vec[4].record(&cell.soma.taun_im)
-*/
+
 
 
 //Record the currents.
-objref g_cvt, nap_vec, nat_vec, kdr_vec, im_vec
+objref g_cvt, nap_vec, nat_vec, sahp_vec, kdr_vec, capool_vec, cal_vec, im_vec, cas_vec
 g_cvt = new Graph()
 nap_vec = new Vector()
 nat_vec = new Vector()
+sahp_vec = new Vector()
 kdr_vec = new Vector()
+capool_vec = new Vector()
+cal_vec = new Vector()
 im_vec = new Vector()
+cas_vec = new Vector()
 
 nap_vec.record(&cell.soma.i_nap(0.5))
-nat_vec.record(&cell.soma.i_natDG(0.5))
-kdr_vec.record(&cell.soma.i_kdrDG(0.5))
+nat_vec.record(&cell.soma.i_natCA3(0.5))
+sahp_vec.record(&cell.soma.i_sAHP(0.5))
+kdr_vec.record(&cell.soma.i_kdrCA3(0.5))
+capool_vec.record(&cell.soma.xx_capool())
+cal_vec.record(&cell.soma.ica_cal(0.5))
 im_vec.record(&cell.soma.i_im(0.5))
+cas_vec.record(&cell.soma.ica_cas(0.5))
+
 
 //Create a current clamp.
 objectvar i_inj
@@ -105,8 +114,6 @@ func runSim(){
 
 printf("Cell fi at %f nA injection: %f\n",I_INJ,runSim(I_INJ))
 
-
-
 proc cgraph() {
     //Graph currents.
     g_cvt.color(1)
@@ -117,22 +124,35 @@ proc cgraph() {
     g_cvt.label("Red: nat")
     g_cvt.vector(nat_vec.size(), &time.x[0], &nat_vec.x[0])
 
+    g_cvt.color(3)
+    g_cvt.label("Blue: sAHP")
+    g_cvt.vector(sahp_vec.size(), &time.x[0], &sahp_vec.x[0])
+
     g_cvt.color(4)
     g_cvt.label("Green: kdr")
     g_cvt.vector(kdr_vec.size(), &time.x[0], &kdr_vec.x[0])
 
-  
+    g_cvt.color(5)
+    g_cvt.label("Orange: ca_pool")
+    g_cvt.vector(capool_vec.size(), &time.x[0], &capool_vec.x[0])
+
+    g_cvt.color(6)
+    g_cvt.label("Brown: cal")
+    g_cvt.vector(cal_vec.size(), &time.x[0], &cal_vec.x[0])
+
     g_cvt.color(7)
     g_cvt.label("Violet: im")
     g_cvt.vector(im_vec.size(), &time.x[0], &im_vec.x[0])
-   
+    
+    g_cvt.color(9)
+    g_cvt.label("Grey : cas")
+    g_cvt.vector(cas_vec.size(), &time.x[0], &cas_vec.x[0])
+
     g_cvt.flush()
 
     g_cvt.exec_menu("View = plot")
 }
 
-
-/*
 objref color_labels[9]
 //Tau graphs
 proc tgraph() {
@@ -163,9 +183,7 @@ proc tgraph() {
 
 
 } 
-*/
 
-/*
 //M-infinity graphs.
 proc ggraph() {
     g_g.color(1)
@@ -192,37 +210,42 @@ proc ggraph() {
 
     g_g.exec_menu("View = plot")
 }
-*/
 
 mgraph()
 cgraph()
-//tgraph()
-//ggraph()
+tgraph()
+ggraph()
 
 
 objectvar g_fi, target, reported, current_inj
 g_fi = new Graph()
-reported = new Vector(10)
-current_inj = new Vector(10)
+reported = new Vector(14)
+current_inj = new Vector(14)
 
+//minimum spiking threshold value is 44 pA for  SOM cells.
 count = 0
-for (i = 0; i < 1.0; i += 0.1) {
+for (i = 0.044; i <= 0.26 + 0.044; i += 0.02) {
     reported.x[count] = runSim(i)
     current_inj.x[count] = i
     count += 1
 }
 
-target = new Vector(10)
-target.x[0] = 0
-target.x[1] = 0
-target.x[2] = 14
-target.x[3] = 30
-target.x[4] = 46
-target.x[5] = 63
-target.x[6] = 79
-target.x[7] = 94
-target.x[8] = 109
-target.x[9] = 123
+target = new Vector(14)
+target.x[0] = 18
+target.x[1] = 21
+target.x[2] = 33
+target.x[3] = 38
+target.x[4] = 40
+target.x[5] = 45
+target.x[6] = 50
+target.x[7] = 52
+target.x[8] = 53
+target.x[9] = 53
+target.x[10] = 53
+target.x[11] = 53
+target.x[12] = 54
+target.x[13] = 58
+
 
 g_fi.color(4)
 g_fi.vector(10, &current_inj.x[0],&target.x[0])
@@ -230,7 +253,9 @@ g_fi.vector(10, &current_inj.x[0],&target.x[0])
 g_fi.color(1)
 g_fi.vector(10, &current_inj.x[0],&reported.x[0])
 
-g_fi.size(0,1.0,0,target.x[target.size() - 1] + 10)
+g_fi.size(0,0.27,0,target.x[target.size() - 1] + 10)
 
 g_fi.flush()
+
+printf("Cell fi at %f nA injection: %f\n",I_INJ,runSim(I_INJ))
 

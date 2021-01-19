@@ -46,25 +46,21 @@ extern double hoc_Exp(double);
 #define t _nt->_t
 #define dt _nt->_dt
 #define gbar _p[0]
-#define km _p[1]
-#define kh _p[2]
-#define vhalfm _p[3]
-#define vhalfh _p[4]
-#define i _p[5]
-#define gna _p[6]
-#define minf _p[7]
-#define hinf _p[8]
-#define mtau _p[9]
-#define htau _p[10]
-#define m _p[11]
-#define h _p[12]
-#define ena _p[13]
-#define ina _p[14]
-#define tha1 _p[15]
-#define Dm _p[16]
-#define Dh _p[17]
-#define v _p[18]
-#define _g _p[19]
+#define i _p[1]
+#define gna _p[2]
+#define minf _p[3]
+#define hinf _p[4]
+#define mtau _p[5]
+#define htau _p[6]
+#define m _p[7]
+#define h _p[8]
+#define ena _p[9]
+#define ina _p[10]
+#define tha1 _p[11]
+#define Dm _p[12]
+#define Dh _p[13]
+#define v _p[14]
+#define _g _p[15]
 #define _ion_ena	*_ppvar[0]._pval
 #define _ion_ina	*_ppvar[1]._pval
 #define _ion_dinadv	*_ppvar[2]._pval
@@ -128,11 +124,11 @@ extern void hoc_reg_nmodl_filename(int, const char*);
  #define _zhexp _thread[0]._pval[1]
  /* declare global and static user variables */
 #define Rd Rd_natDG
- double Rd = 0.029;
+ double Rd = 0.03;
 #define Rg Rg_natDG
  double Rg = 0.01;
 #define Rb Rb_natDG
- double Rb = 0.5;
+ double Rb = 0.124;
 #define Ra Ra_natDG
  double Ra = 0.4;
 #define ar2 ar2_natDG
@@ -152,15 +148,15 @@ extern void hoc_reg_nmodl_filename(int, const char*);
 #define qd qd_natDG
  double qd = 1.5;
 #define qa qa_natDG
- double qa = 10;
+ double qa = 7.2;
 #define thinf thinf_natDG
  double thinf = -50;
 #define tq tq_natDG
  double tq = -55;
 #define thi2 thi2_natDG
- double thi2 = -35;
+ double thi2 = -45;
 #define thi1 thi1_natDG
- double thi1 = -40;
+ double thi1 = -45;
 #define tha tha_natDG
  double tha = -30;
  /* some parameters have upper and lower limits */
@@ -184,10 +180,6 @@ extern void hoc_reg_nmodl_filename(int, const char*);
  "qinf_natDG", "mV",
  "ar2_natDG", "1",
  "gbar_natDG", "mho/cm2",
- "km_natDG", "ms",
- "kh_natDG", "ms",
- "vhalfm_natDG", "mV",
- "vhalfh_natDG", "mV",
  "i_natDG", "mA/cm2",
  "gna_natDG", "mho/cm2",
  "mtau_natDG", "ms",
@@ -241,10 +233,6 @@ static void _ode_matsol(_NrnThread*, _Memb_list*, int);
  "7.7.0",
 "natDG",
  "gbar_natDG",
- "km_natDG",
- "kh_natDG",
- "vhalfm_natDG",
- "vhalfh_natDG",
  0,
  "i_natDG",
  "gna_natDG",
@@ -264,15 +252,11 @@ extern Prop* need_memb(Symbol*);
 static void nrn_alloc(Prop* _prop) {
 	Prop *prop_ion;
 	double *_p; Datum *_ppvar;
- 	_p = nrn_prop_data_alloc(_mechtype, 20, _prop);
+ 	_p = nrn_prop_data_alloc(_mechtype, 16, _prop);
  	/*initialize range parameters*/
  	gbar = 0.01;
- 	km = 7.2;
- 	kh = 4;
- 	vhalfm = 40;
- 	vhalfh = 50;
  	_prop->param = _p;
- 	_prop->param_size = 20;
+ 	_prop->param_size = 16;
  	_ppvar = nrn_prop_datum_alloc(_mechtype, 4, _prop);
  	_prop->dparam = _ppvar;
  	/*connect ionic variables to this model*/
@@ -315,7 +299,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
   hoc_reg_nmodl_text(_mechtype, nmodl_file_text);
   hoc_reg_nmodl_filename(_mechtype, nmodl_filename);
 #endif
-  hoc_register_prop_size(_mechtype, 20, 4);
+  hoc_register_prop_size(_mechtype, 16, 4);
   hoc_register_dparam_semantics(_mechtype, 0, "na_ion");
   hoc_register_dparam_semantics(_mechtype, 1, "na_ion");
   hoc_register_dparam_semantics(_mechtype, 2, "na_ion");
@@ -323,7 +307,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
  	hoc_register_cvode(_mechtype, _ode_count, _ode_map, _ode_spec, _ode_matsol);
  	hoc_register_tolerance(_mechtype, _hoc_state_tol, &_atollist);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 natDG /home/pbcanfield/Desktop/NeuroResearch/DGCell/x86_64/natDG.mod\n");
+ 	ivoc_help("help ?1 natDG /home/mizzou/Desktop/NeuroResearch/DG/x86_64/natDG.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -371,7 +355,7 @@ static int  trates ( _threadargsprotocomma_ double _lvm , double _la2 ) {
    tha1 = tha ;
    _la = trap0 ( _threadargscomma_ _lvm , tha1 , Ra , qa ) ;
    _lb = trap0 ( _threadargscomma_ - _lvm , - tha1 , Rb , qa ) ;
-   mtau = ( 1.0 / ( _la + _lb ) / _lqt ) ;
+   mtau = 1.0 / ( _la + _lb ) / _lqt ;
    if ( mtau < mmin ) {
      mtau = mmin ;
      }
@@ -379,7 +363,7 @@ static int  trates ( _threadargsprotocomma_ double _lvm , double _la2 ) {
      minf = 0.0 ;
      }
    else {
-     minf = 1.0 / ( 1.0 + exp ( ( - v - vhalfm ) / km ) ) ;
+     minf = 1.0 / ( 1.0 + exp ( ( - v - 35.5 ) / 7.2 ) ) ;
      }
    _la = trap0 ( _threadargscomma_ _lvm , thi1 , Rd , qd ) ;
    _lb = trap0 ( _threadargscomma_ - _lvm , - thi2 , Rg , qg ) ;
@@ -387,7 +371,7 @@ static int  trates ( _threadargsprotocomma_ double _lvm , double _la2 ) {
    if ( htau < hmin ) {
      htau = hmin ;
      }
-   hinf = 1.0 / ( 1.0 + exp ( ( v + vhalfh ) / kh ) ) ;
+   hinf = 1.0 / ( 1.0 + exp ( ( v + 40.0 ) / 4.0 ) ) ;
     return 0; }
  
 static void _hoc_trates(void) {
@@ -636,7 +620,7 @@ _first = 0;
 #endif
 
 #if NMODL_TEXT
-static const char* nmodl_filename = "/home/pbcanfield/Desktop/NeuroResearch/DGCell/modfiles/natDG.mod";
+static const char* nmodl_filename = "/home/mizzou/Desktop/NeuroResearch/DG/modfiles/natDG.mod";
 static const char* nmodl_file_text = 
   "TITLE nat\n"
   ": Na current \n"
@@ -647,7 +631,7 @@ static const char* nmodl_file_text =
   "	SUFFIX natDG\n"
   "	USEION na READ ena WRITE ina\n"
   "	:RANGE  , i :, ar2\n"
-  "	RANGE gbar, gna, i, minf, hinf, mtau, htau, km, kh, vhalfh, vhalfm : , qinf, thinf\n"
+  "	RANGE gbar, gna, i, minf, hinf, mtau, htau : , qinf, thinf\n"
   "}\n"
   "\n"
   "PARAMETER {\n"
@@ -655,19 +639,19 @@ static const char* nmodl_file_text =
   "	gbar = 0.010   	(mho/cm2)	\n"
   "								\n"
   "	tha  =  -30	(mV)		: v 1/2 for act	\n"
-  "	qa   = 10	(mV)		: act slope (4.5)		\n"
-  "	Ra   = .4	(/ms)		: open (v)		\n"
-  "	Rb   = 0.5 	(/ms)		: close (v) (0.124)	\n"
+  "	qa   = 7.2	(mV)		: act slope (4.5)		\n"
+  "	Ra   = 0.4	(/ms)		: open (v)		\n"
+  "	Rb   = 0.124 	(/ms)		: close (v)		\n"
   "\n"
-  "	thi1  = -40	(mV)		: v 1/2 for inact 	\n"
-  "	thi2  = -35 	(mV)	: v 1/2 for inact 	\n"
-  "	qd   = 1.5		(mV)    : inact tau slope\n"
+  "	thi1  = -45	(mV)		: v 1/2 for inact 	\n"
+  "	thi2  = -45 	(mV)		: v 1/2 for inact 	\n"
+  "	qd   = 1.5	(mV)	        : inact tau slope\n"
   "	qg   = 1.5      (mV)\n"
   "	mmin=0.02	\n"
   "	hmin=0.5			\n"
   "	q10=2\n"
   "	Rg   = 0.01 	(/ms)		: inact recov (v) 	\n"
-  "	Rd   = .029 	(/ms)		: inact (v)	\n"
+  "	Rd   = .03 	(/ms)		: inact (v)	\n"
   "	qq   = 10        (mV)\n"
   "	tq   = -55      (mV)\n"
   "\n"
@@ -678,13 +662,6 @@ static const char* nmodl_file_text =
   "	ena		(mV)            : must be explicitly def. in hoc\n"
   "	celsius\n"
   "	v 		(mV)\n"
-  "\n"
-  "	km = 7.2 	(ms)\n"
-  "	kh = 4 		(ms)\n"
-  "\n"
-  "	vhalfm = 40  (mV)\n"
-  "	vhalfh = 50	(mV)\n"
-  "\n"
   "}\n"
   "\n"
   "\n"
@@ -735,19 +712,18 @@ static const char* nmodl_file_text =
   "		tha1 = tha \n"
   "	a = trap0(vm,tha1,Ra,qa)\n"
   "	b = trap0(-vm,-tha1,Rb,qa)\n"
-  "	mtau = (1/(a+b)/qt)\n"
+  "	mtau = 1/(a+b)/qt\n"
   "        if (mtau<mmin) {mtau=mmin}\n"
-  "	if (v < -60 ) {\n"
+  "	if (v < -60 ) {			:-57.5\n"
   "	minf = 0\n"
   "	} else{\n"
-  "	minf  = 1 / ( 1 + exp( ( - v - vhalfm ) / km ) )\n"
+  "	minf  = 1 / ( 1 + exp( ( - v - 35.5) / 7.2 ) ) :35.5/7.2\n"
   "	}\n"
   "	a = trap0(vm,thi1,Rd,qd)\n"
   "	b = trap0(-vm,-thi2,Rg,qg)\n"
   "	htau =  1/(a+b)/qt\n"
-  "        \n"
-  "	if (htau<hmin) {htau=hmin}\n"
-  "	hinf  = 1 / ( 1 + exp( ( v + vhalfh ) / kh ) )\n"
+  "        if (htau<hmin) {htau=hmin}\n"
+  "	hinf  = 1 / ( 1 + exp( ( v + 40 ) / 4 ) ) :40/4\n"
   "}\n"
   "\n"
   "FUNCTION trap0(v,th,a,q) {\n"

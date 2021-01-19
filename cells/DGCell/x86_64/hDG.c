@@ -46,15 +46,14 @@ extern double hoc_Exp(double);
 #define t _nt->_t
 #define dt _nt->_dt
 #define ghdbar _p[0]
-#define vhalfl _p[1]
-#define i _p[2]
-#define linf _p[3]
-#define taul _p[4]
-#define ghd _p[5]
-#define l _p[6]
-#define Dl _p[7]
-#define v _p[8]
-#define _g _p[9]
+#define i _p[1]
+#define linf _p[2]
+#define taul _p[3]
+#define ghd _p[4]
+#define l _p[5]
+#define Dl _p[6]
+#define v _p[7]
+#define _g _p[8]
  
 #if MAC
 #if !defined(v)
@@ -130,6 +129,8 @@ extern void hoc_reg_nmodl_filename(int, const char*);
  double q10 = 4.5;
 #define vhalft vhalft_hdDG
  double vhalft = -75;
+#define vhalfl vhalfl_hdDG
+ double vhalfl = -81;
 #define zetat zetat_hdDG
  double zetat = 2.2;
  /* some parameters have upper and lower limits */
@@ -138,12 +139,12 @@ extern void hoc_reg_nmodl_filename(int, const char*);
 };
  static HocParmUnits _hoc_parm_units[] = {
  "ehd_hdDG", "mV",
+ "vhalfl_hdDG", "mV",
  "vhalft_hdDG", "mV",
  "a0t_hdDG", "/ms",
  "zetat_hdDG", "1",
  "gmt_hdDG", "1",
  "ghdbar_hdDG", "mho/cm2",
- "vhalfl_hdDG", "mV",
  "i_hdDG", "mA/cm2",
  0,0
 };
@@ -152,6 +153,7 @@ extern void hoc_reg_nmodl_filename(int, const char*);
  /* connect global user variables to hoc */
  static DoubScal hoc_scdoub[] = {
  "ehd_hdDG", &ehd_hdDG,
+ "vhalfl_hdDG", &vhalfl_hdDG,
  "kl_hdDG", &kl_hdDG,
  "vhalft_hdDG", &vhalft_hdDG,
  "a0t_hdDG", &a0t_hdDG,
@@ -183,7 +185,6 @@ static void _ode_matsol(_NrnThread*, _Memb_list*, int);
  "7.7.0",
 "hdDG",
  "ghdbar_hdDG",
- "vhalfl_hdDG",
  0,
  "i_hdDG",
  "linf_hdDG",
@@ -199,12 +200,11 @@ extern Prop* need_memb(Symbol*);
 static void nrn_alloc(Prop* _prop) {
 	Prop *prop_ion;
 	double *_p; Datum *_ppvar;
- 	_p = nrn_prop_data_alloc(_mechtype, 10, _prop);
+ 	_p = nrn_prop_data_alloc(_mechtype, 9, _prop);
  	/*initialize range parameters*/
  	ghdbar = 0.0001;
- 	vhalfl = -81;
  	_prop->param = _p;
- 	_prop->param_size = 10;
+ 	_prop->param_size = 9;
  	_ppvar = nrn_prop_datum_alloc(_mechtype, 1, _prop);
  	_prop->dparam = _ppvar;
  	/*connect ionic variables to this model*/
@@ -232,12 +232,12 @@ extern void _cvode_abstol( Symbol**, double*, int);
   hoc_reg_nmodl_text(_mechtype, nmodl_file_text);
   hoc_reg_nmodl_filename(_mechtype, nmodl_filename);
 #endif
-  hoc_register_prop_size(_mechtype, 10, 1);
+  hoc_register_prop_size(_mechtype, 9, 1);
   hoc_register_dparam_semantics(_mechtype, 0, "cvodeieq");
  	hoc_register_cvode(_mechtype, _ode_count, _ode_map, _ode_spec, _ode_matsol);
  	hoc_register_tolerance(_mechtype, _hoc_state_tol, &_atollist);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 hdDG /home/pbcanfield/Desktop/NeuroResearch/DGCell/x86_64/hDG.mod\n");
+ 	ivoc_help("help ?1 hdDG /home/mizzou/Desktop/NeuroResearch/DG/x86_64/hDG.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -519,7 +519,7 @@ _first = 0;
 #endif
 
 #if NMODL_TEXT
-static const char* nmodl_filename = "/home/pbcanfield/Desktop/NeuroResearch/DGCell/modfiles/hDG.mod";
+static const char* nmodl_filename = "/home/mizzou/Desktop/NeuroResearch/DG/modfiles/hDG.mod";
 static const char* nmodl_file_text = 
   "TITLE I-h channel from Magee 1998 for distal dendrites\n"
   "\n"
@@ -548,7 +548,7 @@ static const char* nmodl_file_text =
   "NEURON {\n"
   "	SUFFIX hdDG\n"
   "	NONSPECIFIC_CURRENT i\n"
-  "        RANGE ghd, i, ghdbar, vhalfl\n"
+  "        RANGE ghd, i, ghdbar :, vhalfl\n"
   "        RANGE linf,taul\n"
   "}\n"
   "\n"
@@ -594,7 +594,7 @@ static const char* nmodl_file_text =
   "        LOCAL a,qt\n"
   "        qt=q10^((celsius-33)/10)\n"
   "        a = alpt(v)\n"
-  "	if (v > -62.5 ) {\n"
+  "		if (v > -62.5 ) {\n"
   "		linf = 0\n"
   "		} else{\n"
   "        linf = 1/(1 + exp(-(v-vhalfl)/kl))\n"
