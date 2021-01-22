@@ -139,7 +139,7 @@ static void nrn_alloc(Prop* _prop) {
 	double *_p; Datum *_ppvar;
  	_p = nrn_prop_data_alloc(_mechtype, 5, _prop);
  	/*initialize range parameters*/
- 	glbar = 4.79682e-05;
+ 	glbar = 0.00017;
  	el = -61.1;
  	_prop->param = _p;
  	_prop->param_size = 5;
@@ -164,7 +164,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
 #endif
   hoc_register_prop_size(_mechtype, 5, 0);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 leakBC /home/pbcanfield/Desktop/NeuroResearch/BCCell/x86_64/leakBC.mod\n");
+ 	ivoc_help("help ?1 leakBC /home/mizzou/Desktop/NeuroResearch/cells/BCCell/x86_64/leakBC.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -292,7 +292,7 @@ _first = 0;
 #endif
 
 #if NMODL_TEXT
-static const char* nmodl_filename = "/home/pbcanfield/Desktop/NeuroResearch/BCCell/modfiles/leakBC.mod";
+static const char* nmodl_filename = "/home/mizzou/Desktop/NeuroResearch/cells/BCCell/modfiles/leakBC.mod";
 static const char* nmodl_file_text = 
   ": passive leak current\n"
   "\n"
@@ -308,7 +308,7 @@ static const char* nmodl_file_text =
   "}\n"
   "\n"
   "PARAMETER {\n"
-  "	glbar = 4.796821e-05  :3.333333e-5 (siemens/cm2) < 0, 1e9 >\n"
+  "	glbar = 1.7e-04  :3.333333e-5 (siemens/cm2) < 0, 1e9 >\n"
   "	el = -61.1 (mV)\n"
   "}\n"
   "\n"

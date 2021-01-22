@@ -5,7 +5,7 @@ begintemplate BCCell
 
 	proc init() {	
 		
-		cap = 1
+		cap = 1.0
 
 		gna = 0.1
 		kmna = 7.2 //14
