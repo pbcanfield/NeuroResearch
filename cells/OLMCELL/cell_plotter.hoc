@@ -3,11 +3,11 @@ load_file("OLM.hoc")
 //simuation constants
 SIMRUNTIME = 600
 DELAY = 200
-INJTIME = 200
+INJTIME = 300
 I_INJ = 0.4
 
 tstop = SIMRUNTIME
-v_init = -75
+v_init = -68
 
 objectvar membrane_voltage, time
 membrane_voltage = new Vector()
@@ -39,6 +39,23 @@ g_mvt.size(0,SIMRUNTIME, 30, -90)
 g_mvt.vector(membrane_voltage.size(), &time.x[0], &membrane_voltage.x[0])
 g_mvt.flush()
 
+
+//Record the currents.
+objref g_cvt, kap_vec, nat_vec, kdr_vec, nap_vec, im_vec
+g_cvt = new Graph()
+kap_vec = new Vector()
+nat_vec = new Vector()
+kdr_vec = new Vector()
+nap_vec = new Vector()
+im_vec = new Vector()
+
+
+nat_vec.record(&cell.soma[0].i_natOLM(0.5))
+kdr_vec.record(&cell.soma[0].i_kdrOLM(0.5))
+kap_vec.record(&cell.soma[0].i_kapOLM(0.5))
+nap_vec.record(&cell.soma.i_napOLM(0.5))
+im_vec.record(&cell.soma.i_imOLM(0.5))
+
 objref nc, nil, spvec
 func runSim(){
 
@@ -55,6 +72,37 @@ func runSim(){
 }
 
 printf("Cell fi at %f nA injection: %f\n",I_INJ,runSim(I_INJ))
+
+proc cgraph() {
+    //Graph currents.
+    g_cvt.color(1)
+    g_cvt.label("Black: kap")
+    g_cvt.vector(kap_vec.size(), &time.x[0], &kap_vec.x[0])
+
+    g_cvt.color(2)
+    g_cvt.label("Red: nat")
+    g_cvt.vector(nat_vec.size(), &time.x[0], &nat_vec.x[0])
+
+    g_cvt.color(4)
+    g_cvt.label("Green: kdr")
+    g_cvt.vector(kdr_vec.size(), &time.x[0], &kdr_vec.x[0])
+
+    g_cvt.color(7)
+    g_cvt.label("Violet: im")
+    g_cvt.vector(im_vec.size(), &time.x[0], &im_vec.x[0])
+
+    g_cvt.color(5)
+    g_cvt.label("Orange: nap")
+    g_cvt.vector(nap_vec.size(), &time.x[0], &nap_vec.x[0])
+    
+    
+    g_cvt.flush()
+
+    g_cvt.exec_menu("View = plot")
+}
+
+cgraph()
+
 
 objectvar g_fi, target, reported, current_inj
 g_fi = new Graph()

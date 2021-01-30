@@ -12,8 +12,8 @@ UNITS {
 }
 
 PARAMETER {
-	glbar_inter = 3.333333e-5 (siemens/cm2) < 0, 1e9 >
-	el = -75 (mV)
+	glbar_inter = 1.3e-4 (siemens/cm2) < 0, 1e9 >
+	el = -68 (mV)
 }
 
 ASSIGNED {

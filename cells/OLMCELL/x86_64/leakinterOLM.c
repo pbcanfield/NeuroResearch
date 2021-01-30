@@ -141,8 +141,8 @@ static void nrn_alloc(Prop* _prop) {
 	double *_p; Datum *_ppvar;
  	_p = nrn_prop_data_alloc(_mechtype, 5, _prop);
  	/*initialize range parameters*/
- 	glbar_inter = 3.33333e-05;
- 	el = -75;
+ 	glbar_inter = 0.00013;
+ 	el = -68;
  	_prop->param = _p;
  	_prop->param_size = 5;
  
@@ -166,7 +166,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
 #endif
   hoc_register_prop_size(_mechtype, 5, 0);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 leakinterOLM /home/nopsal/Desktop/NeuroResearch/OLMCELL/modfiles/x86_64/leakinterOLM.mod\n");
+ 	ivoc_help("help ?1 leakinterOLM /home/mizzou/Desktop/NeuroResearch/cells/OLMCELL/x86_64/leakinterOLM.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -294,7 +294,7 @@ _first = 0;
 #endif
 
 #if NMODL_TEXT
-static const char* nmodl_filename = "/home/nopsal/Desktop/NeuroResearch/OLMCELL/modfiles/leakinterOLM.mod";
+static const char* nmodl_filename = "/home/mizzou/Desktop/NeuroResearch/cells/OLMCELL/modfiles/leakinterOLM.mod";
 static const char* nmodl_file_text = 
   ": passive leak current\n"
   "\n"
@@ -310,8 +310,8 @@ static const char* nmodl_file_text =
   "}\n"
   "\n"
   "PARAMETER {\n"
-  "	glbar_inter = 3.333333e-5 (siemens/cm2) < 0, 1e9 >\n"
-  "	el = -75 (mV)\n"
+  "	glbar_inter = 1.3e-4 (siemens/cm2) < 0, 1e9 >\n"
+  "	el = -68 (mV)\n"
   "}\n"
   "\n"
   "ASSIGNED {\n"

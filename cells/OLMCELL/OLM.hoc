@@ -37,70 +37,82 @@ begintemplate OLMCell
 			basal.append()
 		}
 
-		/////// geometry ////////
+
+		cap  = 1.5
+		gnat = 0.02
+		gkdr = 0.04
+		gkap = 0
+		gnap = 0.001
+		gim  = 0.004
+
+		/////// geometry ////////f
 		soma[0] {
 			nseg = 1
 			L = 40 // (micrometer)
 			diam = 40 // (micrometer)
-	    	}
+	    }
 		
 		dend[0] {
 			nseg = 1
 			L = 200 // (micrometer)
 			diam = 10 // (micrometer)
-			}
-			
-		
+		}
 			
 		/////// biophysics //////
 		
 		soma[0]{
-			cm = 1//1		    // (microF/cm2)
+			cm = cap//1		    // (microF/cm2)
 			Ra = 150*22.5	// (ohm-cm)
 			Rm = 20000	    // (ohm-cm2)
 			
 			insert leakinterOLM
-			glbar_inter_leakinterOLM = 3.8e-5 // (siemens/cm2)
-			el_leakinterOLM = -80	// (mV)
 
-			
 			insert kdrOLM
 		
 			insert kapOLM
 			insert natOLM
+
+			insert imOLM
+			insert napOLM
 			
 			ena = 55		// (mV)
 				// (siemens/cm2)
 
 			ek = -80		// (mV)
-			gbar_kdrOLM = 0.03// (siemens/cm2)
+			gbar_kdrOLM = gkdr// (siemens/cm2)
 			
-			gkabar_kapOLM = 0.0142
-			gbar_natOLM = 0.0085
-			
+			gkabar_kapOLM = gkap
+			gbar_natOLM = gnat
+
+			gbar_napOLM = gnap
+			gbar_imOLM = gim
 
 	    	}
 			
 		dend[0] {
-			cm = 1//1		// (microF/cm2)
+			cm = cap//1		// (microF/cm2)
 			Ra = 150	// (ohm-cm)
 			Rm = 20000	// (ohm-cm2)
 			
 			insert leakinterOLM
-			glbar_inter_leakinterOLM = 3.8e-5 // (siemens/cm2)
-			el_leakinterOLM = -80	// (mV)
 
 			insert natOLM
 			insert kdrOLM
 			insert kapOLM
+
+			insert imOLM
+			insert napOLM
 			
 			ena = 55		// (mV)
 				// (siemens/cm2)
 
 			ek = -80		// (mV)
-			gbar_kdrOLM = 0.03 // (siemens/cm2)
-			gkabar_kapOLM = 0.0142
-			gbar_natOLM = 0.0085
+			gbar_kdrOLM = gkdr // (siemens/cm2)
+			gkabar_kapOLM = gkap
+			gbar_natOLM = gnat
+
+			gbar_napOLM = gnap
+			gbar_imOLM = gim
 
 		}
 			
