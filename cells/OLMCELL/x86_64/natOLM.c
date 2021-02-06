@@ -307,7 +307,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
  	hoc_register_cvode(_mechtype, _ode_count, _ode_map, _ode_spec, _ode_matsol);
  	hoc_register_tolerance(_mechtype, _hoc_state_tol, &_atollist);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 natOLM /home/pbcanfield/Desktop/NeuroResearch/cells/OLMCELL/x86_64/natOLM.mod\n");
+ 	ivoc_help("help ?1 natOLM /home/pbczgf/NeuroResearch/cells/OLMCELL/x86_64/natOLM.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -371,7 +371,7 @@ static int  trates ( _threadargsprotocomma_ double _lvm , double _la2 ) {
    if ( htau < hmin ) {
      htau = hmin ;
      }
-   hinf = 1.0 / ( 1.0 + exp ( ( v + 50.0 ) / 10.0 ) ) ;
+   hinf = 1.0 / ( 1.0 + exp ( ( v + 45.0 ) / 4.0 ) ) ;
     return 0; }
  
 static void _hoc_trates(void) {
@@ -620,7 +620,7 @@ _first = 0;
 #endif
 
 #if NMODL_TEXT
-static const char* nmodl_filename = "/home/pbcanfield/Desktop/NeuroResearch/cells/OLMCELL/modfiles/natOLM.mod";
+static const char* nmodl_filename = "/home/pbczgf/NeuroResearch/cells/OLMCELL/modfiles/natOLM.mod";
 static const char* nmodl_file_text = 
   "TITLE nat\n"
   ": Na current \n"
@@ -723,7 +723,7 @@ static const char* nmodl_file_text =
   "	b = trap0(-vm,-thi2,Rg,qg)\n"
   "	htau =  1/(a+b)/qt\n"
   "        if (htau<hmin) {htau=hmin}\n"
-  "	hinf  = 1 / ( 1 + exp( ( v + 50 ) / 10 ) ) :4\n"
+  "	hinf  = 1 / ( 1 + exp( ( v + 45 ) / 4 ) ) :4\n"
   "}\n"
   "\n"
   "FUNCTION trap0(v,th,a,q) {\n"

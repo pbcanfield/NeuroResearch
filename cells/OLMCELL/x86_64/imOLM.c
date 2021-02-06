@@ -224,7 +224,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
  	hoc_register_cvode(_mechtype, _ode_count, _ode_map, _ode_spec, _ode_matsol);
  	hoc_register_tolerance(_mechtype, _hoc_state_tol, &_atollist);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 imOLM /home/pbcanfield/Desktop/NeuroResearch/cells/OLMCELL/x86_64/imOLM.mod\n");
+ 	ivoc_help("help ?1 imOLM /home/pbczgf/NeuroResearch/cells/OLMCELL/x86_64/imOLM.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -307,7 +307,7 @@ static int  rate ( _threadargsprotocomma_ double _lv ) {
    else {
      ninf = 1.0 / ( 1.0 + exp ( ( - _lv - 35.0 ) / 10.34 ) ) ;
      }
-   taun = 5.0 / _lsum ;
+   taun = 10.0 / _lsum ;
      return 0; }
  
 static void _hoc_rate(void) {
@@ -523,7 +523,7 @@ _first = 0;
 #endif
 
 #if NMODL_TEXT
-static const char* nmodl_filename = "/home/pbcanfield/Desktop/NeuroResearch/cells/OLMCELL/modfiles/imOLM.mod";
+static const char* nmodl_filename = "/home/pbczgf/NeuroResearch/cells/OLMCELL/modfiles/imOLM.mod";
 static const char* nmodl_file_text = 
   ": voltage-gated persistent muscarinic channel\n"
   "\n"
@@ -597,7 +597,7 @@ static const char* nmodl_file_text =
   "	} else {\n"
   "	ninf = 1 / ( 1 + exp( ( - v - 35 ) / 10.34 ) ) :-35/10.34 :-52.7/10.34\n"
   "	}\n"
-  "	taun = 5/sum :increase\n"
+  "	taun = 10/sum :increase\n"
   "	UNITSON\n"
   "}\n"
   ;

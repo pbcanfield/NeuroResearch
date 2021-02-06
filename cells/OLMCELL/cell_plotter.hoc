@@ -3,8 +3,8 @@ load_file("OLM.hoc")
 //simuation constants
 SIMRUNTIME = 600
 DELAY = 200
-INJTIME = 300
-I_INJ = 0.4
+INJTIME = 250
+I_INJ = 0.8
 
 tstop = SIMRUNTIME
 v_init = -68
@@ -43,7 +43,6 @@ g_mvt.flush()
 //Record the currents.
 objref g_cvt, kap_vec, nat_vec, kdr_vec, nap_vec, im_vec
 g_cvt = new Graph()
-kap_vec = new Vector()
 nat_vec = new Vector()
 kdr_vec = new Vector()
 nap_vec = new Vector()
@@ -52,7 +51,6 @@ im_vec = new Vector()
 
 nat_vec.record(&cell.soma[0].i_natOLM(0.5))
 kdr_vec.record(&cell.soma[0].i_kdrOLM(0.5))
-kap_vec.record(&cell.soma[0].i_kapOLM(0.5))
 nap_vec.record(&cell.soma.i_napOLM(0.5))
 im_vec.record(&cell.soma.i_imOLM(0.5))
 
@@ -75,10 +73,6 @@ printf("Cell fi at %f nA injection: %f\n",I_INJ,runSim(I_INJ))
 
 proc cgraph() {
     //Graph currents.
-    g_cvt.color(1)
-    g_cvt.label("Black: kap")
-    g_cvt.vector(kap_vec.size(), &time.x[0], &kap_vec.x[0])
-
     g_cvt.color(2)
     g_cvt.label("Red: nat")
     g_cvt.vector(nat_vec.size(), &time.x[0], &nat_vec.x[0])
@@ -104,35 +98,32 @@ proc cgraph() {
 cgraph()
 
 
-objectvar g_fi, target, reported, current_inj
+objectvar g_fi, target, reported, current_inj_reported, current_inj_target
 g_fi = new Graph()
 reported = new Vector(10)
-current_inj = new Vector(10)
+current_inj_reported = new Vector(10)
 
 count = 0
 for (i = 0; i < 1.0; i += 0.1) {
     reported.x[count] = runSim(i)
-    current_inj.x[count] = i
+    current_inj_reported.x[count] = i
     count += 1
 }
 
-target = new Vector(10)
-target.x[0] = 0
-target.x[1] = 0
-target.x[2] = 6
-target.x[3] = 14
-target.x[4] = 22
-target.x[5] = 29
-target.x[6] = 36
-target.x[7] = 43
-target.x[8] = 50
-target.x[9] = 56
+current_inj_target = new Vector(2)
+current_inj_target.x[0] = 0.4
+current_inj_target.x[1] = 0.8
+
+target = new Vector(2)
+target.x[0] = 48
+target.x[1] = 92
 
 g_fi.color(4)
-g_fi.vector(10, &current_inj.x[0],&target.x[0])
+g_fi.vector(2, &current_inj_target.x[0],&target.x[0])
+
 
 g_fi.color(1)
-g_fi.vector(10, &current_inj.x[0],&reported.x[0])
+g_fi.vector(10, &current_inj_reported.x[0],&reported.x[0])
 
 g_fi.size(0,1.0,0,target.x[target.size() - 1] + 10)
 

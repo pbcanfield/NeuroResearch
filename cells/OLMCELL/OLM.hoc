@@ -40,10 +40,9 @@ begintemplate OLMCell
 
 		cap  = 1.5
 		gnat = 0.02
-		gkdr = 0.04
-		gkap = 0
-		gnap = 0.001
-		gim  = 0.004
+		gkdr = 0.18
+		gnap = 0.0017
+		gim  = 0.005
 
 		/////// geometry ////////f
 		soma[0] {
@@ -69,7 +68,6 @@ begintemplate OLMCell
 
 			insert kdrOLM
 		
-			insert kapOLM
 			insert natOLM
 
 			insert imOLM
@@ -81,7 +79,6 @@ begintemplate OLMCell
 			ek = -80		// (mV)
 			gbar_kdrOLM = gkdr// (siemens/cm2)
 			
-			gkabar_kapOLM = gkap
 			gbar_natOLM = gnat
 
 			gbar_napOLM = gnap
@@ -98,7 +95,6 @@ begintemplate OLMCell
 
 			insert natOLM
 			insert kdrOLM
-			insert kapOLM
 
 			insert imOLM
 			insert napOLM
@@ -108,7 +104,6 @@ begintemplate OLMCell
 
 			ek = -80		// (mV)
 			gbar_kdrOLM = gkdr // (siemens/cm2)
-			gkabar_kapOLM = gkap
 			gbar_natOLM = gnat
 
 			gbar_napOLM = gnap

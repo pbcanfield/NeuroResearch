@@ -129,7 +129,7 @@ extern void hoc_reg_nmodl_filename(int, const char*);
 #define qt qt_kdrOLM
  double qt = 1;
 #define vhalfn vhalfn_kdrOLM
- double vhalfn = 0;
+ double vhalfn = 7;
 #define zetan zetan_kdrOLM
  double zetan = -3;
  /* some parameters have upper and lower limits */
@@ -244,7 +244,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
  	hoc_register_cvode(_mechtype, _ode_count, _ode_map, _ode_spec, _ode_matsol);
  	hoc_register_tolerance(_mechtype, _hoc_state_tol, &_atollist);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 kdrOLM /home/pbcanfield/Desktop/NeuroResearch/cells/OLMCELL/x86_64/kdrca1OLM.mod\n");
+ 	ivoc_help("help ?1 kdrOLM /home/pbczgf/NeuroResearch/cells/OLMCELL/x86_64/kdrca1OLM.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -544,7 +544,7 @@ _first = 0;
 #endif
 
 #if NMODL_TEXT
-static const char* nmodl_filename = "/home/pbcanfield/Desktop/NeuroResearch/cells/OLMCELL/modfiles/kdrca1OLM.mod";
+static const char* nmodl_filename = "/home/pbczgf/NeuroResearch/cells/OLMCELL/modfiles/kdrca1OLM.mod";
 static const char* nmodl_file_text = 
   "TITLE K-DR channel\n"
   ": from Klee Ficker and Heinemann\n"
@@ -563,7 +563,7 @@ static const char* nmodl_file_text =
   "        ek (mV)		: must be explicitely def. in hoc\n"
   "	celsius		(degC)\n"
   "	gbar=.003 (mho/cm2)\n"
-  "        vhalfn = 0 :-15: 13 : -25  : -20  (mV)\n"
+  "        vhalfn = 7 :-15: 13 : -25  : -20  (mV)\n"
   "        a0n=0.02      (/ms)\n"
   "        zetan=-3    (1)\n"
   "        gmn=0.7  (1)\n"
