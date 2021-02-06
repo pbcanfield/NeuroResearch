@@ -44,7 +44,7 @@ begintemplate OLMCell
 		gnap = 0.0017
 		gim  = 0.005
 
-		/////// geometry ////////f
+		/////// geometry ////////
 		soma[0] {
 			nseg = 1
 			L = 40 // (micrometer)
