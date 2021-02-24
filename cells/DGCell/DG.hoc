@@ -33,11 +33,11 @@ begintemplate DGCell
 			ghdbar_hdDG = gh
 			ehd = -45
             
-			insert nap
-			gbar_nap = gnap
+			insert napDG
+			gbar_napDG = gnap
 			
-			insert im
-			gbar_im = gim
+			insert imDG
+			gbar_imDG = gim
 			
         }
 
@@ -58,11 +58,11 @@ begintemplate DGCell
 			ghdbar_hdDG = gh
 			ehd = -45
 			
-			insert nap
-			gbar_nap = gnap
+			insert napDG
+			gbar_napDG = gnap
 			
-			insert im
-			gbar_im = gim
+			insert imDG
+			gbar_imDG = gim
 
         }
 
@@ -83,11 +83,11 @@ begintemplate DGCell
 			ghdbar_hdDG = gh
 			ehd = -45
       
-			insert nap
-			gbar_nap = gnap
+			insert napDG
+			gbar_napDG = gnap
 			
-			insert im
-			gbar_im = gim
+			insert imDG
+			gbar_imDG = gim
 				 
         }
 		

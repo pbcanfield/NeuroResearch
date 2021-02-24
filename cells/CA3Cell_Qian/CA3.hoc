@@ -70,14 +70,14 @@ begintemplate CA3PyramidalCell
 			insert natCA3  
 			gbar_natCA3 = gnat
 
-			insert nap//0.0
-			gbar_nap = gnap 
+			insert napCA3//0.0
+			gbar_napCA3 = gnap 
 			
 			insert kdrCA3 
 			gbar_kdrCA3 = gkdr
 		
-			insert im
-			gbar_im = gim
+			insert imCA3
+			gbar_imCA3 = gim
 
 			ena=45  ek=-80 
 		}
@@ -98,8 +98,8 @@ begintemplate CA3PyramidalCell
 			insert kdrCA3 
 			gbar_kdrCA3 = gkdr
 
-			insert im
-			gbar_im = gim
+			insert imCA3
+			gbar_imCA3 = gim
 
 			ena=45  ek=-80
 		}
@@ -120,8 +120,8 @@ begintemplate CA3PyramidalCell
 			insert kdrCA3 
 			gbar_kdrCA3 = gkdr
 
-			insert im
-			gbar_im = gim
+			insert imCA3
+			gbar_imCA3 = gim
 			
 			ena=45  ek=-80  		}
 		

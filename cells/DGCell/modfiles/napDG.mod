@@ -13,7 +13,7 @@ UNITS {
 	(mA) = (milliamp) 
 } 
 NEURON { 
-	SUFFIX nap
+	SUFFIX napDG
 	USEION na READ ena WRITE ina
 	RANGE i, minf, mtau, gnap, gbar :, vhalf, k
 	RANGE mseg, vhalf
