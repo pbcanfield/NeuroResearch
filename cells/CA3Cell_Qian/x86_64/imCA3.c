@@ -22,15 +22,15 @@ extern int _method3;
 extern double hoc_Exp(double);
 #endif
  
-#define nrn_init _nrn_init__im
-#define _nrn_initial _nrn_initial__im
-#define nrn_cur _nrn_cur__im
-#define _nrn_current _nrn_current__im
-#define nrn_jacob _nrn_jacob__im
-#define nrn_state _nrn_state__im
-#define _net_receive _net_receive__im 
-#define rate rate__im 
-#define states states__im 
+#define nrn_init _nrn_init__imCA3
+#define _nrn_initial _nrn_initial__imCA3
+#define nrn_cur _nrn_cur__imCA3
+#define _nrn_current _nrn_current__imCA3
+#define nrn_jacob _nrn_jacob__imCA3
+#define nrn_state _nrn_state__imCA3
+#define _net_receive _net_receive__imCA3 
+#define rate rate__imCA3 
+#define states states__imCA3 
  
 #define _threadargscomma_ _p, _ppvar, _thread, _nt,
 #define _threadargsprotocomma_ double* _p, Datum* _ppvar, Datum* _thread, _NrnThread* _nt,
@@ -108,27 +108,27 @@ extern void hoc_reg_nmodl_filename(int, const char*);
 }
  /* connect user functions to hoc names */
  static VoidFunc hoc_intfunc[] = {
- "setdata_im", _hoc_setdata,
- "alf_im", _hoc_alf,
- "bet_im", _hoc_bet,
- "rate_im", _hoc_rate,
+ "setdata_imCA3", _hoc_setdata,
+ "alf_imCA3", _hoc_alf,
+ "bet_imCA3", _hoc_bet,
+ "rate_imCA3", _hoc_rate,
  0, 0
 };
-#define alf alf_im
-#define bet bet_im
+#define alf alf_imCA3
+#define bet bet_imCA3
  extern double alf( _threadargsprotocomma_ double );
  extern double bet( _threadargsprotocomma_ double );
  /* declare global and static user variables */
  /* some parameters have upper and lower limits */
  static HocParmLimits _hoc_parm_limits[] = {
- "gbar_im", 0, 1e+09,
+ "gbar_imCA3", 0, 1e+09,
  0,0,0
 };
  static HocParmUnits _hoc_parm_units[] = {
- "gbar_im", "siemens/cm2",
- "i_im", "mA/cm2",
- "taun_im", "ms",
- "gm_im", "siemens/cm2",
+ "gbar_imCA3", "siemens/cm2",
+ "i_imCA3", "mA/cm2",
+ "taun_imCA3", "ms",
+ "gm_imCA3", "siemens/cm2",
  0,0
 };
  static double delta_t = 0.01;
@@ -157,15 +157,15 @@ static void _ode_matsol(_NrnThread*, _Memb_list*, int);
  /* connect range variables in _p that hoc is supposed to know about */
  static const char *_mechanism[] = {
  "7.7.0",
-"im",
- "gbar_im",
+"imCA3",
+ "gbar_imCA3",
  0,
- "i_im",
- "ninf_im",
- "taun_im",
- "gm_im",
+ "i_imCA3",
+ "ninf_imCA3",
+ "taun_imCA3",
+ "gm_imCA3",
  0,
- "n_im",
+ "n_imCA3",
  0,
  0};
  static Symbol* _k_sym;
@@ -203,7 +203,7 @@ extern void _nrn_thread_table_reg(int, void(*)(double*, Datum*, Datum*, _NrnThre
 extern void hoc_register_tolerance(int, HocStateTolerance*, Symbol***);
 extern void _cvode_abstol( Symbol**, double*, int);
 
- void _im_reg() {
+ void _imCA3_reg() {
 	int _vectorized = 1;
   _initlists();
  	ion_reg("k", -10000.);
@@ -224,7 +224,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
  	hoc_register_cvode(_mechtype, _ode_count, _ode_map, _ode_spec, _ode_matsol);
  	hoc_register_tolerance(_mechtype, _hoc_state_tol, &_atollist);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 im /home/pbczgf/NeuroResearch/cells/DGCell/x86_64/im.mod\n");
+ 	ivoc_help("help ?1 imCA3 /home/pbczgf/NeuroResearch/cells/CA3Cell_Qian/x86_64/imCA3.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -301,13 +301,13 @@ static int  rate ( _threadargsprotocomma_ double _lv ) {
   _laa = alf ( _threadargscomma_ _lv ) ;
    _lab = bet ( _threadargscomma_ _lv ) ;
    _lsum = _laa + _lab ;
-   if ( _lv < - 67.5 ) {
+   if ( _lv < - 100.0 ) {
      ninf = 0.0 ;
      }
    else {
      ninf = 1.0 / ( 1.0 + exp ( ( - _lv - 35.0 ) / 10.34 ) ) ;
      }
-   taun = 7.0 / _lsum ;
+   taun = 5.0 / _lsum ;
      return 0; }
  
 static void _hoc_rate(void) {
@@ -523,12 +523,12 @@ _first = 0;
 #endif
 
 #if NMODL_TEXT
-static const char* nmodl_filename = "/home/pbczgf/NeuroResearch/cells/DGCell/modfiles/im.mod";
+static const char* nmodl_filename = "/home/pbczgf/NeuroResearch/cells/CA3Cell_Qian/modfiles/imCA3.mod";
 static const char* nmodl_file_text = 
   ": voltage-gated persistent muscarinic channel\n"
   "\n"
   "NEURON {\n"
-  "	SUFFIX im\n"
+  "	SUFFIX imCA3\n"
   "	USEION k READ ek WRITE ik\n"
   "	RANGE gm, i,  gbar\n"
   "	RANGE ninf, taun\n"
@@ -592,12 +592,12 @@ static const char* nmodl_file_text =
   "	aa=alf(v) ab=bet(v) \n"
   "	\n"
   "	sum = aa+ab\n"
-  "	if (v < -67.5 ) {					:-67.5\n"
+  "	if (v < -100 ) {					:-67.5\n"
   "	ninf = 0\n"
   "	} else {\n"
   "	ninf = 1 / ( 1 + exp( ( - v - 35 ) / 10.34 ) ) :-35/10.34 :-52.7/10.34\n"
   "	}\n"
-  "	taun = 7/sum :increase\n"
+  "	taun = 5/sum :increase\n"
   "	UNITSON\n"
   "}\n"
   ;

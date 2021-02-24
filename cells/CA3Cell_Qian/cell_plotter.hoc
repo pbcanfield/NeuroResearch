@@ -32,8 +32,8 @@ for(i = 0; i < 9; i+=1) {
 gating_vec[0].record(&cell.soma.minf_natCA3)
 gating_vec[1].record(&cell.soma.hinf_natCA3)
 gating_vec[2].record(&cell.soma.ninf_kdrCA3)
-gating_vec[3].record(&cell.soma.minf_nap)
-gating_vec[4].record(&cell.soma.ninf_im)
+gating_vec[3].record(&cell.soma.minf_napCA3)
+gating_vec[4].record(&cell.soma.ninf_imCA3)
 
 
 
@@ -48,8 +48,8 @@ for(i = 0; i < 9; i+=1) {
 tau_vec[0].record(&cell.soma.mtau_natCA3)
 tau_vec[1].record(&cell.soma.htau_natCA3)
 tau_vec[2].record(&cell.soma.taun_kdrCA3)
-tau_vec[3].record(&cell.soma.mtau_nap)
-tau_vec[4].record(&cell.soma.taun_im)
+tau_vec[3].record(&cell.soma.mtau_napCA3)
+tau_vec[4].record(&cell.soma.taun_imCA3)
 
 
 
@@ -62,10 +62,10 @@ kdr_vec = new Vector()
 im_vec = new Vector()
 
 
-nap_vec.record(&cell.soma.i_nap(0.5))
+nap_vec.record(&cell.soma.i_napCA3(0.5))
 nat_vec.record(&cell.soma.i_natCA3(0.5))
 kdr_vec.record(&cell.soma.i_kdrCA3(0.5))
-im_vec.record(&cell.soma.i_im(0.5))
+im_vec.record(&cell.soma.i_imCA3(0.5))
 
 
 //Create a current clamp.

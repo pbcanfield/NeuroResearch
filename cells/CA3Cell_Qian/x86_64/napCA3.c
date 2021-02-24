@@ -22,16 +22,16 @@ extern int _method3;
 extern double hoc_Exp(double);
 #endif
  
-#define nrn_init _nrn_init__nap
-#define _nrn_initial _nrn_initial__nap
-#define nrn_cur _nrn_cur__nap
-#define _nrn_current _nrn_current__nap
-#define nrn_jacob _nrn_jacob__nap
-#define nrn_state _nrn_state__nap
-#define _net_receive _net_receive__nap 
-#define rate rate__nap 
-#define segment segment__nap 
-#define states states__nap 
+#define nrn_init _nrn_init__napCA3
+#define _nrn_initial _nrn_initial__napCA3
+#define nrn_cur _nrn_cur__napCA3
+#define _nrn_current _nrn_current__napCA3
+#define nrn_jacob _nrn_jacob__napCA3
+#define nrn_state _nrn_state__napCA3
+#define _net_receive _net_receive__napCA3 
+#define rate rate__napCA3 
+#define segment segment__napCA3 
+#define states states__napCA3 
  
 #define _threadargscomma_ _p, _ppvar, _thread, _nt,
 #define _threadargsprotocomma_ double* _p, Datum* _ppvar, Datum* _thread, _NrnThread* _nt,
@@ -110,31 +110,31 @@ extern void hoc_reg_nmodl_filename(int, const char*);
 }
  /* connect user functions to hoc names */
  static VoidFunc hoc_intfunc[] = {
- "setdata_nap", _hoc_setdata,
- "rate_nap", _hoc_rate,
- "segment_nap", _hoc_segment,
+ "setdata_napCA3", _hoc_setdata,
+ "rate_napCA3", _hoc_rate,
+ "segment_napCA3", _hoc_segment,
  0, 0
 };
  /* declare global and static user variables */
-#define k k_nap
+#define k k_napCA3
  double k = 5;
  /* some parameters have upper and lower limits */
  static HocParmLimits _hoc_parm_limits[] = {
  0,0,0
 };
  static HocParmUnits _hoc_parm_units[] = {
- "k_nap", "mV",
- "i_nap", "mA/cm2",
- "minf_nap", "1",
- "mtau_nap", "ms",
- "gnap_nap", "mho/cm2",
+ "k_napCA3", "mV",
+ "i_napCA3", "mA/cm2",
+ "minf_napCA3", "1",
+ "mtau_napCA3", "ms",
+ "gnap_napCA3", "mho/cm2",
  0,0
 };
  static double delta_t = 1;
  static double m0 = 0;
  /* connect global user variables to hoc */
  static DoubScal hoc_scdoub[] = {
- "k_nap", &k_nap,
+ "k_napCA3", &k_napCA3,
  0,0
 };
  static DoubVec hoc_vdoub[] = {
@@ -157,17 +157,17 @@ static void _ode_matsol(_NrnThread*, _Memb_list*, int);
  /* connect range variables in _p that hoc is supposed to know about */
  static const char *_mechanism[] = {
  "7.7.0",
-"nap",
- "gbar_nap",
- "vhalf_nap",
- "mseg_nap",
+"napCA3",
+ "gbar_napCA3",
+ "vhalf_napCA3",
+ "mseg_napCA3",
  0,
- "i_nap",
- "minf_nap",
- "mtau_nap",
- "gnap_nap",
+ "i_napCA3",
+ "minf_napCA3",
+ "mtau_napCA3",
+ "gnap_napCA3",
  0,
- "m_nap",
+ "m_napCA3",
  0,
  0};
  static Symbol* _na_sym;
@@ -207,7 +207,7 @@ extern void _nrn_thread_table_reg(int, void(*)(double*, Datum*, Datum*, _NrnThre
 extern void hoc_register_tolerance(int, HocStateTolerance*, Symbol***);
 extern void _cvode_abstol( Symbol**, double*, int);
 
- void _nap_reg() {
+ void _napCA3_reg() {
 	int _vectorized = 1;
   _initlists();
  	ion_reg("na", -10000.);
@@ -228,7 +228,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
  	hoc_register_cvode(_mechtype, _ode_count, _ode_map, _ode_spec, _ode_matsol);
  	hoc_register_tolerance(_mechtype, _hoc_state_tol, &_atollist);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 nap /home/pbczgf/NeuroResearch/cells/DGCell/x86_64/nap.mod\n");
+ 	ivoc_help("help ?1 napCA3 /home/pbczgf/NeuroResearch/cells/CA3Cell_Qian/x86_64/napCA3.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -268,7 +268,7 @@ static int _ode_spec1(_threadargsproto_);
 }
  
 static int  rate ( _threadargsprotocomma_ double _lv ) {
-   if ( _lv < - 65.0 ) {
+   if ( _lv < - 67.5 ) {
      minf = 0.0 ;
      }
    else {
@@ -513,7 +513,7 @@ _first = 0;
 #endif
 
 #if NMODL_TEXT
-static const char* nmodl_filename = "/home/pbczgf/NeuroResearch/cells/DGCell/modfiles/nap.mod";
+static const char* nmodl_filename = "/home/pbczgf/NeuroResearch/cells/CA3Cell_Qian/modfiles/napCA3.mod";
 static const char* nmodl_file_text = 
   "TITLE Sodium persistent current for RD Traub, J Neurophysiol 89:909-921, 2003\n"
   "\n"
@@ -530,7 +530,7 @@ static const char* nmodl_file_text =
   "	(mA) = (milliamp) \n"
   "} \n"
   "NEURON { \n"
-  "	SUFFIX nap\n"
+  "	SUFFIX napCA3\n"
   "	USEION na READ ena WRITE ina\n"
   "	RANGE i, minf, mtau, gnap, gbar :, vhalf, k\n"
   "	RANGE mseg, vhalf\n"
@@ -574,7 +574,7 @@ static const char* nmodl_file_text =
   "UNITSOFF\n"
   " \n"
   "PROCEDURE rate(v (mV)) {\n"
-  "	if (v < -65 ) { :-67.5\n"
+  "	if (v < -67.5 ) { :-67.5\n"
   "	minf = 0\n"
   "	} else{\n"
   "	minf  = 1 / ( 1 + exp( ( vhalf - v ) / k ) )\n"

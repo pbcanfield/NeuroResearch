@@ -28,10 +28,10 @@ nat_vec = new Vector()
 kdr_vec = new Vector()
 im_vec = new Vector()
 
-nap_vec.record(&cell.soma.i_nap(0.5))
+nap_vec.record(&cell.soma.i_napDG(0.5))
 nat_vec.record(&cell.soma.i_natDG(0.5))
 kdr_vec.record(&cell.soma.i_kdrDG(0.5))
-im_vec.record(&cell.soma.i_im(0.5))
+im_vec.record(&cell.soma.i_imDG(0.5))
 
 //Create a current clamp.
 objectvar i_inj

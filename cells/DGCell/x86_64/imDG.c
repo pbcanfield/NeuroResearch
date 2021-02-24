@@ -22,15 +22,15 @@ extern int _method3;
 extern double hoc_Exp(double);
 #endif
  
-#define nrn_init _nrn_init__sAHP
-#define _nrn_initial _nrn_initial__sAHP
-#define nrn_cur _nrn_cur__sAHP
-#define _nrn_current _nrn_current__sAHP
-#define nrn_jacob _nrn_jacob__sAHP
-#define nrn_state _nrn_state__sAHP
-#define _net_receive _net_receive__sAHP 
-#define rate rate__sAHP 
-#define states states__sAHP 
+#define nrn_init _nrn_init__imDG
+#define _nrn_initial _nrn_initial__imDG
+#define nrn_cur _nrn_cur__imDG
+#define _nrn_current _nrn_current__imDG
+#define nrn_jacob _nrn_jacob__imDG
+#define nrn_state _nrn_state__imDG
+#define _net_receive _net_receive__imDG 
+#define rate rate__imDG 
+#define states states__imDG 
  
 #define _threadargscomma_ _p, _ppvar, _thread, _nt,
 #define _threadargsprotocomma_ double* _p, Datum* _ppvar, Datum* _thread, _NrnThread* _nt,
@@ -45,22 +45,20 @@ extern double hoc_Exp(double);
  
 #define t _nt->_t
 #define dt _nt->_dt
-#define gsAHPbar _p[0]
+#define gbar _p[0]
 #define i _p[1]
-#define cinf _p[2]
-#define ctau _p[3]
-#define gk _p[4]
-#define c _p[5]
+#define ninf _p[2]
+#define taun _p[3]
+#define gm _p[4]
+#define n _p[5]
 #define ek _p[6]
-#define casi _p[7]
-#define ik _p[8]
-#define Dc _p[9]
-#define v _p[10]
-#define _g _p[11]
+#define ik _p[7]
+#define Dn _p[8]
+#define v _p[9]
+#define _g _p[10]
 #define _ion_ek	*_ppvar[0]._pval
 #define _ion_ik	*_ppvar[1]._pval
 #define _ion_dikdv	*_ppvar[2]._pval
-#define _ion_casi	*_ppvar[3]._pval
  
 #if MAC
 #if !defined(v)
@@ -79,8 +77,8 @@ extern "C" {
  static Prop* _extcall_prop;
  /* external NEURON variables */
  /* declaration of user functions */
- static void _hoc_cbet(void);
- static void _hoc_calf(void);
+ static void _hoc_alf(void);
+ static void _hoc_bet(void);
  static void _hoc_rate(void);
  static int _mechtype;
 extern void _nrn_cacheloop_reg(int, int);
@@ -110,29 +108,31 @@ extern void hoc_reg_nmodl_filename(int, const char*);
 }
  /* connect user functions to hoc names */
  static VoidFunc hoc_intfunc[] = {
- "setdata_sAHP", _hoc_setdata,
- "cbet_sAHP", _hoc_cbet,
- "calf_sAHP", _hoc_calf,
- "rate_sAHP", _hoc_rate,
+ "setdata_imDG", _hoc_setdata,
+ "alf_imDG", _hoc_alf,
+ "bet_imDG", _hoc_bet,
+ "rate_imDG", _hoc_rate,
  0, 0
 };
-#define cbet cbet_sAHP
-#define calf calf_sAHP
- extern double cbet( _threadargsprotocomma_ double , double );
- extern double calf( _threadargsprotocomma_ double , double );
+#define alf alf_imDG
+#define bet bet_imDG
+ extern double alf( _threadargsprotocomma_ double );
+ extern double bet( _threadargsprotocomma_ double );
  /* declare global and static user variables */
  /* some parameters have upper and lower limits */
  static HocParmLimits _hoc_parm_limits[] = {
+ "gbar_imDG", 0, 1e+09,
  0,0,0
 };
  static HocParmUnits _hoc_parm_units[] = {
- "i_sAHP", "mA/cm2",
- "ctau_sAHP", "ms",
- "gk_sAHP", "mho/cm2",
+ "gbar_imDG", "siemens/cm2",
+ "i_imDG", "mA/cm2",
+ "taun_imDG", "ms",
+ "gm_imDG", "siemens/cm2",
  0,0
 };
- static double c0 = 0;
  static double delta_t = 0.01;
+ static double n0 = 0;
  /* connect global user variables to hoc */
  static DoubScal hoc_scdoub[] = {
  0,0
@@ -152,36 +152,35 @@ static void _ode_map(int, double**, double**, double*, Datum*, double*, int);
 static void _ode_spec(_NrnThread*, _Memb_list*, int);
 static void _ode_matsol(_NrnThread*, _Memb_list*, int);
  
-#define _cvode_ieq _ppvar[4]._i
+#define _cvode_ieq _ppvar[3]._i
  static void _ode_matsol_instance1(_threadargsproto_);
  /* connect range variables in _p that hoc is supposed to know about */
  static const char *_mechanism[] = {
  "7.7.0",
-"sAHP",
- "gsAHPbar_sAHP",
+"imDG",
+ "gbar_imDG",
  0,
- "i_sAHP",
- "cinf_sAHP",
- "ctau_sAHP",
- "gk_sAHP",
+ "i_imDG",
+ "ninf_imDG",
+ "taun_imDG",
+ "gm_imDG",
  0,
- "c_sAHP",
+ "n_imDG",
  0,
  0};
  static Symbol* _k_sym;
- static Symbol* _cas_sym;
  
 extern Prop* need_memb(Symbol*);
 
 static void nrn_alloc(Prop* _prop) {
 	Prop *prop_ion;
 	double *_p; Datum *_ppvar;
- 	_p = nrn_prop_data_alloc(_mechtype, 12, _prop);
+ 	_p = nrn_prop_data_alloc(_mechtype, 11, _prop);
  	/*initialize range parameters*/
- 	gsAHPbar = 0.00044;
+ 	gbar = 0.0003;
  	_prop->param = _p;
- 	_prop->param_size = 12;
- 	_ppvar = nrn_prop_datum_alloc(_mechtype, 5, _prop);
+ 	_prop->param_size = 11;
+ 	_ppvar = nrn_prop_datum_alloc(_mechtype, 4, _prop);
  	_prop->dparam = _ppvar;
  	/*connect ionic variables to this model*/
  prop_ion = need_memb(_k_sym);
@@ -189,9 +188,6 @@ static void nrn_alloc(Prop* _prop) {
  	_ppvar[0]._pval = &prop_ion->param[0]; /* ek */
  	_ppvar[1]._pval = &prop_ion->param[3]; /* ik */
  	_ppvar[2]._pval = &prop_ion->param[4]; /* _ion_dikdv */
- prop_ion = need_memb(_cas_sym);
- nrn_promote(prop_ion, 1, 0);
- 	_ppvar[3]._pval = &prop_ion->param[1]; /* casi */
  
 }
  static void _initlists();
@@ -207,13 +203,11 @@ extern void _nrn_thread_table_reg(int, void(*)(double*, Datum*, Datum*, _NrnThre
 extern void hoc_register_tolerance(int, HocStateTolerance*, Symbol***);
 extern void _cvode_abstol( Symbol**, double*, int);
 
- void _sahp_reg() {
+ void _imDG_reg() {
 	int _vectorized = 1;
   _initlists();
  	ion_reg("k", -10000.);
- 	ion_reg("cas", 2.0);
  	_k_sym = hoc_lookup("k_ion");
- 	_cas_sym = hoc_lookup("cas_ion");
  	register_mech(_mechanism, nrn_alloc,nrn_cur, nrn_jacob, nrn_state, nrn_init, hoc_nrnpointerindex, 1);
  _mechtype = nrn_get_mechtype(_mechanism[1]);
      _nrn_setdata_reg(_mechtype, _setdata);
@@ -222,16 +216,15 @@ extern void _cvode_abstol( Symbol**, double*, int);
   hoc_reg_nmodl_text(_mechtype, nmodl_file_text);
   hoc_reg_nmodl_filename(_mechtype, nmodl_filename);
 #endif
-  hoc_register_prop_size(_mechtype, 12, 5);
+  hoc_register_prop_size(_mechtype, 11, 4);
   hoc_register_dparam_semantics(_mechtype, 0, "k_ion");
   hoc_register_dparam_semantics(_mechtype, 1, "k_ion");
   hoc_register_dparam_semantics(_mechtype, 2, "k_ion");
-  hoc_register_dparam_semantics(_mechtype, 3, "cas_ion");
-  hoc_register_dparam_semantics(_mechtype, 4, "cvodeieq");
+  hoc_register_dparam_semantics(_mechtype, 3, "cvodeieq");
  	hoc_register_cvode(_mechtype, _ode_count, _ode_map, _ode_spec, _ode_matsol);
  	hoc_register_tolerance(_mechtype, _hoc_state_tol, &_atollist);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 sAHP /home/pbczgf/NeuroResearch/cells/CA3Cell_Qian/x86_64/sahp.mod\n");
+ 	ivoc_help("help ?1 imDG /home/pbczgf/NeuroResearch/cells/DGCell/x86_64/imDG.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -242,7 +235,7 @@ static int error;
 static int _ninits = 0;
 static int _match_recurse=1;
 static void _modl_cleanup(){ _match_recurse=1;}
-static int rate(_threadargsprotocomma_ double, double);
+static int rate(_threadargsprotocomma_ double);
  
 static int _ode_spec1(_threadargsproto_);
 /*static int _ode_matsol1(_threadargsproto_);*/
@@ -251,74 +244,70 @@ static int _ode_spec1(_threadargsproto_);
  
 /*CVODE*/
  static int _ode_spec1 (double* _p, Datum* _ppvar, Datum* _thread, _NrnThread* _nt) {int _reset = 0; {
-   rate ( _threadargscomma_ v , casi ) ;
-   Dc = ( cinf - c ) / ctau ;
+   rate ( _threadargscomma_ v ) ;
+   Dn = ( ninf - n ) / taun ;
    }
  return _reset;
 }
  static int _ode_matsol1 (double* _p, Datum* _ppvar, Datum* _thread, _NrnThread* _nt) {
- rate ( _threadargscomma_ v , casi ) ;
- Dc = Dc  / (1. - dt*( ( ( ( - 1.0 ) ) ) / ctau )) ;
+ rate ( _threadargscomma_ v ) ;
+ Dn = Dn  / (1. - dt*( ( ( ( - 1.0 ) ) ) / taun )) ;
   return 0;
 }
  /*END CVODE*/
  static int states (double* _p, Datum* _ppvar, Datum* _thread, _NrnThread* _nt) { {
-   rate ( _threadargscomma_ v , casi ) ;
-    c = c + (1. - exp(dt*(( ( ( - 1.0 ) ) ) / ctau)))*(- ( ( ( cinf ) ) / ctau ) / ( ( ( ( - 1.0 ) ) ) / ctau ) - c) ;
+   rate ( _threadargscomma_ v ) ;
+    n = n + (1. - exp(dt*(( ( ( - 1.0 ) ) ) / taun)))*(- ( ( ( ninf ) ) / taun ) / ( ( ( ( - 1.0 ) ) ) / taun ) - n) ;
    }
   return 0;
 }
  
-double calf ( _threadargsprotocomma_ double _lv , double _lcasi ) {
-   double _lcalf;
- double _lvs , _lva ;
-  _lvs = 10.0 * log10 ( 1000.0 * _lcasi ) ;
-   _lcalf = 0.006 / exp ( - 0.5 * ( _lvs - 35.0 ) ) ;
+double alf ( _threadargsprotocomma_ double _lv ) {
+   double _lalf;
+  _lalf = 0.016 / exp ( - ( _lv + 52.7 ) / 23.0 ) ;
     
-return _lcalf;
+return _lalf;
  }
  
-static void _hoc_calf(void) {
+static void _hoc_alf(void) {
   double _r;
    double* _p; Datum* _ppvar; Datum* _thread; _NrnThread* _nt;
    if (_extcall_prop) {_p = _extcall_prop->param; _ppvar = _extcall_prop->dparam;}else{ _p = (double*)0; _ppvar = (Datum*)0; }
   _thread = _extcall_thread;
   _nt = nrn_threads;
- _r =  calf ( _p, _ppvar, _thread, _nt, *getarg(1) , *getarg(2) );
+ _r =  alf ( _p, _ppvar, _thread, _nt, *getarg(1) );
  hoc_retpushx(_r);
 }
  
-double cbet ( _threadargsprotocomma_ double _lv , double _lcasi ) {
-   double _lcbet;
- double _lvs , _lvb ;
-  _lvs = 10.0 * log10 ( 1000.0 * _lcasi ) ;
-   _lcbet = 0.012 / exp ( 0.2 * ( _lvs + 100.0 ) ) ;
+double bet ( _threadargsprotocomma_ double _lv ) {
+   double _lbet;
+  _lbet = 0.016 / exp ( ( _lv + 52.7 ) / 18.8 ) ;
     
-return _lcbet;
+return _lbet;
  }
  
-static void _hoc_cbet(void) {
+static void _hoc_bet(void) {
   double _r;
    double* _p; Datum* _ppvar; Datum* _thread; _NrnThread* _nt;
    if (_extcall_prop) {_p = _extcall_prop->param; _ppvar = _extcall_prop->dparam;}else{ _p = (double*)0; _ppvar = (Datum*)0; }
   _thread = _extcall_thread;
   _nt = nrn_threads;
- _r =  cbet ( _p, _ppvar, _thread, _nt, *getarg(1) , *getarg(2) );
+ _r =  bet ( _p, _ppvar, _thread, _nt, *getarg(1) );
  hoc_retpushx(_r);
 }
  
-static int  rate ( _threadargsprotocomma_ double _lv , double _lcasi ) {
-   double _lcsum , _lca , _lcb ;
-  _lca = calf ( _threadargscomma_ _lv , _lcasi ) ;
-   _lcb = cbet ( _threadargscomma_ _lv , _lcasi ) ;
-   _lcsum = _lca + _lcb ;
-   if ( _lv < - 65.0 ) {
-     cinf = 0.0 ;
+static int  rate ( _threadargsprotocomma_ double _lv ) {
+   double _lsum , _laa , _lab ;
+  _laa = alf ( _threadargscomma_ _lv ) ;
+   _lab = bet ( _threadargscomma_ _lv ) ;
+   _lsum = _laa + _lab ;
+   if ( _lv < - 67.5 ) {
+     ninf = 0.0 ;
      }
    else {
-     cinf = _lca / _lcsum ;
+     ninf = 1.0 / ( 1.0 + exp ( ( - _lv - 35.0 ) / 10.34 ) ) ;
      }
-   ctau = 50.0 ;
+   taun = 7.0 / _lsum ;
      return 0; }
  
 static void _hoc_rate(void) {
@@ -328,7 +317,7 @@ static void _hoc_rate(void) {
   _thread = _extcall_thread;
   _nt = nrn_threads;
  _r = 1.;
- rate ( _p, _ppvar, _thread, _nt, *getarg(1) , *getarg(2) );
+ rate ( _p, _ppvar, _thread, _nt, *getarg(1) );
  hoc_retpushx(_r);
 }
  
@@ -344,7 +333,6 @@ static void _ode_spec(_NrnThread* _nt, _Memb_list* _ml, int _type) {
     _nd = _ml->_nodelist[_iml];
     v = NODEV(_nd);
   ek = _ion_ek;
-  casi = _ion_casi;
      _ode_spec1 (_p, _ppvar, _thread, _nt);
   }}
  
@@ -372,7 +360,6 @@ static void _ode_matsol(_NrnThread* _nt, _Memb_list* _ml, int _type) {
     _nd = _ml->_nodelist[_iml];
     v = NODEV(_nd);
   ek = _ion_ek;
-  casi = _ion_casi;
  _ode_matsol_instance1(_threadargs_);
  }}
  extern void nrn_update_ion_pointer(Symbol*, Datum*, int, int);
@@ -380,15 +367,14 @@ static void _ode_matsol(_NrnThread* _nt, _Memb_list* _ml, int _type) {
    nrn_update_ion_pointer(_k_sym, _ppvar, 0, 0);
    nrn_update_ion_pointer(_k_sym, _ppvar, 1, 3);
    nrn_update_ion_pointer(_k_sym, _ppvar, 2, 4);
-   nrn_update_ion_pointer(_cas_sym, _ppvar, 3, 1);
  }
 
 static void initmodel(double* _p, Datum* _ppvar, Datum* _thread, _NrnThread* _nt) {
   int _i; double _save;{
-  c = c0;
+  n = n0;
  {
-   rate ( _threadargscomma_ v , casi ) ;
-   c = cinf ;
+   rate ( _threadargscomma_ v ) ;
+   n = ninf ;
    }
  
 }
@@ -415,14 +401,13 @@ for (_iml = 0; _iml < _cntml; ++_iml) {
   }
  v = _v;
   ek = _ion_ek;
-  casi = _ion_casi;
  initmodel(_p, _ppvar, _thread, _nt);
  }
 }
 
 static double _nrn_current(double* _p, Datum* _ppvar, Datum* _thread, _NrnThread* _nt, double _v){double _current=0.;v=_v;{ {
-   gk = gsAHPbar * c ;
-   ik = gk * ( v - ek ) ;
+   gm = gbar * n * n ;
+   ik = gm * ( v - ek ) ;
    i = ik ;
    }
  _current += ik;
@@ -450,7 +435,6 @@ for (_iml = 0; _iml < _cntml; ++_iml) {
     _v = NODEV(_nd);
   }
   ek = _ion_ek;
-  casi = _ion_casi;
  _g = _nrn_current(_p, _ppvar, _thread, _nt, _v + .001);
  	{ double _dik;
   _dik = ik;
@@ -519,7 +503,6 @@ for (_iml = 0; _iml < _cntml; ++_iml) {
  v=_v;
 {
   ek = _ion_ek;
-  casi = _ion_casi;
  {   states(_p, _ppvar, _thread, _nt);
   } }}
 
@@ -531,7 +514,7 @@ static void _initlists(){
  double _x; double* _p = &_x;
  int _i; static int _first = 1;
   if (!_first) return;
- _slist1[0] = &(c) - _p;  _dlist1[0] = &(Dc) - _p;
+ _slist1[0] = &(n) - _p;  _dlist1[0] = &(Dn) - _p;
 _first = 0;
 }
 
@@ -540,90 +523,82 @@ _first = 0;
 #endif
 
 #if NMODL_TEXT
-static const char* nmodl_filename = "/home/pbczgf/NeuroResearch/cells/CA3Cell_Qian/modfiles/sahp.mod";
+static const char* nmodl_filename = "/home/pbczgf/NeuroResearch/cells/DGCell/modfiles/imDG.mod";
 static const char* nmodl_file_text = 
-  ":  iC   fast Ca2+/V-dependent K+ channel\n"
+  ": voltage-gated persistent muscarinic channel\n"
   "\n"
   "NEURON {\n"
-  "	SUFFIX sAHP\n"
+  "	SUFFIX imDG\n"
   "	USEION k READ ek WRITE ik\n"
-  "	USEION cas READ casi VALENCE 2 \n"
-  "        RANGE gk, i , ctau, cinf, gsAHPbar : ,ik\n"
+  "	RANGE gm, i,  gbar\n"
+  "	RANGE ninf, taun\n"
   "}\n"
   "\n"
   "UNITS {\n"
-  "        (mM) = (milli/liter)\n"
   "	(mA) = (milliamp)\n"
   "	(mV) = (millivolt)\n"
   "}\n"
   "\n"
   "PARAMETER {\n"
-  "	gsAHPbar= 0.00044 :2.5e-4 :2e-4 : 0.0001	(mho/cm2) : \n"
+  "	gbar = 0.0003 (siemens/cm2) <0,1e9>\n"
   "}\n"
   "\n"
   "ASSIGNED {\n"
   "	v (mV)\n"
   "	ek (mV)\n"
-  "	casi (mM)\n"
   "	ik (mA/cm2)\n"
   "	i  (mA/cm2)\n"
-  "	cinf \n"
-  "	ctau (ms)\n"
-  "	gk (mho/cm2)\n"
+  "	ninf\n"
+  "	taun (ms)\n"
+  "	gm (siemens/cm2)\n"
   "}\n"
   "\n"
   "STATE {\n"
-  "	c\n"
+  "	n\n"
   "}\n"
   "\n"
   "BREAKPOINT {\n"
   "	SOLVE states METHOD cnexp\n"
-  "	gk = gsAHPbar*c       \n"
-  "	ik = gk*(v-ek)\n"
+  "	gm = gbar*n*n\n"
+  "	ik = gm*(v-ek)\n"
   "	i = ik\n"
   "}\n"
   "\n"
   "INITIAL {\n"
-  "	rate(v,casi)\n"
-  "	c = cinf\n"
+  "	rate(v)\n"
+  "	n = ninf\n"
   "}\n"
   "\n"
   "DERIVATIVE states {\n"
-  "        rate(v,casi)\n"
-  "	c' = (cinf-c)/ctau\n"
+  "	rate(v)\n"
+  "	n' = (ninf-n)/taun\n"
   "}\n"
   "\n"
-  "UNITSOFF\n"
-  "\n"
-  "\n"
-  "FUNCTION calf(v (mV), casi (mM)) (/ms) { LOCAL vs, va\n"
+  "FUNCTION alf(v (mV)) (/ms) {\n"
   "	UNITSOFF\n"
-  "	vs=10*log10(1000*casi)\n"
-  "	calf = 0.006/exp(-0.5*(vs-35))\n"
+  "	alf = 0.016/exp(-(v+52.7)/23) :52.7/23\n"
   "	UNITSON\n"
   "}\n"
   "\n"
-  "FUNCTION cbet(v (mV), casi (mM))(/ms) { LOCAL vs, vb \n"
+  "FUNCTION bet(v (mV)) (/ms) {\n"
   "	UNITSOFF\n"
-  "	  vs=10*log10(1000*casi)\n"
-  "	  cbet = 0.012/exp(0.2*(vs+100))\n"
+  "	bet = 0.016/exp((v+52.7)/18.8) :52.7/18.8\n"
   "	UNITSON\n"
   "}\n"
   "\n"
-  "UNITSON\n"
-  "\n"
-  "PROCEDURE rate(v (mV), casi (mM)) {LOCAL  csum, ca, cb\n"
+  "PROCEDURE rate(v (mV)) {\n"
+  "	LOCAL sum, aa, ab\n"
   "	UNITSOFF\n"
-  "	ca=calf(v, casi) \n"
-  "	cb=cbet(v, casi)		\n"
-  "	csum = ca+cb\n"
-  "	if (v < -65 ) {              :::::::::::::::::::::::::::  67.5\n"
-  "	cinf = 0\n"
-  "	} else{\n"
-  "	cinf = ca/csum\n"
+  "	aa=alf(v) ab=bet(v) \n"
+  "	\n"
+  "	sum = aa+ab\n"
+  "	if (v < -67.5 ) {					:-67.5\n"
+  "	ninf = 0\n"
+  "	} else {\n"
+  "	ninf = 1 / ( 1 + exp( ( - v - 35 ) / 10.34 ) ) :-35/10.34 :-52.7/10.34\n"
   "	}\n"
-  "	ctau = 50 :35\n"
+  "	taun = 7/sum :increase\n"
   "	UNITSON\n"
-  "}	\n"
+  "}\n"
   ;
 #endif
