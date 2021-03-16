@@ -1,1 +1,1 @@
-../modfiles//izh.mod
+.././izh.mod

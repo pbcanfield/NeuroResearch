@@ -642,7 +642,7 @@ _first = 0;
 #endif
 
 #if NMODL_TEXT
-static const char* nmodl_filename = "/home/pbczgf/NeuroResearch/cells/CA3Cell_Izh/modfiles/izh.mod";
+static const char* nmodl_filename = "/home/pbczgf/NeuroResearch/cells/CA3Cell_Izh/izh.mod";
 static const char* nmodl_file_text = 
   "NEURON {\n"
   "  POINT_PROCESS IZH\n"
