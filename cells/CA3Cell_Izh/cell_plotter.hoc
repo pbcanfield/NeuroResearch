@@ -5,7 +5,7 @@ load_file("graphics_library.hoc")
 SIMRUNTIME = 1500
 DELAY = 400
 INJTIME = 500
-I_INJ = 0.2
+I_INJ = 0.8
 
 tstop = SIMRUNTIME
 v_init = -75

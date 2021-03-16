@@ -234,7 +234,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
   hoc_register_dparam_semantics(_mechtype, 5, "tca_ion");
  	hoc_register_cvode(_mechtype, _ode_count, 0, 0, 0);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 gskch /home/pbcanfield/Desktop/NeuroResearch/cells/CA3Cell_Izh/x86_64/gskch.mod\n");
+ 	ivoc_help("help ?1 gskch /home/pbczgf/NeuroResearch/cells/CA3Cell_Izh/x86_64/gskch.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -448,7 +448,7 @@ _first = 0;
 }
 
 #if NMODL_TEXT
-static const char* nmodl_filename = "/home/pbcanfield/Desktop/NeuroResearch/cells/CA3Cell_Izh/modfiles/gskch.mod";
+static const char* nmodl_filename = "/home/pbczgf/NeuroResearch/cells/CA3Cell_Izh/modfiles/gskch.mod";
 static const char* nmodl_file_text = 
   "TITLE gskch.mod  calcium-activated potassium channel (non-voltage-dependent)\n"
   "\n"
