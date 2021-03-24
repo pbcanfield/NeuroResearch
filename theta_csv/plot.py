@@ -6,6 +6,8 @@ with open('hz_data.csv', 'r') as file:
 
     file.close()
 
+print(x_data)
+
 y_burst = []
 file = open('y_data_burst.csv','r')
 for value in file:
