@@ -1,23 +1,47 @@
 begintemplate DGCell
+  
+    NumSoma = 1
+    NumDend = 2
+
     public soma, dend
     
-    create soma
-    create dend[2]
+    create soma[NumSoma]
+    create dend[NumDend]
 
+	public all, somatic, basal, apical, axonal
+	objref all, somatic, basal, apical, axonal
+	objref this
+    
     proc init(){
 	
+        all = new SectionList()
+        somatic = new SectionList()
+		basal = new SectionList()
+		apical = new SectionList()
+		axonal = new SectionList()
+
+		v_init = -75
+
+		for i=0,NumSoma soma[i] {
+			all.append()
+			somatic.append()
+		} 
+		for i=0,NumDend dend[i] {
+			all.append()
+			basal.append()
+		}
         
         soma {L = 20 diam = 15 nseg = 1}
         dend[0] {diam= 3 L=270 nseg=8}     
 		dend[1] {diam =5 L=555 nseg=7} 
 
-		gh = 0 //4.00e-05
+		gh = 0//1.00e-05
 		gnat = 0.08
 		gk = 0.02
-		gnap = 0.0005
-		gim = 0.0009
+		gnap = 0.001 //0.0007 This parameter set should be tried in the future.
+		gim = 0.0009  //0.0004
 
-        soma { 
+        soma[0] { 
             cm = 0.8
 			insert leakDG
             
@@ -93,8 +117,8 @@ begintemplate DGCell
 		
 		
 
-        connect soma(1), dend[0](0)
-		connect dend[1](1), soma(0)
+        connect soma[0](1), dend[0](0)
+		connect dend[1](1), soma[0](0)
 
         define_shape()
     }
