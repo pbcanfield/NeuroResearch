@@ -5,7 +5,7 @@ DELAY = 300
 RINAMP = -0.1
 
 //Should match the cells leak reversal potential
-v_init = -68.5
+v_init = -70.5
 
 objectvar cell
 cell = new OLMCell()

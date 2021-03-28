@@ -23,7 +23,7 @@ PARAMETER {
 	gbar = 3e-4 :1e-4 	(mho/cm2)
 	v ena 		(mV)  
 	k = 5      (mV)
-	vhalf = -48 :-48 (mV)
+	vhalf = -55 :-48 (mV)
 	mseg = -999 
 } 
 ASSIGNED { 

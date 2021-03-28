@@ -38,11 +38,12 @@ begintemplate OLMCell
 		}
 
 
-		cap  = 1.5
-		gnat = 0.02
-		gkdr = 0.18
-		gnap = 0.0017
-		gim  = 0.005
+		cap  = 1.6
+		gnat = 0.1
+		gkdr = 0.005 //0.025
+		gnap =   0.0002//0.0002
+		gim  = 0.0015
+		gh = 0.00000
 
 		/////// geometry ////////
 		soma[0] {
@@ -65,14 +66,12 @@ begintemplate OLMCell
 			Rm = 20000	    // (ohm-cm2)
 			
 			insert leakinterOLM
-
 			insert kdrOLM
-		
 			insert natOLM
-
 			insert imOLM
 			insert napOLM
-			
+			insert hdOLM 
+
 			ena = 55		// (mV)
 				// (siemens/cm2)
 
@@ -83,6 +82,7 @@ begintemplate OLMCell
 
 			gbar_napOLM = gnap
 			gbar_imOLM = gim
+			ghdbar_hdOLM = gh
 
 	    	}
 			
@@ -92,13 +92,12 @@ begintemplate OLMCell
 			Rm = 20000	// (ohm-cm2)
 			
 			insert leakinterOLM
-
 			insert natOLM
 			insert kdrOLM
-
 			insert imOLM
 			insert napOLM
-			
+			insert hdOLM
+
 			ena = 55		// (mV)
 				// (siemens/cm2)
 
@@ -108,6 +107,7 @@ begintemplate OLMCell
 
 			gbar_napOLM = gnap
 			gbar_imOLM = gim
+			ghdbar_hdOLM = gh
 
 		}
 			

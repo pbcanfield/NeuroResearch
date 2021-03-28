@@ -70,6 +70,6 @@ PROCEDURE rate(v (mV)) {
 	} else {
 	ninf = 1 / ( 1 + exp( ( - v - 35 ) / 10.34 ) ) :-35/10.34 :-52.7/10.34
 	}
-	taun = 10/sum :increase
+	taun = 5/sum :increase
 	UNITSON
 }

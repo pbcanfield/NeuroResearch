@@ -4,10 +4,10 @@ load_file("OLM.hoc")
 SIMRUNTIME = 600
 DELAY = 200
 INJTIME = 250
-I_INJ = 0.8
+I_INJ = 0.4
 
 tstop = SIMRUNTIME
-v_init = -68
+v_init = -75
 
 objectvar membrane_voltage, time
 membrane_voltage = new Vector()
@@ -35,24 +35,27 @@ run()
 //Membrane voltage vs. time
 objectvar g_mvt
 g_mvt = new Graph()
-g_mvt.size(0,SIMRUNTIME, 30, -90)
+g_mvt.size(0,SIMRUNTIME, 50, -90)
 g_mvt.vector(membrane_voltage.size(), &time.x[0], &membrane_voltage.x[0])
 g_mvt.flush()
 
 
 //Record the currents.
-objref g_cvt, kap_vec, nat_vec, kdr_vec, nap_vec, im_vec
+objref g_cvt, kap_vec, nat_vec, kdr_vec, nap_vec, im_vec, ih_vec
 g_cvt = new Graph()
 nat_vec = new Vector()
 kdr_vec = new Vector()
 nap_vec = new Vector()
 im_vec = new Vector()
+ih_vec = new Vector()
 
 
 nat_vec.record(&cell.soma[0].i_natOLM(0.5))
 kdr_vec.record(&cell.soma[0].i_kdrOLM(0.5))
 nap_vec.record(&cell.soma.i_napOLM(0.5))
 im_vec.record(&cell.soma.i_imOLM(0.5))
+ih_vec.record(&cell.soma.i_hdOLM(0.5))
+
 
 objref nc, nil, spvec
 func runSim(){
@@ -89,6 +92,9 @@ proc cgraph() {
     g_cvt.label("Orange: nap")
     g_cvt.vector(nap_vec.size(), &time.x[0], &nap_vec.x[0])
     
+    g_cvt.color(9)
+    g_cvt.label("Gray: ih")
+    g_cvt.vector(ih_vec.size(), &time.x[0], &ih_vec.x[0])
     
     g_cvt.flush()
 
@@ -115,8 +121,8 @@ current_inj_target.x[0] = 0.4
 current_inj_target.x[1] = 0.8
 
 target = new Vector(2)
-target.x[0] = 48
-target.x[1] = 92
+target.x[0] = 24
+target.x[1] = 54
 
 g_fi.color(4)
 g_fi.vector(2, &current_inj_target.x[0],&target.x[0])
