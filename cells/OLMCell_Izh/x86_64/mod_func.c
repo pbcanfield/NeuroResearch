@@ -9,7 +9,7 @@ void modl_reg(){
   if (!nrn_nobanner_) if (nrnmpi_myid < 1) {
     fprintf(stderr, "Additional mechanisms from files\n");
 
-    fprintf(stderr," izh.mod");
+    fprintf(stderr," ./izh.mod");
     fprintf(stderr, "\n");
   }
   _izh_reg();

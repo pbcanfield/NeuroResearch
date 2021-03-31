@@ -4,8 +4,8 @@ load_file("graphics_library.hoc")
 //simuation constants
 SIMRUNTIME = 1500
 DELAY = 400
-INJTIME = 500
-I_INJ = 0.8
+INJTIME = 300
+I_INJ = 0.2
 
 tstop = SIMRUNTIME
 v_init = -75
@@ -65,6 +65,7 @@ printf("Cell fi at %f nA injection: %f\n",I_INJ,runSim(I_INJ))
 
 mgraph()
 
+/*
 objectvar g_fi, target, reported, current_inj
 g_fi = new Graph()
 reported = new Vector(10)
@@ -85,4 +86,4 @@ g_fi.vector(10, &current_inj.x[0],&reported.x[0])
  g_fi.exec_menu("View = plot")
 
 g_fi.flush()
-
+*/

@@ -1,1 +1,1 @@
-.././izh.mod
+../izh.mod
