@@ -20,18 +20,18 @@ void modl_reg(){
   if (!nrn_nobanner_) if (nrnmpi_myid < 1) {
     fprintf(stderr, "Additional mechanisms from files\n");
 
-    fprintf(stderr," modfiles//cal2.mod");
-    fprintf(stderr," modfiles//capool.mod");
-    fprintf(stderr," modfiles//cas.mod");
-    fprintf(stderr," modfiles//cat.mod");
-    fprintf(stderr," modfiles//hCA3.mod");
-    fprintf(stderr," modfiles//im.mod");
-    fprintf(stderr," modfiles//kca.mod");
-    fprintf(stderr," modfiles//kdrCA3.mod");
-    fprintf(stderr," modfiles//leakCA3.mod");
-    fprintf(stderr," modfiles//nap.mod");
-    fprintf(stderr," modfiles//natCA3.mod");
-    fprintf(stderr," modfiles//sahp.mod");
+    fprintf(stderr," \"modfiles//cal2.mod\"");
+    fprintf(stderr," \"modfiles//capool.mod\"");
+    fprintf(stderr," \"modfiles//cas.mod\"");
+    fprintf(stderr," \"modfiles//cat.mod\"");
+    fprintf(stderr," \"modfiles//hCA3.mod\"");
+    fprintf(stderr," \"modfiles//im.mod\"");
+    fprintf(stderr," \"modfiles//kca.mod\"");
+    fprintf(stderr," \"modfiles//kdrCA3.mod\"");
+    fprintf(stderr," \"modfiles//leakCA3.mod\"");
+    fprintf(stderr," \"modfiles//nap.mod\"");
+    fprintf(stderr," \"modfiles//natCA3.mod\"");
+    fprintf(stderr," \"modfiles//sahp.mod\"");
     fprintf(stderr, "\n");
   }
   _cal2_reg();
