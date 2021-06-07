@@ -1,9 +1,9 @@
 : voltage-gated persistent muscarinic channel
 
 NEURON {
-	SUFFIX im
+	SUFFIX imCA3
 	USEION k READ ek WRITE ik
-	RANGE gm, i,  gbar
+	RANGE gm, i,  gbar, tau
 	RANGE ninf, taun
 }
 
@@ -14,6 +14,7 @@ UNITS {
 
 PARAMETER {
 	gbar = 0.0003 (siemens/cm2) <0,1e9>
+	tau = 5 
 }
 
 ASSIGNED {
@@ -65,11 +66,11 @@ PROCEDURE rate(v (mV)) {
 	aa=alf(v) ab=bet(v) 
 	
 	sum = aa+ab
-	if (v < -67.5 ) {					:-67.5
+	if (v < -100 ) {					:-67.5
 	ninf = 0
 	} else {
-	ninf = 1 / ( 1 + exp( ( - v - 35 ) / 10.34 ) ) :-52.7
+	ninf = 1 / ( 1 + exp( ( - v - 35 ) / 10.34 ) ) :-35/10.34 :-52.7/10.34
 	}
-	taun = 1.5/sum
+	taun = tau/sum :increase
 	UNITSON
 }

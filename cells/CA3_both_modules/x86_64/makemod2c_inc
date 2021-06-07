@@ -1,0 +1,97 @@
+
+./cal2.c: ../modfiles//cal2.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
+	(cd "../modfiles"; MODLUNIT=$(NRNUNITS) $(NOCMODL) cal2.mod -o "/home/pete/Desktop/NeuroResearch/cells/CA3_both_modules/x86_64")
+
+./cal2.o: ./cal2.c
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
+	$(COMPILE) -I"../modfiles" $(INCLUDES) -fPIC -c $< -o $@
+
+./capool.c: ../modfiles//capool.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
+	(cd "../modfiles"; MODLUNIT=$(NRNUNITS) $(NOCMODL) capool.mod -o "/home/pete/Desktop/NeuroResearch/cells/CA3_both_modules/x86_64")
+
+./capool.o: ./capool.c
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
+	$(COMPILE) -I"../modfiles" $(INCLUDES) -fPIC -c $< -o $@
+
+./cas.c: ../modfiles//cas.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
+	(cd "../modfiles"; MODLUNIT=$(NRNUNITS) $(NOCMODL) cas.mod -o "/home/pete/Desktop/NeuroResearch/cells/CA3_both_modules/x86_64")
+
+./cas.o: ./cas.c
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
+	$(COMPILE) -I"../modfiles" $(INCLUDES) -fPIC -c $< -o $@
+
+./cat.c: ../modfiles//cat.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
+	(cd "../modfiles"; MODLUNIT=$(NRNUNITS) $(NOCMODL) cat.mod -o "/home/pete/Desktop/NeuroResearch/cells/CA3_both_modules/x86_64")
+
+./cat.o: ./cat.c
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
+	$(COMPILE) -I"../modfiles" $(INCLUDES) -fPIC -c $< -o $@
+
+./hCA3.c: ../modfiles//hCA3.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
+	(cd "../modfiles"; MODLUNIT=$(NRNUNITS) $(NOCMODL) hCA3.mod -o "/home/pete/Desktop/NeuroResearch/cells/CA3_both_modules/x86_64")
+
+./hCA3.o: ./hCA3.c
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
+	$(COMPILE) -I"../modfiles" $(INCLUDES) -fPIC -c $< -o $@
+
+./imCA3.c: ../modfiles//imCA3.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
+	(cd "../modfiles"; MODLUNIT=$(NRNUNITS) $(NOCMODL) imCA3.mod -o "/home/pete/Desktop/NeuroResearch/cells/CA3_both_modules/x86_64")
+
+./imCA3.o: ./imCA3.c
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
+	$(COMPILE) -I"../modfiles" $(INCLUDES) -fPIC -c $< -o $@
+
+./kca.c: ../modfiles//kca.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
+	(cd "../modfiles"; MODLUNIT=$(NRNUNITS) $(NOCMODL) kca.mod -o "/home/pete/Desktop/NeuroResearch/cells/CA3_both_modules/x86_64")
+
+./kca.o: ./kca.c
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
+	$(COMPILE) -I"../modfiles" $(INCLUDES) -fPIC -c $< -o $@
+
+./kdrCA3.c: ../modfiles//kdrCA3.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
+	(cd "../modfiles"; MODLUNIT=$(NRNUNITS) $(NOCMODL) kdrCA3.mod -o "/home/pete/Desktop/NeuroResearch/cells/CA3_both_modules/x86_64")
+
+./kdrCA3.o: ./kdrCA3.c
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
+	$(COMPILE) -I"../modfiles" $(INCLUDES) -fPIC -c $< -o $@
+
+./leakCA3.c: ../modfiles//leakCA3.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
+	(cd "../modfiles"; MODLUNIT=$(NRNUNITS) $(NOCMODL) leakCA3.mod -o "/home/pete/Desktop/NeuroResearch/cells/CA3_both_modules/x86_64")
+
+./leakCA3.o: ./leakCA3.c
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
+	$(COMPILE) -I"../modfiles" $(INCLUDES) -fPIC -c $< -o $@
+
+./napCA3.c: ../modfiles//napCA3.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
+	(cd "../modfiles"; MODLUNIT=$(NRNUNITS) $(NOCMODL) napCA3.mod -o "/home/pete/Desktop/NeuroResearch/cells/CA3_both_modules/x86_64")
+
+./napCA3.o: ./napCA3.c
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
+	$(COMPILE) -I"../modfiles" $(INCLUDES) -fPIC -c $< -o $@
+
+./natCA3.c: ../modfiles//natCA3.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
+	(cd "../modfiles"; MODLUNIT=$(NRNUNITS) $(NOCMODL) natCA3.mod -o "/home/pete/Desktop/NeuroResearch/cells/CA3_both_modules/x86_64")
+
+./natCA3.o: ./natCA3.c
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
+	$(COMPILE) -I"../modfiles" $(INCLUDES) -fPIC -c $< -o $@
+
+./sahp.c: ../modfiles//sahp.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\n"
+	(cd "../modfiles"; MODLUNIT=$(NRNUNITS) $(NOCMODL) sahp.mod -o "/home/pete/Desktop/NeuroResearch/cells/CA3_both_modules/x86_64")
+
+./sahp.o: ./sahp.c
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\n"
+	$(COMPILE) -I"../modfiles" $(INCLUDES) -fPIC -c $< -o $@
+

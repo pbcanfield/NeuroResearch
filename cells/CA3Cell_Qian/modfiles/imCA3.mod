@@ -3,7 +3,7 @@
 NEURON {
 	SUFFIX imCA3
 	USEION k READ ek WRITE ik
-	RANGE gm, i,  gbar
+	RANGE gm, i,  gbar, tau
 	RANGE ninf, taun
 }
 
@@ -14,6 +14,7 @@ UNITS {
 
 PARAMETER {
 	gbar = 0.0003 (siemens/cm2) <0,1e9>
+	tau = 5 
 }
 
 ASSIGNED {
@@ -70,6 +71,6 @@ PROCEDURE rate(v (mV)) {
 	} else {
 	ninf = 1 / ( 1 + exp( ( - v - 35 ) / 10.34 ) ) :-35/10.34 :-52.7/10.34
 	}
-	taun = 5/sum :increase
+	taun = tau/sum :increase
 	UNITSON
 }

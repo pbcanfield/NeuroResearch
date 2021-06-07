@@ -80,8 +80,8 @@ begintemplate CA3Cell
 			insert natCA3  
 			gbar_natCA3 = gnat
 
-			insert nap//0.0
-			gbar_nap = gnap 
+			insert napCA3
+			gbar_napCA3 = gnap 
 
 			insert hdCA3 
 			ghdbar_hdCA3 = ghd
@@ -92,8 +92,8 @@ begintemplate CA3Cell
 			insert sAHP
 			gsAHPbar_sAHP = gsahp
 
-			insert im
-			gbar_im = gim
+			insert imCA3
+			gbar_imCA3 = gim
 
 			insert cas
 			gbar_cas = gcas
@@ -119,8 +119,8 @@ begintemplate CA3Cell
 			insert natCA3  
 			gbar_natCA3 = gnat
 
-			insert nap
-			gbar_nap = gnap 
+			insert napCA3
+			gbar_napCA3 = gnap 
 
 			insert hdCA3 
 			ghdbar_hdCA3 = ghd
@@ -131,8 +131,8 @@ begintemplate CA3Cell
 			insert sAHP
 			gsAHPbar_sAHP = gsahp
 
-			insert im
-			gbar_im = gim
+			insert imCA3
+			gbar_imCA3 = gim
 
 			insert cas
 			gbar_cas = gcas
@@ -158,8 +158,8 @@ begintemplate CA3Cell
 			insert natCA3  
 			gbar_natCA3 = gnat
 
-			insert nap
-			gbar_nap = gnap 
+			insert napCA3
+			gbar_napCA3 = gnap 
 
 			insert hdCA3 
 			ghdbar_hdCA3 =ghd 
@@ -170,8 +170,8 @@ begintemplate CA3Cell
 			insert sAHP
 			gsAHPbar_sAHP = gsahp
 
-			insert im
-			gbar_im = gim
+			insert imCA3
+			gbar_imCA3 = gim
 
 			insert cas
 			gbar_cas = gcas
